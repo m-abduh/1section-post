@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1080,height=1920">
+<script src="gsap.min.js"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#050505;color:#fff;font-family:'NS',system-ui,sans-serif;font-size:40px}
+@font-face{font-family:'NS';src:url('../fonts/NotoSans-Regular-Complete.ttf')format('truetype');font-weight:400}
+@font-face{font-family:'NS';src:url('../fonts/NotoSans-Bold-Complete.ttf')format('truetype');font-weight:700}
+#root{position:relative;width:1080px;height:1920px;overflow:hidden;background:#050505}
+#root::before{content:'';position:absolute;top:35%;left:50%;transform:translate(-50%,-50%);width:700px;height:700px;background:radial-gradient(circle,rgba(251,191,36,.05),transparent 70%);pointer-events:none}
+#root::after{content:'';position:absolute;bottom:-100px;left:-100px;width:400px;height:400px;background:radial-gradient(circle,rgba(251,191,36,.03),transparent 70%);pointer-events:none}
+.clip{position:absolute;inset:0;display:flex;align-items:center;justify-content:center}
+.s1{display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;height:100%;padding:50px 80px;overflow-y:auto;gap:10px}
+.s1h{font-size:32px;color:rgba(251,191,36,.3);letter-spacing:6px;text-transform:uppercase;font-weight:400;margin-bottom:2px}
+.shook{font-size:48px;font-weight:700;color:#f0f0f0;text-align:center;line-height:1.15;margin-bottom:2px;letter-spacing:.5px}
+.s1c{display:flex;flex-direction:column;align-items:center;gap:10px;margin:4px 0}
+.s1p{font-size:30px;color:#d0d0d0;text-align:center;line-height:1.5;max-width:700px;font-weight:300}
+.s1d{font-size:28px;color:rgba(251,191,36,.3);text-align:center;max-width:660px;font-weight:300}
+.s2{display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;height:100%;padding:0 60px;background:radial-gradient(ellipse at center,rgba(251,191,36,.03),transparent 70%)}
+.s2t{font-size:44px;font-weight:700;color:#fff;text-align:center;letter-spacing:1px}
+.s2s{font-size:30px;color:rgba(255,255,255,.3);margin-top:10px;letter-spacing:2px}
+</style>
+</head>
+<body>
+<div id="root" data-composition-id="story" data-start="0" data-width="1080" data-height="1920" data-duration="15">
+
+<section class="clip" data-start="0" data-duration="10" data-track-index="1">
+<div class="s1">
+  <div class="s1h" id="sl">{{title_upper}}</div>
+  <div class="shook" id="sh">{{hook}}</div>
+  <div class="s1c">
+{{#each opening}}
+<div class="s1p" id="sp-{{@index}}">{{.}}</div>
+{{/each}}
+  </div>
+  <div class="s1d" id="sd">{{description}}</div>
+</div>
+</section>
+
+<section class="clip" data-start="10" data-duration="5" data-track-index="1">
+<div class="s2">
+  <div class="s2t" id="s2t">{{follow}}</div>
+  <div class="s2s" id="s2s">{{footer}}</div>
+</div>
+</section>
+
+</div>
+
+<script>
+window.__timelines=window.__timelines||{}
+var tl=gsap.timeline({paused:true})
+tl.from('#sl',{y:-15,opacity:0,duration:.5,ease:'power2.out'},0)
+tl.from('#sh',{y:30,opacity:0,duration:.8,ease:'power3.out'},.25)
+var np=document.querySelectorAll('.s1p').length
+tl.from('.s1p',{y:20,opacity:0,stagger:.15,duration:.55,ease:'power2.out'},.85)
+tl.from('#sd',{y:15,opacity:0,duration:.5,ease:'power2.out'},.85+np*.15+.1)
+tl.from('#s2t',{y:25,opacity:0,duration:.7,ease:'power2.out'},10.2)
+tl.from('#s2s',{opacity:0,duration:.5,ease:'power2.out'},10.7)
+window.__timelines['story']=tl
+</script>
+</body>
+</html>
