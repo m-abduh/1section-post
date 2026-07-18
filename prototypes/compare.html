@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Compare — Prototype</title>
+<link rel="stylesheet" href="doodle.css">
+<style>
+.container { --accent: #c49a4a; }
+.label { background: rgba(196,154,74,.12); color: var(--accent); }
+.vs-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  width: 100%;
+  max-width: 720px;
+}
+.vs-line {
+  flex: 1;
+  height: 1px;
+  position: relative;
+}
+.vs-line::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-top: 2px dashed var(--accent);
+  opacity: .2;
+}
+.vs-text {
+  font-size: 56px;
+  font-weight: 900;
+  color: var(--accent);
+  letter-spacing: -2px;
+}
+.pairs {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 100%;
+  max-width: 720px;
+}
+.pair {
+  display: flex;
+  gap: 0;
+  padding: 14px 0;
+  border-bottom: 1px solid rgba(0,0,0,.04);
+}
+.pair:last-child { border: 0; }
+.pair-old {
+  width: 50%;
+  text-align: right;
+  padding-right: 24px;
+  font-size: 28px;
+  color: #aaa;
+  font-weight: 400;
+}
+.pair-new {
+  width: 50%;
+  text-align: left;
+  padding-left: 24px;
+  font-size: 28px;
+  color: #1a1a1a;
+  font-weight: 700;
+}
+.pair-divider {
+  width: 1px;
+  align-self: stretch;
+  background: linear-gradient(180deg,transparent,rgba(196,154,74,.15),transparent);
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+  <div class="label-row">
+    <span class="label">Compare</span>
+  </div>
+  <div class="visual-area" style="flex:none;flex-direction:column;gap:16px;width:100%;padding:10px 0">
+    <div class="vs-row">
+      <div class="vs-line"></div>
+      <div class="vs-text">VS</div>
+      <div class="vs-line"></div>
+    </div>
+    <div class="pairs">
+      <div class="pair">
+        <div class="pair-old">Takes months to see results</div>
+        <div class="pair-divider"></div>
+        <div class="pair-new">See progress in days</div>
+      </div>
+      <div class="pair">
+        <div class="pair-old">Requires expensive tools</div>
+        <div class="pair-divider"></div>
+        <div class="pair-new">Free or low-cost solutions</div>
+      </div>
+      <div class="pair">
+        <div class="pair-old">Complex and confusing</div>
+        <div class="pair-divider"></div>
+        <div class="pair-new">Simple and intuitive</div>
+      </div>
+    </div>
+  </div>
+  <div class="content-area" style="margin-top:auto">
+    <div class="desc">
+      The new approach is faster, cheaper, and easier than ever before.
+    </div>
+  </div>
+</div>
+</body>
+</html>

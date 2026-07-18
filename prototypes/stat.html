@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Stat — Prototype</title>
+<link rel="stylesheet" href="doodle.css">
+<style>
+.container { --accent: #d4745d; }
+.label { background: rgba(212,116,93,.1); color: var(--accent); }
+.stat-number {
+  font-size: 260px;
+  font-weight: 900;
+  line-height: .8;
+  letter-spacing: -8px;
+  color: #1a1a1a;
+  position: relative;
+}
+.stat-number em {
+  font-style: normal;
+  color: var(--accent);
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+  <div class="label-row">
+    <span class="label">The Stat</span>
+  </div>
+  <div class="visual-area">
+    <div class="stat-number">87<em>%</em></div>
+  </div>
+  <div class="content-area">
+    <div class="main-content">
+      Of people prefer the better option every single time they choose.
+    </div>
+    <div class="desc">
+      Data shows a clear upward trend across all demographics.
+    </div>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Q&A — Prototype</title>
+<link rel="stylesheet" href="doodle.css">
+<style>
+.container { --accent: #5b7fa5; }
+.label { background: rgba(91,127,165,.1); color: var(--accent); }
+.chat-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+  max-width: 760px;
+}
+.bubble {
+  padding: 20px 28px;
+  border-radius: 20px;
+  font-size: 34px;
+  line-height: 1.5;
+  max-width: 80%;
+  position: relative;
+}
+.q-bubble {
+  align-self: flex-end;
+  background: var(--accent);
+  color: #fff;
+  border-radius: 20px 20px 6px 20px;
+}
+.a-bubble {
+  align-self: flex-start;
+  background: #faf8f5;
+  color: #1a1a1a;
+  border-radius: 20px 20px 20px 6px;
+}
+.doodle-dots {
+  display: flex;
+  gap: 8px;
+  align-self: center;
+  padding: 4px 0;
+}
+.doodle-dots span {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  opacity: .3;
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+  <div class="label-row">
+    <span class="label">Q&amp;A</span>
+  </div>
+  <div class="visual-area">
+    <div class="chat-wrap">
+      <div class="bubble q-bubble">
+        What is the one habit that changed everything for you?
+      </div>
+      <div class="doodle-dots">
+        <span></span><span></span><span></span>
+      </div>
+      <div class="bubble a-bubble">
+        Showing up every single day, even when motivation is low.
+      </div>
+    </div>
+  </div>
+  <div class="content-area">
+    <div class="desc">
+      Consistency beats intensity every single time.
+    </div>
+  </div>
+</div>
+</body>
+</html>
