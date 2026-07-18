@@ -10,20 +10,19 @@ body{background:#050505;color:#fff;font-family:'NS',system-ui,sans-serif;font-si
 @font-face{font-family:'NS';src:url('../fonts/NotoSans-Regular-Complete.ttf')format('truetype');font-weight:400}
 @font-face{font-family:'NS';src:url('../fonts/NotoSans-Bold-Complete.ttf')format('truetype');font-weight:700}
 #root{position:relative;width:1080px;height:1920px;overflow:hidden;background:#050505}
-#root::before{content:'';position:absolute;top:40%;left:50%;transform:translate(-50%,-50%);width:800px;height:800px;background:radial-gradient(circle,rgba(239,68,68,.04) 0%,rgba(34,197,94,.04) 100%);pointer-events:none}
 .clip{position:absolute;inset:0;display:flex;align-items:center;justify-content:center}
-.s1{display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;height:100%;padding:50px 80px;overflow-y:auto;gap:8px}
+.s1{display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;height:100%;padding:50px 80px;overflow-y:auto;gap:20px}
 .s1h{font-size:34px;color:rgba(255,255,255,.25);letter-spacing:6px;text-transform:uppercase;font-weight:400;margin-bottom:4px}
-.mc,.fc{border-radius:14px;padding:16px 24px;width:100%;max-width:600px;backdrop-filter:blur(10px)}
-.mc{background:linear-gradient(135deg,rgba(239,68,68,.08),rgba(239,68,68,.02));border:1px solid rgba(239,68,68,.15);border-left:4px solid #ef4444;margin-bottom:2px}
-.fc{background:linear-gradient(135deg,rgba(34,197,94,.08),rgba(34,197,94,.02));border:1px solid rgba(34,197,94,.15);border-left:4px solid #22c55e}
+.mc,.fc{border-radius:14px;padding:16px 24px;width:100%;max-width:600px}
+.mc{border:1px solid rgba(239,68,68,.15);border-left:4px solid #ef4444}
+.fc{border:1px solid rgba(34,197,94,.15);border-left:4px solid #22c55e}
 .mcl{font-size:22px;font-weight:700;color:#ef4444;letter-spacing:3px;margin-bottom:4px;text-transform:uppercase}
 .fcl{font-size:22px;font-weight:700;color:#22c55e;letter-spacing:3px;margin-bottom:4px;text-transform:uppercase}
-.mcb{font-size:34px;color:rgba(255,255,255,.6);line-height:1.35;font-weight:300}
+.mcb{font-size:34px;color:rgba(255,255,255,.55);line-height:1.35;font-weight:300}
 .fcb{font-size:34px;color:#e8e8e8;line-height:1.35;font-weight:400}
-.mvs{font-size:22px;color:rgba(255,255,255,.08);letter-spacing:6px;margin:2px 0}
-.s1d{font-size:30px;color:rgba(255,255,255,.3);text-align:center;margin-top:4px;max-width:680px;font-weight:300}
-.s2{display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;height:100%;padding:0 60px;background:radial-gradient(ellipse at center,rgba(34,197,94,.03),transparent 70%)}
+.mvs{font-size:24px;color:rgba(255,255,255,.08);letter-spacing:8px;margin:4px 0}
+.s1d{font-size:30px;color:rgba(255,255,255,.3);text-align:center;max-width:680px;font-weight:300}
+.s2{display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;height:100%;padding:0 60px}
 .s2t{font-size:44px;font-weight:700;color:#fff;text-align:center;letter-spacing:1px}
 .s2s{font-size:30px;color:rgba(255,255,255,.3);margin-top:10px;letter-spacing:2px}
 </style>
