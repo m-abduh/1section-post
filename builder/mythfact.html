@@ -6,63 +6,62 @@
 <script src="gsap.min.js"></script>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{background:#050505;color:#fff;font-family:'NS',system-ui,sans-serif;font-size:40px}
-@font-face{font-family:'NS';src:url('../fonts/NotoSans-Regular-Complete.ttf')format('truetype');font-weight:400}
-@font-face{font-family:'NS';src:url('../fonts/NotoSans-Bold-Complete.ttf')format('truetype');font-weight:700}
-#root{position:relative;width:1080px;height:1920px;overflow:hidden;background:#050505}
+body{background:#f4f4f6;color:#1a1a2e;font-family:'Satoshi',system-ui,sans-serif;font-size:30px}
+@font-face{font-family:'Satoshi';src:url('../fonts/Satoshi-Variable.ttf')format('truetype');font-weight:300 900}
+#root{position:relative;width:1080px;height:1920px;overflow:hidden;background:#f4f4f6}
 .clip{position:absolute;inset:0;display:flex;align-items:center;justify-content:center}
 .s1{display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;height:100%;padding:50px 80px;overflow-y:auto;gap:20px}
-.s1h{font-size:34px;color:rgba(255,255,255,.25);letter-spacing:6px;text-transform:uppercase;font-weight:400;margin-bottom:4px}
-.mc,.fc{border-radius:14px;padding:16px 24px;width:100%;max-width:600px}
-.mc{border:1px solid rgba(239,68,68,.15);border-left:4px solid #ef4444}
-.fc{border:1px solid rgba(34,197,94,.15);border-left:4px solid #22c55e}
-.mcl{font-size:22px;font-weight:700;color:#ef4444;letter-spacing:3px;margin-bottom:4px;text-transform:uppercase}
-.fcl{font-size:22px;font-weight:700;color:#22c55e;letter-spacing:3px;margin-bottom:4px;text-transform:uppercase}
-.mcb{font-size:34px;color:rgba(255,255,255,.55);line-height:1.35;font-weight:300}
-.fcb{font-size:34px;color:#e8e8e8;line-height:1.35;font-weight:400}
-.mvs{font-size:24px;color:rgba(255,255,255,.08);letter-spacing:8px;margin:4px 0}
-.s1d{font-size:30px;color:rgba(255,255,255,.3);text-align:center;max-width:680px;font-weight:300}
-.s2{display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;height:100%;padding:0 60px}
-.s2t{font-size:44px;font-weight:700;color:#fff;text-align:center;letter-spacing:1px}
-.s2s{font-size:30px;color:rgba(255,255,255,.3);margin-top:10px;letter-spacing:2px}
+.s1h{display:flex;align-items:center;gap:10px;font-size:30px;color:#64748b;letter-spacing:3px;text-transform:uppercase;font-weight:700;background:rgba(100,116,139,.08);padding:8px 20px;border-radius:100px}
+.s1h svg{width:26px;height:26px;stroke:#64748b;stroke-width:1.5;fill:none}
+.mc,.fc{background:#fff;border-radius:20px;padding:18px 24px;width:100%;max-width:720px;box-shadow:0 4px 24px rgba(0,0,0,.04)}
+.mc{border:1px solid rgba(239,68,68,.1);border-left:5px solid #ef4444}
+.fc{border:1px solid rgba(34,197,94,.1);border-left:5px solid #22c55e}
+.mlh,.flh{display:flex;align-items:center;gap:8px;font-size:30px;font-weight:700;letter-spacing:2px;text-transform:uppercase}
+.mlh{color:#ef4444}
+.flh{color:#22c55e}
+.mlh svg,.flh svg{width:24px;height:24px;stroke-width:2.5;fill:none}
+.mcb{font-size:34px;color:#475569;line-height:1.35;margin-top:6px;font-weight:400}
+.fcb{font-size:34px;color:#1a1a2e;line-height:1.35;margin-top:6px;font-weight:600}
+.mvs{display:flex;align-items:center;gap:10px;font-size:30px;color:#cbd5e1;letter-spacing:3px;font-weight:700}
+.mvs svg{width:24px;height:24px;stroke:#cbd5e1;stroke-width:1.5;fill:none}
+.s1d{font-size:30px;color:#94a3b8;text-align:center;max-width:720px;font-weight:400}
+.s2{display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;height:100%;padding:0 60px;background:#fff}
+.s2t{font-size:44px;font-weight:800;color:#1a1a2e;text-align:center}
+.s2s{font-size:30px;color:#94a3b8;margin-top:12px;font-weight:400}
 </style>
 </head>
 <body>
 <div id="root" data-composition-id="mythfact" data-start="0" data-width="1080" data-height="1920" data-duration="15">
-
 <section class="clip" data-start="0" data-duration="10" data-track-index="1">
 <div class="s1">
-  <div class="s1h" id="s1h">{{title}}</div>
+  <div class="s1h" id="s1h"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>{{title}}</div>
   <div class="mc" id="cm">
-    <div class="mcl">{{mythLabel}}</div>
+    <div class="mlh"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke="#ef4444"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>{{mythLabel}}</div>
     <div class="mcb">{{myth}}</div>
   </div>
-  <div class="mvs">&#8593; vs &#8595;</div>
+  <div class="mvs"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m5 12h14"/><path d="m12 5 7 7-7 7"/></svg>vs<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 19-7-7 7-7"/></svg></div>
   <div class="fc" id="cf">
-    <div class="fcl">{{factLabel}}</div>
+    <div class="flh"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke="#22c55e"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>{{factLabel}}</div>
     <div class="fcb">{{fact}}</div>
   </div>
   <div class="s1d" id="sd">{{description}}</div>
 </div>
 </section>
-
 <section class="clip" data-start="10" data-duration="5" data-track-index="1">
 <div class="s2">
   <div class="s2t" id="s2t">{{follow}}</div>
   <div class="s2s" id="s2s">{{footer}}</div>
 </div>
 </section>
-
 </div>
-
 <script>
 window.__timelines=window.__timelines||{}
 var tl=gsap.timeline({paused:true})
-tl.from('#s1h',{y:-15,opacity:0,duration:.5,ease:'power2.out'},0)
-tl.from('#cm',{x:-70,rotation:-5,opacity:0,duration:.55,ease:'power3.out'},.3)
-tl.from('.mvs',{opacity:0,scale:.5,duration:.3},.7)
-tl.from('#cf',{x:70,rotation:5,opacity:0,duration:.55,ease:'power3.out'},.9)
-tl.from('#sd',{y:15,opacity:0,duration:.5,ease:'power2.out'},1.4)
+tl.from('#s1h',{y:-15,opacity:0,scale:.9,duration:.5,ease:'power2.out'},0)
+tl.from('#cm',{x:-60,rotation:-4,opacity:0,duration:.55,ease:'power3.out'},.25)
+tl.from('.mvs',{opacity:0,scale:.5,duration:.3},.65)
+tl.from('#cf',{x:60,rotation:4,opacity:0,duration:.55,ease:'power3.out'},.85)
+tl.from('#sd',{y:15,opacity:0,duration:.5,ease:'power2.out'},1.35)
 tl.from('#s2t',{y:25,opacity:0,duration:.7,ease:'power2.out'},10.2)
 tl.from('#s2s',{opacity:0,duration:.5,ease:'power2.out'},10.7)
 window.__timelines['mythfact']=tl

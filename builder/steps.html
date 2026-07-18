@@ -6,63 +6,55 @@
 <script src="gsap.min.js"></script>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{background:#050505;color:#fff;font-family:'NS',system-ui,sans-serif;font-size:40px}
-@font-face{font-family:'NS';src:url('../fonts/NotoSans-Regular-Complete.ttf')format('truetype');font-weight:400}
-@font-face{font-family:'NS';src:url('../fonts/NotoSans-Bold-Complete.ttf')format('truetype');font-weight:700}
-#root{position:relative;width:1080px;height:1920px;overflow:hidden;background:#050505}
+body{background:#f4f4f6;color:#1a1a2e;font-family:'Satoshi',system-ui,sans-serif;font-size:30px}
+@font-face{font-family:'Satoshi';src:url('../fonts/Satoshi-Variable.ttf')format('truetype');font-weight:300 900}
+#root{position:relative;width:1080px;height:1920px;overflow:hidden;background:#f4f4f6}
 .clip{position:absolute;inset:0;display:flex;align-items:center;justify-content:center}
 .s1{display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;height:100%;padding:50px 80px;overflow-y:auto;gap:20px}
-.s1h{font-size:34px;color:rgba(16,185,129,.45);letter-spacing:6px;text-transform:uppercase;font-weight:400;margin-bottom:2px}
-.s1c{display:flex;flex-direction:column;align-items:center;gap:20px;width:100%;max-width:640px;margin:6px 0}
-.scard{background:linear-gradient(135deg,rgba(255,255,255,.03),rgba(255,255,255,.01));border:1px solid rgba(255,255,255,.06);border-left:3px solid #10b981;border-radius:14px;padding:16px 20px;width:100%}
-.scr{display:flex;align-items:flex-start;gap:20px}
-.snb{width:32px;height:32px;min-width:32px;border-radius:10px;background:linear-gradient(135deg,rgba(16,185,129,.15),rgba(16,185,129,.05));border:1px solid rgba(16,185,129,.3);display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:700;color:#10b981}
-.sct{font-size:34px;font-weight:700;color:#f0f0f0;letter-spacing:.5px}
-.scds{font-size:28px;color:rgba(255,255,255,.4);margin-top:3px;font-weight:300}
-.s1d{font-size:30px;color:rgba(255,255,255,.3);text-align:center;max-width:680px;font-weight:300;letter-spacing:1px}
-.s2{display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;height:100%;padding:0 60px}
-.s2ar{font-size:36px;color:#10b981;margin-bottom:10px;opacity:.6}
-.s2t{font-size:44px;font-weight:700;color:#fff;text-align:center;letter-spacing:1px}
-.s2s{font-size:30px;color:rgba(255,255,255,.3);margin-top:10px;letter-spacing:2px}
+.s1h{display:flex;align-items:center;gap:10px;font-size:30px;color:#10b981;letter-spacing:3px;text-transform:uppercase;font-weight:700;background:rgba(16,185,129,.08);padding:8px 20px;border-radius:100px}
+.s1h svg{width:26px;height:26px;stroke:#10b981;stroke-width:1.5;fill:none}
+.s1c{display:flex;flex-direction:column;align-items:center;gap:16px;width:100%;max-width:720px}
+.scard{background:#fff;border-radius:20px;padding:18px 22px;width:100%;box-shadow:0 4px 24px rgba(0,0,0,.05);display:flex;align-items:flex-start;gap:16px;border:1px solid rgba(0,0,0,.04)}
+.sib{width:48px;height:48px;min-width:48px;border-radius:14px;background:linear-gradient(135deg,#ecfdf5,#d1fae5);display:flex;align-items:center;justify-content:center}
+.sib svg{width:28px;height:28px;stroke:#10b981;stroke-width:2;fill:none}
+.sct{font-size:34px;font-weight:700;color:#1a1a2e}
+.scds{font-size:30px;color:#64748b;margin-top:2px;font-weight:400}
+.s1d{font-size:30px;color:#94a3b8;text-align:center;max-width:720px;font-weight:400}
+.s2{display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;height:100%;padding:0 60px;background:#fff}
+.s2t{font-size:44px;font-weight:800;color:#1a1a2e;text-align:center}
+.s2s{font-size:30px;color:#94a3b8;margin-top:12px;font-weight:400}
 </style>
 </head>
 <body>
 <div id="root" data-composition-id="steps" data-start="0" data-width="1080" data-height="1920" data-duration="15">
-
 <section class="clip" data-start="0" data-duration="10" data-track-index="1">
 <div class="s1">
-  <div class="s1h" id="s1h">{{title}}</div>
-  <div class="s1c" id="sc">
+  <div class="s1h" id="s1h"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>{{title}}</div>
+  <div class="s1c">
 {{#each steps}}
 <div class="scard" id="sc-{{@index}}">
-  <div class="scr">
-    <div class="snb">{{@index1}}</div>
-    <div><div class="sct">{{title}}</div><div class="scds">{{desc}}</div></div>
-  </div>
+  <div class="sib"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></div>
+  <div><div class="sct">{{title}}</div><div class="scds">{{desc}}</div></div>
 </div>
 {{/each}}
   </div>
-  <div class="s1d" id="sd"></div>
+  <div class="s1d" id="sd">{{description}}</div>
 </div>
 </section>
-
 <section class="clip" data-start="10" data-duration="5" data-track-index="1">
 <div class="s2">
-  <div class="s2ar">→</div>
   <div class="s2t" id="s2t">{{follow}}</div>
   <div class="s2s" id="s2s">{{footer}}</div>
 </div>
 </section>
-
 </div>
-
 <script>
 window.__timelines=window.__timelines||{}
 var tl=gsap.timeline({paused:true})
-tl.from('#s1h',{y:-15,opacity:0,duration:.5,ease:'power2.out'},0)
-tl.from('.scard',{y:25,opacity:0,stagger:.1,duration:.55,ease:'power2.out'},.35)
-tl.from('.snb',{scale:0,stagger:.1,duration:.4,ease:'back.out(2)'},.35)
-tl.from('#sd',{y:10,opacity:0,duration:.4,ease:'power2.out'},.35+.1*5+.05)
+tl.from('#s1h',{y:-15,opacity:0,scale:.9,duration:.5,ease:'power2.out'},0)
+tl.from('.scard',{y:25,opacity:0,stagger:.1,duration:.55,ease:'power2.out'},.3)
+tl.from('.sib',{scale:0,stagger:.1,duration:.4,ease:'back.out(2)'},.3)
+tl.from('#sd',{y:10,opacity:0,duration:.4,ease:'power2.out'},.3+.1*5+.05)
 tl.from('#s2t',{y:25,opacity:0,duration:.7,ease:'power2.out'},10.2)
 tl.from('#s2s',{opacity:0,duration:.5,ease:'power2.out'},10.7)
 window.__timelines['steps']=tl

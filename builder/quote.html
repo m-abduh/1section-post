@@ -6,48 +6,45 @@
 <script src="gsap.min.js"></script>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{background:#050505;color:#fff;font-family:'NS',system-ui,sans-serif;font-size:40px}
-@font-face{font-family:'NS';src:url('../fonts/NotoSans-Regular-Complete.ttf')format('truetype');font-weight:400}
-@font-face{font-family:'NS';src:url('../fonts/NotoSans-Bold-Complete.ttf')format('truetype');font-weight:700}
-#root{position:relative;width:1080px;height:1920px;overflow:hidden;background:#050505}
+body{background:#f4f4f6;color:#1a1a2e;font-family:'Satoshi',system-ui,sans-serif;font-size:30px}
+@font-face{font-family:'Satoshi';src:url('../fonts/Satoshi-Variable.ttf')format('truetype');font-weight:300 900}
+#root{position:relative;width:1080px;height:1920px;overflow:hidden;background:#f4f4f6}
 .clip{position:absolute;inset:0;display:flex;align-items:center;justify-content:center}
-.s1{display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;height:100%;padding:50px 100px;gap:20px}
-.s1q{font-size:34px;font-weight:300;color:#e8e8e8;text-align:center;line-height:1.5;font-style:italic;max-width:780px}
-.s1ln{width:140px;height:1px;background:linear-gradient(90deg,transparent,rgba(139,92,246,.2),transparent);margin:4px auto 8px;display:flex;align-items:center;justify-content:center}
-.s1dt{width:6px;height:6px;border-radius:50%;background:#8b5cf6;opacity:.6}
-.s1sr{font-size:30px;color:#a78bfa;text-align:center;font-weight:300;letter-spacing:1px}
-.s1d{font-size:28px;color:rgba(255,255,255,.3);text-align:center;max-width:660px;font-weight:300}
-.s2{display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;height:100%;padding:0 60px}
-.s2t{font-size:44px;font-weight:700;color:#fff;text-align:center;letter-spacing:1px}
-.s2s{font-size:30px;color:rgba(255,255,255,.3);margin-top:10px;letter-spacing:2px}
+.s1{display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;height:100%;padding:50px 80px;gap:20px}
+.s1i svg{width:40px;height:40px;stroke:#8b5cf6;stroke-width:1;fill:none;opacity:.25}
+.s1q{font-size:40px;font-weight:400;color:#1a1a2e;text-align:center;line-height:1.5;font-style:italic;max-width:720px}
+.s1ln{width:160px;height:2px;background:linear-gradient(90deg,transparent,#a78bfa,transparent);margin:4px auto 10px;display:flex;align-items:center;justify-content:center}
+.s1dt{width:6px;height:6px;border-radius:50%;background:#a78bfa}
+.s1sr{font-size:30px;color:#8b5cf6;text-align:center;font-weight:600}
+.s1d{font-size:30px;color:#94a3b8;text-align:center;max-width:720px;font-weight:400}
+.s2{display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;height:100%;padding:0 60px;background:#fff}
+.s2t{font-size:44px;font-weight:800;color:#1a1a2e;text-align:center}
+.s2s{font-size:30px;color:#94a3b8;margin-top:12px;font-weight:400}
 </style>
 </head>
 <body>
 <div id="root" data-composition-id="quote" data-start="0" data-width="1080" data-height="1920" data-duration="15">
-
 <section class="clip" data-start="0" data-duration="10" data-track-index="1">
 <div class="s1">
+  <div class="s1i"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg></div>
   <div class="s1q" id="s1q">{{quote_short}}</div>
   <div class="s1ln" id="s1ln"><div class="s1dt"></div></div>
   <div class="s1sr" id="s1sr">{{source_display}}</div>
   <div class="s1d" id="s1d">{{description}}</div>
 </div>
 </section>
-
 <section class="clip" data-start="10" data-duration="5" data-track-index="1">
 <div class="s2">
   <div class="s2t" id="s2t">{{follow}}</div>
   <div class="s2s" id="s2s">{{footer}}</div>
 </div>
 </section>
-
 </div>
-
 <script>
 window.__timelines=window.__timelines||{}
 var tl=gsap.timeline({paused:true})
 tl.from('#s1q',{y:25,opacity:0,duration:.8,ease:'power2.out'},0)
-tl.from('#s1ln',{scaleX:0,transformOrigin:'center',opacity:0,duration:.6,ease:'power2.out'},.7)
+tl.from('#s1ln',{scaleX:0,transformOrigin:'center',duration:.6,ease:'power2.out'},.7)
 tl.from('#s1sr',{y:15,opacity:0,duration:.5,ease:'power2.out'},1.15)
 tl.from('#s1d',{y:15,opacity:0,duration:.5,ease:'power2.out'},1.5)
 tl.from('#s2t',{y:25,opacity:0,duration:.7,ease:'power2.out'},10.2)
