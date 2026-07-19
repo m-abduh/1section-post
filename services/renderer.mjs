@@ -74,7 +74,7 @@ export function renderPost(type, content, outputPath) {
 
   const musicFile = findMusic();
   if (musicFile) {
-    const audio = `<audio id="bgm" src="${musicFile}" data-start="0" data-duration="15" data-volume="0.3" data-has-audio="true"></audio>`;
+    const audio = `<audio id="bgm" src="${musicFile}" data-start="0" data-duration="20" data-volume="0.3" data-has-audio="true"></audio>`;
     html = html.replace("</div>", audio + "\n</div>");
   }
 

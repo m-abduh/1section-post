@@ -12,38 +12,64 @@ body{font-family:'Satoshi',system-ui,sans-serif;background:#faf8f5;color:#1a1a1a
 .clip{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:20px}
 .card{background:#fff;border-radius:24px;box-shadow:0 8px 40px rgba(0,0,0,.04),0 2px 8px rgba(0,0,0,.02);padding:50px 70px;width:100%;height:100%;display:flex;flex-direction:column}
 :root{--accent:#b0884a}
-.eyebrow-accent{font-size:26px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--accent);margin-bottom:12px}
-.title{font-size:44px;font-weight:800;line-height:1.25;letter-spacing:-1px;color:var(--accent);margin-bottom:20px}
-.visual-area{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative}
-.desc{font-size:26px;color:#c0c0c0;line-height:1.4;margin-top:24px}
-.tier-wrap{display:flex;flex-direction:column;gap:8px;max-width:620px;width:100%}
-.tier-row{display:flex;align-items:center;gap:16px;padding:16px 24px;border-radius:14px}
+.intro-card{align-items:center;justify-content:center}
+.brand{display:flex;flex-direction:column;align-items:center;gap:8px;position:relative;z-index:1}
+.brand-icon{width:72px;height:72px;border-radius:18px;background:#1a1a1a;display:flex;align-items:center;justify-content:center;font-size:32px;font-weight:800;color:#fff;margin-bottom:8px}
+.brand-name{font-size:72px;font-weight:800;letter-spacing:-2px;color:#1a1a1a;line-height:1}
+.brand-name em{font-style:normal;color:var(--accent)}
+.brand-line{width:60px;height:3px;background:var(--accent);border-radius:2px;margin:20px 0}
+.intro-title{font-size:52px;font-weight:800;line-height:1.2;letter-spacing:-1px;color:#1a1a1a;text-align:center;max-width:720px;margin-top:10px}
+.intro-desc{font-size:26px;color:#c0c0c0;line-height:1.4;text-align:center;max-width:600px;margin-top:8px}
+.brand-tag{font-size:16px;color:#ccc;letter-spacing:3px;text-transform:uppercase;margin-top:24px}
+.detail-card{padding:40px 60px;justify-content:center}
+.eyebrow-accent{font-size:24px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--accent);margin-bottom:10px}
+.title{font-size:40px;font-weight:800;line-height:1.25;letter-spacing:-1px;color:var(--accent);margin-bottom:16px}
+.visual-area{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;min-height:0}
+.desc{font-size:24px;color:#c0c0c0;line-height:1.4;margin-top:16px}
+.tier-wrap{display:flex;flex-direction:column;gap:6px;max-width:600px;width:100%}
+.tier-row{display:flex;align-items:center;gap:14px;padding:14px 20px;border-radius:12px}
 .tier-row.s{background:rgba(176,136,74,.06)}
 .tier-row.a{background:rgba(122,158,140,.06)}
 .tier-row.b{background:rgba(122,142,158,.06)}
 .tier-row.c{background:rgba(200,200,200,.06)}
-.tier-badge{width:32px;height:32px;min-width:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:800;color:#fff}
+.tier-badge{width:30px;height:30px;min-width:30px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800;color:#fff}
 .tier-row.s .tier-badge{background:#b0884a}
 .tier-row.a .tier-badge{background:#7a9e8c}
 .tier-row.b .tier-badge{background:#7a8e9e}
 .tier-row.c .tier-badge{background:#ccc}
-.tier-title{font-size:28px;font-weight:700;color:#1a1a1a}
-.tier-desc{font-size:20px;color:#bbb;margin-top:2px}
-.s2{display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;height:100%;padding:0 60px;background:#fff}
-.s2t{font-size:44px;font-weight:800;color:#1a1a1a;text-align:center}
-.s2s{font-size:26px;color:#c0c0c0;margin-top:12px}
+.tier-title{font-size:26px;font-weight:700;color:#1a1a1a}
+.tier-desc{font-size:18px;color:#bbb;margin-top:2px}
+.cta-card{align-items:center;justify-content:center}
+.cta-icon{width:56px;height:56px;border-radius:14px;background:#1a1a1a;display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:800;color:#fff;margin-bottom:6px}
+.cta-name{font-size:48px;font-weight:800;letter-spacing:-1px;color:#1a1a1a;line-height:1}
+.cta-name em{font-style:normal;color:var(--accent)}
+.cta-line{width:40px;height:3px;background:var(--accent);border-radius:2px;margin:14px 0}
+.cta-text{font-size:36px;font-weight:700;color:#1a1a1a;text-align:center;max-width:600px}
+.cta-tag{font-size:18px;color:#ccc;letter-spacing:2px;text-transform:uppercase;margin-top:12px}
 </style>
 </head>
 <body>
-<div id="root" data-composition-id="tierlist" data-start="0" data-width="1080" data-height="1920" data-duration="15">
-<section class="clip" data-start="0" data-duration="10" data-track-index="1">
-  <div class="card">
+<div id="root" data-composition-id="tierlist" data-start="0" data-width="1080" data-height="1920" data-duration="20">
+<section class="clip" data-start="0" data-duration="8" data-track-index="1">
+  <div class="card intro-card">
+    <div class="brand">
+      <div class="brand-icon" id="bi">1s</div>
+      <div class="brand-name" id="bn"><em>1</em>section</div>
+      <div class="brand-line" id="bl"></div>
+      <div class="intro-title" id="bt">{{title}}</div>
+      <div class="intro-desc" id="bd">{{description}}</div>
+      <div class="brand-tag" id="bg">Ideas that stick</div>
+    </div>
+  </div>
+</section>
+<section class="clip" data-start="8" data-duration="9" data-track-index="1">
+  <div class="card detail-card">
     <div class="visual-area">
-      <span class="eyebrow-accent">The verdict</span>
-      <div class="title">{{title}}</div>
+      <span class="eyebrow-accent" id="oe">The verdict</span>
+      <div class="title" id="ot">{{title}}</div>
       <div class="tier-wrap">
 {{#each tiers}}
-        <div class="tier-row {{label}}" id="tr-{{@index}}">
+        <div class="tier-row {{label}}" id="otr-{{@index}}">
           <div class="tier-badge">{{labelUpper}}</div>
           <div>
             <div class="tier-title">{{name}}</div>
@@ -52,28 +78,42 @@ body{font-family:'Satoshi',system-ui,sans-serif;background:#faf8f5;color:#1a1a1a
         </div>
 {{/each}}
       </div>
-      <div class="desc" id="sd">{{description}}</div>
+      <div class="desc" id="o3">{{description}}</div>
     </div>
   </div>
 </section>
-<section class="clip" data-start="10" data-duration="5" data-track-index="1">
-<div class="s2">
-  <div class="s2t" id="s2t">{{follow}}</div>
-  <div class="s2s" id="s2s">{{footer}}</div>
-</div>
+<section class="clip" data-start="17" data-duration="3" data-track-index="1">
+  <div class="card cta-card">
+    <div class="brand">
+      <div class="cta-icon" id="ci">1s</div>
+      <div class="cta-name" id="cn"><em>1</em>section</div>
+      <div class="cta-line" id="cl"></div>
+      <div class="cta-text" id="ct">{{follow}}</div>
+      <div class="cta-tag" id="cg">{{footer}}</div>
+    </div>
+  </div>
 </section>
 </div>
 <script>
 window.__timelines=window.__timelines||{}
 var tl=gsap.timeline({paused:true,defaults:{ease:'power3.out'}})
 var n=document.querySelectorAll('.tier-row').length
-tl.fromTo('.eyebrow-accent',{x:-30,opacity:0},{x:0,opacity:1,duration:.5},0)
-tl.fromTo('.title',{y:24,opacity:0},{y:0,opacity:1,duration:.6},.25)
-tl.fromTo('.tier-row',{x:-20,opacity:0},{x:0,opacity:1,stagger:.08,duration:.5},.5)
-tl.fromTo('.tier-badge',{scale:0},{scale:1,stagger:.08,duration:.35,ease:'back.out(1.4)'},.5)
-tl.fromTo('#sd',{y:15,opacity:0},{y:0,opacity:1,duration:.45},.5+n*.08+.05)
-tl.fromTo('#s2t',{y:30,opacity:0},{y:0,opacity:1,duration:.65},10.2)
-tl.fromTo('#s2s',{opacity:0},{opacity:1,duration:.5},10.65)
+tl.fromTo('#bi',{scale:.5,opacity:0},{scale:1,opacity:1,duration:.5,ease:'back.out(1.4)'},0)
+tl.fromTo('#bn',{y:20,opacity:0},{y:0,opacity:1,duration:.55},.35)
+tl.fromTo('#bl',{scaleX:0},{scaleX:1,transformOrigin:'50% 0%',duration:.4},.7)
+tl.fromTo('#bt',{y:30,opacity:0},{y:0,opacity:1,duration:.6},1)
+tl.fromTo('#bd',{y:20,opacity:0},{y:0,opacity:1,duration:.5},1.4)
+tl.fromTo('#bg',{opacity:0},{opacity:1,duration:.4},1.75)
+tl.fromTo('#oe',{x:-25,opacity:0},{x:0,opacity:1,duration:.35},8.2)
+tl.fromTo('#ot',{y:20,opacity:0},{y:0,opacity:1,duration:.45},8.45)
+tl.fromTo('.tier-row',{x:-20,opacity:0},{x:0,opacity:1,stagger:.06,duration:.4},8.7)
+tl.fromTo('.tier-badge',{scale:0},{scale:1,stagger:.06,duration:.3,ease:'back.out(1.4)'},8.7)
+tl.fromTo('#o3',{y:15,opacity:0},{y:0,opacity:1,duration:.3},8.7+n*.06+.05)
+tl.fromTo('#ci',{scale:.5,opacity:0},{scale:1,opacity:1,duration:.4,ease:'back.out(1.4)'},17)
+tl.fromTo('#cn',{y:15,opacity:0},{y:0,opacity:1,duration:.4},17.25)
+tl.fromTo('#cl',{scaleX:0},{scaleX:1,transformOrigin:'50% 0%',duration:.3},17.55)
+tl.fromTo('#ct',{y:20,opacity:0},{y:0,opacity:1,duration:.45},17.75)
+tl.fromTo('#cg',{opacity:0},{opacity:1,duration:.3},18.1)
 window.__timelines['tierlist']=tl
 </script>
 </body>
