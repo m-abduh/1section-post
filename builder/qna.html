@@ -12,13 +12,10 @@ body{font-family:'Satoshi',system-ui,sans-serif;background:#faf8f5;color:#1a1a1a
 .clip{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:20px}
 .card{background:#fff;border-radius:24px;box-shadow:0 8px 40px rgba(0,0,0,.04),0 2px 8px rgba(0,0,0,.02);padding:50px 70px;width:100%;height:100%;display:flex;flex-direction:column}
 :root{--accent:#5b7fa5}
-.eyebrow-row{display:flex;align-items:center;gap:14px;margin-bottom:6px}
-.eyebrow-accent{font-size:26px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--accent)}
-.eyebrow-line{flex:1;height:2px;background:rgba(0,0,0,.06)}
-.title{font-size:44px;font-weight:800;line-height:1.25;letter-spacing:-1px;color:var(--accent);margin-bottom:36px}
+.eyebrow-accent{font-size:26px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--accent);margin-bottom:12px}
+.title{font-size:44px;font-weight:800;line-height:1.25;letter-spacing:-1px;color:var(--accent);margin-bottom:20px}
 .visual-area{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative}
-.content-area{margin-top:20px}
-.desc{font-size:26px;color:#c0c0c0;line-height:1.4}
+.desc{font-size:26px;color:#c0c0c0;line-height:1.4;margin-top:24px}
 .chat-wrap{display:flex;flex-direction:column;gap:20px;width:100%;max-width:760px}
 .q-bubble{align-self:flex-end;background:var(--accent);color:#fff;border-radius:20px 20px 6px 20px;padding:20px 28px;font-size:34px;line-height:1.5;max-width:80%}
 .a-bubble{align-self:flex-start;background:#faf8f5;color:#1a1a1a;border-radius:20px 20px 20px 6px;padding:20px 28px;font-size:34px;line-height:1.5;max-width:80%}
@@ -31,18 +28,13 @@ body{font-family:'Satoshi',system-ui,sans-serif;background:#faf8f5;color:#1a1a1a
 <div id="root" data-composition-id="qna" data-start="0" data-width="1080" data-height="1920" data-duration="15">
 <section class="clip" data-start="0" data-duration="10" data-track-index="1">
   <div class="card">
-    <div class="eyebrow-row">
-      <span class="eyebrow-accent">Good question</span>
-      <div class="eyebrow-line"></div>
-    </div>
     <div class="visual-area">
+      <span class="eyebrow-accent">Good question</span>
       <div class="title">{{title}}</div>
       <div class="chat-wrap">
         <div class="q-bubble" id="qb">{{question}}</div>
         <div class="a-bubble" id="ab">{{answer}}</div>
       </div>
-    </div>
-    <div class="content-area">
       <div class="desc" id="sd">{{description}}</div>
     </div>
   </div>
@@ -57,11 +49,11 @@ body{font-family:'Satoshi',system-ui,sans-serif;background:#faf8f5;color:#1a1a1a
 <script>
 window.__timelines=window.__timelines||{}
 var tl=gsap.timeline({paused:true,defaults:{ease:'power3.out'}})
-tl.fromTo('.eyebrow-row',{x:-30,opacity:0},{x:0,opacity:1,duration:.5},0)
+tl.fromTo('.eyebrow-accent',{x:-30,opacity:0},{x:0,opacity:1,duration:.5},0)
 tl.fromTo('.title',{y:24,opacity:0},{y:0,opacity:1,duration:.6},.25)
-tl.fromTo('#qb',{x:50,opacity:0},{x:0,opacity:1,duration:.55},.55)
-tl.fromTo('#ab',{x:-50,opacity:0},{x:0,opacity:1,duration:.55},.95)
-tl.fromTo('#sd',{y:15,opacity:0},{y:0,opacity:1,duration:.4},1.35)
+tl.fromTo('#qb',{x:50,opacity:0},{x:0,opacity:1,duration:.55},.5)
+tl.fromTo('#ab',{x:-50,opacity:0},{x:0,opacity:1,duration:.55},.9)
+tl.fromTo('#sd',{y:15,opacity:0},{y:0,opacity:1,duration:.4},1.25)
 tl.fromTo('#s2t',{y:30,opacity:0},{y:0,opacity:1,duration:.65},10.2)
 tl.fromTo('#s2s',{opacity:0},{opacity:1,duration:.5},10.65)
 window.__timelines['qna']=tl
