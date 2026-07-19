@@ -64,6 +64,7 @@ function buildPrompt(type) {
 
 Generate content for a statistics social media video. Return a JSON object with these fields:
 - "label": a short label/title (3-5 words)
+- "title": a compelling headline that introduces the stat (4-8 words)
 - "stat": a striking statistic. MUST be 6 characters or fewer (e.g. "73%", "42M", "$1.2B", "1/4", "12yr", "3:1", "99th", "200K"). NO spaces if possible.
 - "desc": a one-sentence description of what the stat means (max 12 words)
 - "sub": a 2-3 sentence explanation providing deeper context
@@ -108,6 +109,7 @@ Make it counterintuitive and intellectually engaging for adults. The fact MUST b
     quote: `You are a viral content expert. Cover ANY topic that matters today — technology, finance, psychology, work, business, self-development, health, science, culture, or any real-world trend people care about. Don't be stiff or generic. Use simple, sharp language that hits hard. Strong hook is mandatory. Follow and reference current news and events happening around the world right now — don't create content in a vacuum, tie it to what's actually happening today. Use reality-based insights and accurate data from real research or proven facts.
 
 Generate content for an inspirational quote social media video. Return a JSON object with:
+- "title": a short theme label (3-4 words)
 - "quote": an insightful, thought-provoking quote (1-2 sentences)
 - "source": the person who said the quote (first and last name)
 - "description": a 1-2 sentence explanation of why this quote matters or how to apply it

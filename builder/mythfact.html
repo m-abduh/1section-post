@@ -6,46 +6,67 @@
 <script src="gsap.min.js"></script>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{background:#f4f4f6;color:#1a1a2e;font-family:'Satoshi',system-ui,sans-serif;font-size:30px}
 @font-face{font-family:'Satoshi';src:url('../fonts/Satoshi-Variable.ttf')format('truetype');font-weight:300 900}
-#root{position:relative;width:1080px;height:1920px;overflow:hidden;background:#f4f4f6}
-.clip{position:absolute;inset:0;display:flex;align-items:center;justify-content:center}
-.s1{display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;height:100%;padding:50px 80px;overflow-y:auto;gap:20px}
-.s1h{display:flex;align-items:center;gap:10px;font-size:30px;color:#64748b;letter-spacing:3px;text-transform:uppercase;font-weight:700;background:rgba(100,116,139,.08);padding:8px 20px;border-radius:100px}
-.s1h svg{width:26px;height:26px;stroke:#64748b;stroke-width:1.5;fill:none}
-.mc,.fc{background:#fff;border-radius:20px;padding:18px 24px;width:100%;max-width:720px;box-shadow:0 4px 24px rgba(0,0,0,.04)}
-.mc{border:1px solid rgba(239,68,68,.1);border-left:5px solid #ef4444}
-.fc{border:1px solid rgba(34,197,94,.1);border-left:5px solid #22c55e}
-.mlh,.flh{display:flex;align-items:center;gap:8px;font-size:30px;font-weight:700;letter-spacing:2px;text-transform:uppercase}
-.mlh{color:#ef4444}
-.flh{color:#22c55e}
-.mlh svg,.flh svg{width:24px;height:24px;stroke-width:2.5;fill:none}
-.mcb{font-size:34px;color:#475569;line-height:1.35;margin-top:6px;font-weight:400}
-.fcb{font-size:34px;color:#1a1a2e;line-height:1.35;margin-top:6px;font-weight:600}
-.mvs{display:flex;align-items:center;gap:10px;font-size:30px;color:#cbd5e1;letter-spacing:3px;font-weight:700}
-.mvs svg{width:24px;height:24px;stroke:#cbd5e1;stroke-width:1.5;fill:none}
-.s1d{font-size:30px;color:#94a3b8;text-align:center;max-width:720px;font-weight:400}
+body{font-family:'Satoshi',system-ui,sans-serif;background:#faf8f5;color:#1a1a1a}
+#root{position:relative;width:1080px;height:1920px;overflow:hidden;background:#faf8f5}
+.clip{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:20px}
+.card{background:#fff;border-radius:24px;box-shadow:0 8px 40px rgba(0,0,0,.04),0 2px 8px rgba(0,0,0,.02);padding:50px 70px;width:100%;height:100%;display:flex;flex-direction:column}
+:root{--accent:#c4665d;--accent-myth:#c4665d;--accent-fact:#5d9e7a}
+.eyebrow-row{display:flex;align-items:center;gap:14px;margin-bottom:6px}
+.eyebrow-accent{font-size:26px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--accent)}
+.eyebrow-line{flex:1;height:2px;background:rgba(0,0,0,.06)}
+.title{font-size:44px;font-weight:800;line-height:1.25;letter-spacing:-1px;color:var(--accent);margin-bottom:36px}
+.visual-area{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative}
+.content-area{margin-top:20px}
+.desc{font-size:26px;color:#c0c0c0;line-height:1.4}
+.mf-wrap{display:flex;flex-direction:column;gap:0;max-width:640px;width:100%}
+.mf-card{padding:28px 32px;border-radius:20px}
+.myth-card{background:rgba(196,102,93,.05)}
+.fact-card{background:rgba(93,158,122,.05)}
+.mf-top{display:flex;align-items:flex-start;gap:14px}
+.mf-icon{font-size:36px;line-height:1;margin-top:2px;min-width:36px}
+.myth-card .mf-icon{color:var(--accent-myth)}
+.fact-card .mf-icon{color:var(--accent-fact)}
+.mf-text{font-size:28px;line-height:1.5}
+.myth-card .mf-text{color:#777;font-weight:400;text-decoration:line-through}
+.fact-card .mf-text{color:#1a1a1a;font-weight:600}
+.mf-line{display:flex;align-items:center;justify-content:center;height:32px}
+.mf-line::before{content:'';width:2px;height:100%;background:rgba(0,0,0,.06)}
 .s2{display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;height:100%;padding:0 60px;background:#fff}
-.s2t{font-size:44px;font-weight:800;color:#1a1a2e;text-align:center}
-.s2s{font-size:30px;color:#94a3b8;margin-top:12px;font-weight:400}
+.s2t{font-size:44px;font-weight:800;color:#1a1a1a;text-align:center}
+.s2s{font-size:26px;color:#c0c0c0;margin-top:12px}
 </style>
 </head>
 <body>
 <div id="root" data-composition-id="mythfact" data-start="0" data-width="1080" data-height="1920" data-duration="15">
 <section class="clip" data-start="0" data-duration="10" data-track-index="1">
-<div class="s1">
-  <div class="s1h" id="s1h"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>{{title}}</div>
-  <div class="mc" id="cm">
-    <div class="mlh"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke="#ef4444"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>{{mythLabel}}</div>
-    <div class="mcb">{{myth}}</div>
+  <div class="card">
+    <div class="eyebrow-row">
+      <span class="eyebrow-accent">Don't be fooled</span>
+      <div class="eyebrow-line"></div>
+    </div>
+    <div class="visual-area">
+      <div class="title" style="margin-bottom:36px">{{title}}</div>
+      <div class="mf-wrap">
+        <div class="mf-card myth-card" id="cm">
+          <div class="mf-top">
+            <span class="mf-icon">&#10005;</span>
+            <div class="mf-text">{{myth}}</div>
+          </div>
+        </div>
+        <div class="mf-line" id="ml"></div>
+        <div class="mf-card fact-card" id="cf">
+          <div class="mf-top">
+            <span class="mf-icon">&#10003;</span>
+            <div class="mf-text">{{fact}}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="content-area">
+      <div class="desc" id="sd">{{description}}</div>
+    </div>
   </div>
-  <div class="mvs"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m5 12h14"/><path d="m12 5 7 7-7 7"/></svg>vs<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 19-7-7 7-7"/></svg></div>
-  <div class="fc" id="cf">
-    <div class="flh"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke="#22c55e"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>{{factLabel}}</div>
-    <div class="fcb">{{fact}}</div>
-  </div>
-  <div class="s1d" id="sd">{{description}}</div>
-</div>
 </section>
 <section class="clip" data-start="10" data-duration="5" data-track-index="1">
 <div class="s2">
@@ -57,11 +78,10 @@ body{background:#f4f4f6;color:#1a1a2e;font-family:'Satoshi',system-ui,sans-serif
 <script>
 window.__timelines=window.__timelines||{}
 var tl=gsap.timeline({paused:true})
-tl.from('#s1h',{y:-15,opacity:0,scale:.9,duration:.5,ease:'power2.out'},0)
-tl.from('#cm',{x:-60,rotation:-4,opacity:0,duration:.55,ease:'power3.out'},.25)
-tl.from('.mvs',{opacity:0,scale:.5,duration:.3},.65)
-tl.from('#cf',{x:60,rotation:4,opacity:0,duration:.55,ease:'power3.out'},.85)
-tl.from('#sd',{y:15,opacity:0,duration:.5,ease:'power2.out'},1.35)
+tl.from('#cm',{y:-20,opacity:0,duration:.55,ease:'power2.out'},0)
+tl.from('#ml',{opacity:0,scaleY:0,transformOrigin:'top',duration:.3},.4)
+tl.from('#cf',{y:20,opacity:0,duration:.55,ease:'power2.out'},.6)
+tl.from('#sd',{y:15,opacity:0,duration:.5,ease:'power2.out'},1.1)
 tl.from('#s2t',{y:25,opacity:0,duration:.7,ease:'power2.out'},10.2)
 tl.from('#s2s',{opacity:0,duration:.5,ease:'power2.out'},10.7)
 window.__timelines['mythfact']=tl

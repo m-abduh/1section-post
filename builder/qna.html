@@ -6,40 +6,46 @@
 <script src="gsap.min.js"></script>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{background:#f4f4f6;color:#1a1a2e;font-family:'Satoshi',system-ui,sans-serif;font-size:30px}
 @font-face{font-family:'Satoshi';src:url('../fonts/Satoshi-Variable.ttf')format('truetype');font-weight:300 900}
-#root{position:relative;width:1080px;height:1920px;overflow:hidden;background:#f4f4f6}
-.clip{position:absolute;inset:0;display:flex;align-items:center;justify-content:center}
-.s1{display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;height:100%;padding:50px 80px;overflow-y:auto;gap:20px}
-.s1h{display:flex;align-items:center;gap:10px;font-size:30px;color:#06b6d4;letter-spacing:3px;text-transform:uppercase;font-weight:700;background:rgba(6,182,212,.08);padding:8px 20px;border-radius:100px}
-.s1h svg{width:26px;height:26px;stroke:#06b6d4;stroke-width:1.5;fill:none}
-.s1c{display:flex;flex-direction:column;align-items:center;width:100%;max-width:720px;gap:14px}
-.qb{background:#fff;border-radius:20px 20px 6px 20px;padding:16px 22px;font-size:34px;color:#1a1a2e;line-height:1.35;align-self:flex-end;max-width:80%;display:flex;align-items:flex-start;gap:12px;box-shadow:0 4px 20px rgba(6,182,212,.08);border:1px solid rgba(6,182,212,.1);font-weight:500}
-.qb svg{width:30px;height:30px;min-width:30px;stroke:#06b6d4;stroke-width:1.5;fill:none;margin-top:3px}
-.qbd{display:flex;align-items:center;gap:10px;margin:4px 0 10px;align-self:center}
-.qbd span{width:32px;height:2px;background:#e2e8f0}
-.qbd div{width:5px;height:5px;border-radius:50%;background:#cbd5e1}
-.ab{display:flex;align-items:flex-start;gap:14px;align-self:flex-start;background:#fff;border-radius:16px;padding:14px 20px;max-width:85%;box-shadow:0 4px 20px rgba(6,182,212,.05);border:1px solid rgba(6,182,212,.06)}
-.ab svg{width:30px;height:30px;min-width:30px;stroke:#06b6d4;stroke-width:1.5;fill:none;margin-top:2px}
-.at{font-size:34px;color:#475569;line-height:1.35;flex:1;font-weight:400}
-.s1d{font-size:30px;color:#94a3b8;text-align:center;max-width:720px;font-weight:400}
+body{font-family:'Satoshi',system-ui,sans-serif;background:#faf8f5;color:#1a1a1a}
+#root{position:relative;width:1080px;height:1920px;overflow:hidden;background:#faf8f5}
+.clip{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:20px}
+.card{background:#fff;border-radius:24px;box-shadow:0 8px 40px rgba(0,0,0,.04),0 2px 8px rgba(0,0,0,.02);padding:50px 70px;width:100%;height:100%;display:flex;flex-direction:column}
+:root{--accent:#5b7fa5}
+.eyebrow-row{display:flex;align-items:center;gap:14px;margin-bottom:6px}
+.eyebrow-accent{font-size:26px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--accent)}
+.eyebrow-line{flex:1;height:2px;background:rgba(0,0,0,.06)}
+.title{font-size:44px;font-weight:800;line-height:1.25;letter-spacing:-1px;color:var(--accent);margin-bottom:36px}
+.visual-area{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative}
+.content-area{margin-top:20px}
+.desc{font-size:26px;color:#c0c0c0;line-height:1.4}
+.chat-wrap{display:flex;flex-direction:column;gap:20px;width:100%;max-width:760px}
+.q-bubble{align-self:flex-end;background:var(--accent);color:#fff;border-radius:20px 20px 6px 20px;padding:20px 28px;font-size:34px;line-height:1.5;max-width:80%}
+.a-bubble{align-self:flex-start;background:#faf8f5;color:#1a1a1a;border-radius:20px 20px 20px 6px;padding:20px 28px;font-size:34px;line-height:1.5;max-width:80%}
 .s2{display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;height:100%;padding:0 60px;background:#fff}
-.s2t{font-size:44px;font-weight:800;color:#1a1a2e;text-align:center}
-.s2s{font-size:30px;color:#94a3b8;margin-top:12px;font-weight:400}
+.s2t{font-size:44px;font-weight:800;color:#1a1a1a;text-align:center}
+.s2s{font-size:26px;color:#c0c0c0;margin-top:12px}
 </style>
 </head>
 <body>
 <div id="root" data-composition-id="qna" data-start="0" data-width="1080" data-height="1920" data-duration="15">
 <section class="clip" data-start="0" data-duration="10" data-track-index="1">
-<div class="s1">
-  <div class="s1h" id="s1h"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg>{{title}}</div>
-  <div class="s1c">
-    <div class="qb" id="qb"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg><span>{{question}}</span></div>
-    <div class="qbd" id="qd"><span></span><div></div><span></span></div>
-    <div class="ab" id="ab"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg><div class="at" id="at">{{answer}}</div></div>
+  <div class="card">
+    <div class="eyebrow-row">
+      <span class="eyebrow-accent">Good question</span>
+      <div class="eyebrow-line"></div>
+    </div>
+    <div class="visual-area">
+      <div class="title">{{title}}</div>
+      <div class="chat-wrap">
+        <div class="q-bubble" id="qb">{{question}}</div>
+        <div class="a-bubble" id="ab">{{answer}}</div>
+      </div>
+    </div>
+    <div class="content-area">
+      <div class="desc" id="sd">{{description}}</div>
+    </div>
   </div>
-  <div class="s1d" id="sd">{{description}}</div>
-</div>
 </section>
 <section class="clip" data-start="10" data-duration="5" data-track-index="1">
 <div class="s2">
@@ -51,11 +57,9 @@ body{background:#f4f4f6;color:#1a1a2e;font-family:'Satoshi',system-ui,sans-serif
 <script>
 window.__timelines=window.__timelines||{}
 var tl=gsap.timeline({paused:true})
-tl.from('#s1h',{y:-15,opacity:0,scale:.9,duration:.5,ease:'power2.out'},0)
-tl.from('#qb',{x:50,opacity:0,duration:.55,ease:'power2.out'},.25)
-tl.from('#qd',{opacity:0,duration:.3},.65)
-tl.from('#ab',{x:-50,opacity:0,duration:.55,ease:'power2.out'},.8)
-tl.from('#sd',{y:10,opacity:0,duration:.4,ease:'power2.out'},1.25)
+tl.from('#qb',{x:40,opacity:0,duration:.55,ease:'power2.out'},0)
+tl.from('#ab',{x:-40,opacity:0,duration:.55,ease:'power2.out'},.45)
+tl.from('#sd',{y:15,opacity:0,duration:.4,ease:'power2.out'},.9)
 tl.from('#s2t',{y:25,opacity:0,duration:.7,ease:'power2.out'},10.2)
 tl.from('#s2s',{opacity:0,duration:.5,ease:'power2.out'},10.7)
 window.__timelines['qna']=tl

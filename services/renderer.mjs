@@ -67,6 +67,13 @@ export function renderPost(type, content, outputPath) {
     }));
   }
 
+  if (type === "tierlist" && Array.isArray(content.tiers)) {
+    content.tiers = content.tiers.map(t => ({
+      ...t,
+      labelUpper: (t.label || "").toUpperCase(),
+    }));
+  }
+
   html = renderTemplate(html, content);
 
   if (html.includes('<script id="cd"')) {

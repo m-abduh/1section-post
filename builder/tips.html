@@ -6,36 +6,55 @@
 <script src="gsap.min.js"></script>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{background:#f4f4f6;color:#1a1a2e;font-family:'Satoshi',system-ui,sans-serif;font-size:30px}
 @font-face{font-family:'Satoshi';src:url('../fonts/Satoshi-Variable.ttf')format('truetype');font-weight:300 900}
-#root{position:relative;width:1080px;height:1920px;overflow:hidden;background:#f4f4f6}
-.clip{position:absolute;inset:0;display:flex;align-items:center;justify-content:center}
-.s1{display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;height:100%;padding:50px 80px;overflow-y:auto;gap:20px}
-.s1h{display:flex;align-items:center;gap:10px;font-size:30px;color:#6366f1;letter-spacing:3px;text-transform:uppercase;font-weight:700;background:rgba(99,102,241,.08);padding:8px 20px;border-radius:100px}
-.s1h svg{width:26px;height:26px;stroke:#6366f1;stroke-width:1.5;fill:none}
-.s1c{display:flex;flex-direction:column;align-items:center;gap:14px;width:100%;max-width:720px}
-.tc{background:#fff;border-radius:16px;padding:16px 20px;width:100%;box-shadow:0 4px 24px rgba(0,0,0,.04);border:1px solid rgba(0,0,0,.04);display:flex;align-items:flex-start;gap:16px}
-.tc svg{width:32px;height:32px;min-width:32px;stroke:#6366f1;stroke-width:1.5;fill:none;margin-top:2px}
-.tct{font-size:34px;font-weight:700;color:#1a1a2e}
-.tcd{font-size:30px;color:#64748b;margin-top:2px;font-weight:400}
-.s1d{font-size:30px;color:#64748b;text-align:center;max-width:720px;font-weight:400}
+body{font-family:'Satoshi',system-ui,sans-serif;background:#faf8f5;color:#1a1a1a}
+#root{position:relative;width:1080px;height:1920px;overflow:hidden;background:#faf8f5}
+.clip{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:20px}
+.card{background:#fff;border-radius:24px;box-shadow:0 8px 40px rgba(0,0,0,.04),0 2px 8px rgba(0,0,0,.02);padding:50px 70px;width:100%;height:100%;display:flex;flex-direction:column}
+:root{--accent:#7a9e8c}
+.eyebrow-row{display:flex;align-items:center;gap:14px;margin-bottom:6px}
+.eyebrow-accent{font-size:26px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--accent)}
+.eyebrow-line{flex:1;height:2px;background:rgba(0,0,0,.06)}
+.title{font-size:44px;font-weight:800;line-height:1.25;letter-spacing:-1px;color:var(--accent);margin-bottom:36px}
+.visual-area{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative}
+.content-area{margin-top:20px}
+.desc{font-size:26px;color:#c0c0c0;line-height:1.4}
+.tips-list{display:flex;flex-direction:column;gap:14px;max-width:660px;width:100%}
+.tip-item{display:flex;align-items:flex-start;gap:18px;padding:20px 24px;background:#fff;border-radius:16px;box-shadow:0 2px 8px rgba(0,0,0,.04)}
+.tip-num{width:38px;height:38px;min-width:38px;border-radius:10px;background:var(--accent);display:flex;align-items:center;justify-content:center;font-size:17px;font-weight:700;color:#fff}
+.tip-title{font-size:30px;font-weight:700;color:#1a1a1a;margin-top:0}
+.tip-desc{font-size:22px;color:#999;margin-top:1px}
 .s2{display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;height:100%;padding:0 60px;background:#fff}
-.s2t{font-size:44px;font-weight:800;color:#1a1a2e;text-align:center}
-.s2s{font-size:30px;color:#94a3b8;margin-top:12px;font-weight:400}
+.s2t{font-size:44px;font-weight:800;color:#1a1a1a;text-align:center}
+.s2s{font-size:26px;color:#c0c0c0;margin-top:12px}
 </style>
 </head>
 <body>
 <div id="root" data-composition-id="tips" data-start="0" data-width="1080" data-height="1920" data-duration="15">
 <section class="clip" data-start="0" data-duration="10" data-track-index="1">
-<div class="s1">
-  <div class="s1h" id="s1h"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></svg>{{title_upper}}</div>
-  <div class="s1c">
+  <div class="card">
+    <div class="eyebrow-row">
+      <span class="eyebrow-accent">{{title_upper}}</span>
+      <div class="eyebrow-line"></div>
+    </div>
+    <div class="visual-area">
+      <div class="title" style="margin-bottom:36px">{{subtitle}}</div>
+      <div class="tips-list">
 {{#each tips}}
-<div class="tc"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></svg><div><div class="tct">{{tip}}</div><div class="tcd">{{desc}}</div></div></div>
+        <div class="tip-item" id="tc-{{@index}}">
+          <div class="tip-num">{{@index1}}</div>
+          <div>
+            <div class="tip-title">{{tip}}</div>
+            <div class="tip-desc">{{desc}}</div>
+          </div>
+        </div>
 {{/each}}
+      </div>
+    </div>
+    <div class="content-area">
+      <div class="desc" id="sd">{{subtitle}}</div>
+    </div>
   </div>
-  <div class="s1d" id="sd">{{subtitle}}</div>
-</div>
 </section>
 <section class="clip" data-start="10" data-duration="5" data-track-index="1">
 <div class="s2">
@@ -47,10 +66,8 @@ body{background:#f4f4f6;color:#1a1a2e;font-family:'Satoshi',system-ui,sans-serif
 <script>
 window.__timelines=window.__timelines||{}
 var tl=gsap.timeline({paused:true})
-tl.from('#s1h',{y:-15,opacity:0,scale:.9,duration:.5,ease:'power2.out'},0)
-var nt=document.querySelectorAll('.tc').length
-tl.from('.tc',{y:20,opacity:0,stagger:.1,duration:.45,ease:'power2.out'},.3)
-tl.from('#sd',{y:10,opacity:0,duration:.4,ease:'power2.out'},.3+nt*.1+.05)
+tl.from('.tip-item',{y:20,opacity:0,stagger:.1,duration:.5,ease:'power2.out'},0)
+tl.from('#sd',{y:15,opacity:0,duration:.4,ease:'power2.out'},.3+.1*5+.05)
 tl.from('#s2t',{y:25,opacity:0,duration:.7,ease:'power2.out'},10.2)
 tl.from('#s2s',{opacity:0,duration:.5,ease:'power2.out'},10.7)
 window.__timelines['tips']=tl
