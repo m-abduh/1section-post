@@ -7,33 +7,36 @@
 <link rel="stylesheet" href="doodle.css">
 <style>
 .container { --accent: #7a9e8c; }
-.label { background: rgba(122,158,140,.12); color: var(--accent); }
 .tips-list {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 14px;
+  max-width: 660px;
+  align-self: center;
   width: 100%;
-  max-width: 700px;
 }
 .tip-item {
   display: flex;
-  align-items: center;
-  gap: 14px;
-  padding: 14px 20px;
+  align-items: flex-start;
+  gap: 18px;
+  padding: 20px 24px;
   background: #fff;
-  border-radius: 12px;
-  box-shadow: 0 1px 3px rgba(0,0,0,.04);
+  border-radius: 16px;
+  box-shadow: 0 2px 8px rgba(0,0,0,.04);
 }
-.tip-icon {
-  width: 36px;
-  height: 36px;
-  min-width: 36px;
+.tip-num {
+  width: 38px;
+  height: 38px;
+  min-width: 38px;
   border-radius: 10px;
-  background: rgba(122,158,140,.1);
+  background: var(--accent);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 18px;
+  font-size: 17px;
+  font-weight: 700;
+  color: #fff;
+  margin-top: 1px;
 }
 .tip-title {
   font-size: 30px;
@@ -49,27 +52,29 @@
 <body>
 <div class="container">
 
-  <div class="label-row">
-    <span class="label">Tips</span>
+  <div class="eyebrow-row">
+    <span class="eyebrow-accent">Here's a tip</span>
+    <div class="eyebrow-line"></div>
   </div>
-  <div class="visual-area" style="flex:none;flex-direction:column;width:100%;padding:10px 0;align-items:flex-start">
+  <div class="visual-area" style="flex-direction:column">
+    <div class="title" style="margin-bottom:36px">Work smarter, not harder</div>
     <div class="tips-list">
       <div class="tip-item">
-        <div class="tip-icon">🎯</div>
+        <div class="tip-num">1</div>
         <div>
           <div class="tip-title">Single-task mode</div>
           <div class="tip-desc">One focus block at a time. No multitasking allowed.</div>
         </div>
       </div>
       <div class="tip-item">
-        <div class="tip-icon">⏱</div>
+        <div class="tip-num">2</div>
         <div>
           <div class="tip-title">Time boxing</div>
           <div class="tip-desc">Set a timer. Work only until it rings. Then rest.</div>
         </div>
       </div>
       <div class="tip-item">
-        <div class="tip-icon">🧹</div>
+        <div class="tip-num">3</div>
         <div>
           <div class="tip-title">Environment design</div>
           <div class="tip-desc">Remove distractions before they remove your focus.</div>
@@ -77,7 +82,7 @@
       </div>
     </div>
   </div>
-  <div class="content-area" style="margin-top:auto">
+  <div class="content-area">
     <div class="desc">
       Simple productivity hacks that actually work.
     </div>

@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Tier List — Prototype</title>
+<link rel="stylesheet" href="doodle.css">
+<style>
+.container { --accent: #b0884a; }
+.tier-wrap {
+  display: flex;
+  flex-direction: column;
+  max-width: 640px;
+  align-self: center;
+  width: 100%;
+}
+.tier-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 18px 0;
+  border-bottom: 1px solid rgba(0,0,0,.04);
+}
+.tier-row:last-child { border: 0; }
+.tier-badge {
+  min-width: 36px;
+  padding: 4px 8px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: .5px;
+  margin-top: 3px;
+}
+.tier-badge.s { background: rgba(176,136,74,.12); color: #b0884a; }
+.tier-badge.a { background: rgba(122,158,140,.12); color: #7a9e8c; }
+.tier-badge.b { background: rgba(122,142,158,.12); color: #7a8e9e; }
+.tier-badge.c { background: rgba(176,176,176,.12); color: #b0b0b0; }
+.tier-title {
+  font-size: 30px;
+  font-weight: 700;
+}
+.tier-desc {
+  font-size: 22px;
+  color: #999;
+  margin-top: 2px;
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+  <div class="eyebrow-row">
+    <span class="eyebrow-accent">The verdict</span>
+    <div class="eyebrow-line"></div>
+  </div>
+  <div class="visual-area" style="flex-direction:column">
+    <div class="title" style="margin-bottom:36px">Ranking what works</div>
+    <div class="tier-wrap">
+      <div class="tier-row">
+        <div class="tier-badge s">S</div>
+        <div>
+          <div class="tier-title">80/20 Rule</div>
+          <div class="tier-desc">Highest leverage activity you can do</div>
+        </div>
+      </div>
+      <div class="tier-row">
+        <div class="tier-badge a">A</div>
+        <div>
+          <div class="tier-title">Deep Work</div>
+          <div class="tier-desc">Focused, uninterrupted sessions</div>
+        </div>
+      </div>
+      <div class="tier-row">
+        <div class="tier-badge b">B</div>
+        <div>
+          <div class="tier-title">Task Batching</div>
+          <div class="tier-desc">Group similar work together</div>
+        </div>
+      </div>
+      <div class="tier-row">
+        <div class="tier-badge c">C</div>
+        <div>
+          <div class="tier-title">To-Do Lists</div>
+          <div class="tier-desc">Better than nothing</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="content-area">
+    <div class="desc">
+      Not all productivity methods are created equal.
+    </div>
+  </div>
+</div>
+</body>
+</html>

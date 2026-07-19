@@ -7,39 +7,36 @@
 <link rel="stylesheet" href="doodle.css">
 <style>
 .container { --accent-myth: #c4665d; --accent-fact: #5d9e7a; }
-.label { background: rgba(100,116,139,.1); color: #64748b; }
 .mf-wrap {
   display: flex;
   flex-direction: column;
   gap: 16px;
+  max-width: 680px;
+  align-self: center;
   width: 100%;
-  max-width: 720px;
 }
 .mf-card {
-  padding: 20px 24px;
+  padding: 24px 28px;
   border-radius: 20px;
-  position: relative;
 }
 .myth-card {
   background: rgba(196,102,93,.06);
-  border-left: 4px solid var(--accent-myth);
 }
 .fact-card {
   background: rgba(93,158,122,.06);
-  border-left: 4px solid var(--accent-fact);
 }
 .mf-label {
-  font-size: 24px;
+  font-size: 22px;
   font-weight: 700;
   letter-spacing: 3px;
   text-transform: uppercase;
-  margin-bottom: 4px;
+  margin-bottom: 6px;
 }
 .mf-label.myth { color: var(--accent-myth); }
 .mf-label.fact { color: var(--accent-fact); }
 .mf-text {
-  font-size: 32px;
-  line-height: 1.45;
+  font-size: 30px;
+  line-height: 1.5;
 }
 .mf-text.myth { color: #666; font-weight: 400; }
 .mf-text.fact { color: #1a1a1a; font-weight: 600; }
@@ -47,23 +44,30 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 16px;
+  gap: 14px;
   font-size: 14px;
   letter-spacing: 3px;
   text-transform: uppercase;
-  color: #bbb;
+  color: #ccc;
   font-weight: 700;
 }
-.mf-vs svg { width: 32px; height: 16px; }
+.mf-vs::before,
+.mf-vs::after {
+  content: '';
+  width: 40px;
+  height: 1px;
+  background: rgba(0,0,0,.06);
+}
 </style>
 </head>
 <body>
 <div class="container">
 
-  <div class="label-row">
-    <span class="label">Myth vs Fact</span>
+  <div class="eyebrow-row">
+    <span class="eyebrow-accent">Don't be fooled</span>
+    <div class="eyebrow-line"></div>
   </div>
-  <div class="visual-area" style="flex-direction:column;gap:0">
+  <div class="visual-area" style="flex-direction:column">
     <div class="mf-wrap">
       <div class="mf-card myth-card">
         <div class="mf-label myth">The Myth</div>

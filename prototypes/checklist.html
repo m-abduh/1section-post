@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Checklist — Prototype</title>
+<link rel="stylesheet" href="doodle.css">
+<style>
+.container { --accent: #5d9e7a; }
+.cl-wrap {
+  display: flex;
+  flex-direction: column;
+  max-width: 680px;
+  align-self: center;
+  width: 100%;
+  gap: 10px;
+}
+.cl-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 20px;
+  background: #faf8f5;
+  border-radius: 14px;
+}
+.cl-item.done { background: rgba(93,158,122,.06); }
+.cl-check {
+  width: 36px;
+  height: 36px;
+  min-width: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  font-weight: 700;
+}
+.cl-check.on { background: var(--accent); color: #fff; }
+.cl-check.off { border: 2px solid rgba(0,0,0,.12); color: transparent; }
+.cl-text {
+  font-size: 30px;
+  font-weight: 400;
+}
+.cl-item.done .cl-text { text-decoration: line-through; color: #bbb; }
+.cl-item.done .cl-check.on { opacity: .6; }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <div class="eyebrow-row">
+    <span class="eyebrow-accent">Quick wins</span>
+    <div class="eyebrow-line"></div>
+  </div>
+  <div class="visual-area" style="flex-direction:column">
+    <div class="title" style="margin-bottom:36px">Start with these</div>
+    <div class="cl-wrap">
+      <div class="cl-item done">
+        <div class="cl-check on">&#10003;</div>
+        <div class="cl-text">Define your top 3 priorities</div>
+      </div>
+      <div class="cl-item done">
+        <div class="cl-check on">&#10003;</div>
+        <div class="cl-text">Remove one distraction today</div>
+      </div>
+      <div class="cl-item">
+        <div class="cl-check off"></div>
+        <div class="cl-text">Block 2 hours for deep work</div>
+      </div>
+      <div class="cl-item">
+        <div class="cl-check off"></div>
+        <div class="cl-text">Review and adjust for tomorrow</div>
+      </div>
+    </div>
+  </div>
+  <div class="content-area">
+    <div class="desc">
+      Small checks lead to big progress over time.
+    </div>
+  </div>
+</div>
+</body>
+</html>

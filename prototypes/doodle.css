@@ -32,22 +32,42 @@ body {
   position: relative;
   overflow: hidden;
 }
-.label-row {
+.eyebrow-row {
   display: flex;
   align-items: center;
   gap: 14px;
-  margin-bottom: 8px;
+  margin-bottom: 6px;
   position: relative;
   z-index: 1;
 }
-.label {
-  font-size: 28px;
+.eyebrow {
+  font-size: 14px;
   font-weight: 700;
-  letter-spacing: 4px;
+  letter-spacing: 3px;
   text-transform: uppercase;
-  padding: 6px 20px;
-  border-radius: 100px;
-  display: inline-block;
+  color: #bbb;
+  flex-shrink: 0;
+}
+.eyebrow-line {
+  flex: 1;
+  height: 1px;
+  background: rgba(0,0,0,.08);
+}
+.eyebrow-accent {
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.title {
+  font-size: 44px;
+  font-weight: 800;
+  line-height: 1.25;
+  letter-spacing: -1px;
+  color: var(--accent);
+  position: relative;
+  z-index: 1;
 }
 .visual-area {
   flex: 1;

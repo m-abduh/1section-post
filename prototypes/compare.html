@@ -7,103 +7,90 @@
 <link rel="stylesheet" href="doodle.css">
 <style>
 .container { --accent: #c49a4a; }
-.label { background: rgba(196,154,74,.12); color: var(--accent); }
-.vs-row {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 24px;
-  width: 100%;
-  max-width: 720px;
-}
-.vs-line {
-  flex: 1;
-  height: 1px;
-  position: relative;
-}
-.vs-line::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-top: 2px dashed var(--accent);
-  opacity: .2;
-}
-.vs-text {
-  font-size: 56px;
-  font-weight: 900;
-  color: var(--accent);
-  letter-spacing: -2px;
-}
-.pairs {
+.comp-wrap {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  max-width: 680px;
+  align-self: center;
   width: 100%;
-  max-width: 720px;
 }
-.pair {
+.comp-headers {
   display: flex;
-  gap: 0;
-  padding: 14px 0;
+  margin-bottom: 16px;
+  padding: 0 20px;
+}
+.comp-h-before {
+  flex: 1;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #bbb;
+}
+.comp-h-after {
+  flex: 1;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--accent);
+  text-align: right;
+}
+.comp-row {
+  display: flex;
+  align-items: center;
+  padding: 16px 20px;
   border-bottom: 1px solid rgba(0,0,0,.04);
 }
-.pair:last-child { border: 0; }
-.pair-old {
-  width: 50%;
-  text-align: right;
-  padding-right: 24px;
-  font-size: 28px;
-  color: #aaa;
+.comp-row:last-child { border: 0; }
+.comp-before {
+  flex: 1;
+  font-size: 26px;
+  color: #bbb;
   font-weight: 400;
+  padding-right: 20px;
 }
-.pair-new {
-  width: 50%;
-  text-align: left;
-  padding-left: 24px;
-  font-size: 28px;
+.comp-after {
+  flex: 1;
+  font-size: 26px;
   color: #1a1a1a;
-  font-weight: 700;
-}
-.pair-divider {
-  width: 1px;
-  align-self: stretch;
-  background: linear-gradient(180deg,transparent,rgba(196,154,74,.15),transparent);
+  font-weight: 600;
+  text-align: right;
+  padding-left: 20px;
 }
 </style>
 </head>
 <body>
 <div class="container">
 
-  <div class="label-row">
-    <span class="label">Compare</span>
+  <div class="eyebrow-row">
+    <span class="eyebrow-accent">Side by side</span>
+    <div class="eyebrow-line"></div>
   </div>
-  <div class="visual-area" style="flex:none;flex-direction:column;gap:16px;width:100%;padding:10px 0">
-    <div class="vs-row">
-      <div class="vs-line"></div>
-      <div class="vs-text">VS</div>
-      <div class="vs-line"></div>
-    </div>
-    <div class="pairs">
-      <div class="pair">
-        <div class="pair-old">Takes months to see results</div>
-        <div class="pair-divider"></div>
-        <div class="pair-new">See progress in days</div>
+  <div class="visual-area" style="flex-direction:column">
+    <div class="title" style="margin-bottom:36px">See the difference</div>
+    <div class="comp-wrap">
+      <div class="comp-headers">
+        <div class="comp-h-before">Before</div>
+        <div class="comp-h-after">After</div>
       </div>
-      <div class="pair">
-        <div class="pair-old">Requires expensive tools</div>
-        <div class="pair-divider"></div>
-        <div class="pair-new">Free or low-cost solutions</div>
+      <div class="comp-row">
+        <div class="comp-before">Takes months to see results</div>
+        <div class="comp-after">See progress in days</div>
       </div>
-      <div class="pair">
-        <div class="pair-old">Complex and confusing</div>
-        <div class="pair-divider"></div>
-        <div class="pair-new">Simple and intuitive</div>
+      <div class="comp-row">
+        <div class="comp-before">Requires expensive tools</div>
+        <div class="comp-after">Free or low-cost solutions</div>
+      </div>
+      <div class="comp-row">
+        <div class="comp-before">Complex and confusing</div>
+        <div class="comp-after">Simple and intuitive</div>
       </div>
     </div>
   </div>
-  <div class="content-area" style="margin-top:auto">
+  <div class="content-area">
     <div class="desc">
-      The new approach is faster, cheaper, and easier than ever before.
+      Small shifts in approach lead to vastly different outcomes.
     </div>
   </div>
 </div>

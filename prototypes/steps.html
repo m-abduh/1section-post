@@ -7,12 +7,12 @@
 <link rel="stylesheet" href="doodle.css">
 <style>
 .container { --accent: #5a8f8f; }
-.label { background: rgba(90,143,143,.12); color: var(--accent); }
 .steps-list {
   display: flex;
   flex-direction: column;
+  max-width: 680px;
+  align-self: center;
   width: 100%;
-  max-width: 700px;
 }
 .step-row {
   display: flex;
@@ -66,10 +66,12 @@
 <body>
 <div class="container">
 
-  <div class="label-row">
-    <span class="label">Steps</span>
+  <div class="eyebrow-row">
+    <span class="eyebrow-accent">Follow this</span>
+    <div class="eyebrow-line"></div>
   </div>
-  <div class="visual-area" style="flex:none;flex-direction:column;width:100%;padding:20px 0;align-items:flex-start">
+  <div class="visual-area" style="flex-direction:column;width:100%">
+    <div class="title" style="margin-bottom:36px;align-self:center;max-width:680px;width:100%">Build your system</div>
     <div class="steps-list">
       <div class="step-row">
         <div class="step-left">
@@ -102,7 +104,7 @@
       </div>
     </div>
   </div>
-  <div class="content-area" style="margin-top:auto">
+  <div class="content-area">
     <div class="desc">
       Follow these steps to transform your approach completely.
     </div>
