@@ -11,7 +11,7 @@ body{font-family:'Satoshi',system-ui,sans-serif;background:#faf8f5;color:#1a1a1a
 #root{position:relative;width:1080px;height:1920px;overflow:hidden;background:#faf8f5}
 .clip{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:20px}
 .card{background:#fff;border-radius:24px;box-shadow:0 8px 40px rgba(0,0,0,.04),0 2px 8px rgba(0,0,0,.02);padding:50px 70px;width:100%;height:100%;display:flex;flex-direction:column}
-:root{--accent:#d4745d}
+:root{--accent:#7a9e8c}
 .eyebrow-row{display:flex;align-items:center;gap:14px;margin-bottom:6px}
 .eyebrow-accent{font-size:26px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--accent)}
 .eyebrow-line{flex:1;height:2px;background:rgba(0,0,0,.06)}
@@ -19,36 +19,57 @@ body{font-family:'Satoshi',system-ui,sans-serif;background:#faf8f5;color:#1a1a1a
 .visual-area{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative}
 .content-area{margin-top:20px}
 .desc{font-size:26px;color:#c0c0c0;line-height:1.4}
-.stat-wrap{display:flex;align-items:center;gap:40px;max-width:760px}
-.stat-big{display:flex;align-items:baseline;gap:4px;flex-shrink:0}
-.stat-num{font-size:130px;font-weight:800;line-height:1;color:var(--accent);letter-spacing:-4px}
-.stat-pct{font-size:52px;font-weight:700;color:var(--accent);opacity:.5}
-.stat-body{font-size:36px;line-height:1.5;color:#1a1a1a;font-weight:400}
+.tips-list{display:flex;flex-direction:column;gap:14px;max-width:660px;width:100%}
+.tip-item{display:flex;align-items:flex-start;gap:18px;padding:20px 24px;background:#fff;border-radius:16px;box-shadow:0 2px 8px rgba(0,0,0,.04)}
+.tip-num{width:38px;height:38px;min-width:38px;border-radius:10px;background:var(--accent);display:flex;align-items:center;justify-content:center;font-size:17px;font-weight:700;color:#fff}
+.tip-title{font-size:30px;font-weight:700;color:#1a1a1a;margin-top:0}
+.tip-desc{font-size:22px;color:#999;margin-top:1px}
 .s2{display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;height:100%;padding:0 60px;background:#fff}
 .s2t{font-size:44px;font-weight:800;color:#1a1a1a;text-align:center}
 .s2s{font-size:26px;color:#c0c0c0;margin-top:12px}
 </style>
 </head>
 <body>
-<div id="root" data-composition-id="stat" data-start="0" data-width="1080" data-height="1920" data-duration="15">
+<div id="root" data-composition-id="tips" data-start="0" data-width="1080" data-height="1920" data-duration="15">
 <section class="clip" data-start="0" data-duration="10" data-track-index="1">
   <div class="card">
     <div class="eyebrow-row">
-      <span class="eyebrow-accent">THE STAT</span>
-      <div class="eyebrow-line"><audio id="bgm" src="/home/mabduh/projects/marketing/marketing/music/Project Ex - Neo Nebula (freetouse.com).mp3" data-start="0" data-duration="15" data-volume="0.3" data-has-audio="true"></audio>
+      <span class="eyebrow-accent">FOCUS BETTER</span>
+      <div class="eyebrow-line"><audio id="bgm" src="/home/mabduh/projects/marketing/marketing/music/Project Ex - In Orbit (freetouse.com).mp3" data-start="0" data-duration="15" data-volume="0.3" data-has-audio="true"></audio>
 </div>
     </div>
     <div class="visual-area">
-      <div class="title" style="margin-bottom:36px">The data is undeniable</div>
-      <div class="stat-wrap">
-        <div class="stat-big">
-          <span class="stat-num" id="e1">87%</span>
+      <div class="title" style="margin-bottom:36px">Simple ways to focus better</div>
+      <div class="tips-list">
+
+        <div class="tip-item" id="tc-0">
+          <div class="tip-num">1</div>
+          <div>
+            <div class="tip-title">Single-task mode</div>
+            <div class="tip-desc">One focus block at a time. No multitasking allowed.</div>
+          </div>
         </div>
-        <div class="stat-body" id="e2">Of people prefer the better option</div>
+
+        <div class="tip-item" id="tc-1">
+          <div class="tip-num">2</div>
+          <div>
+            <div class="tip-title">Time boxing</div>
+            <div class="tip-desc">Set a timer. Work only until it rings. Then rest.</div>
+          </div>
+        </div>
+
+        <div class="tip-item" id="tc-2">
+          <div class="tip-num">3</div>
+          <div>
+            <div class="tip-title">Environment design</div>
+            <div class="tip-desc">Remove distractions before they remove your focus.</div>
+          </div>
+        </div>
+
       </div>
     </div>
     <div class="content-area">
-      <div class="desc" id="e3">Data shows a clear upward trend</div>
+      <div class="desc" id="sd">Simple ways to focus better</div>
     </div>
   </div>
 </section>
@@ -62,16 +83,15 @@ body{font-family:'Satoshi',system-ui,sans-serif;background:#faf8f5;color:#1a1a1a
 <script>
 window.__timelines=window.__timelines||{}
 var tl=gsap.timeline({paused:true,defaults:{ease:'power3.out'}})
-tl.set('.eyebrow-row,.stat-wrap,.content-area',{opacity:0},0)
-tl.fromTo('.title',{opacity:0,scale:1.3},{opacity:1,scale:1.3,duration:.35,ease:'power2.out'},0)
-tl.to('.title',{scale:1,duration:.5,ease:'power3.out'},.3)
-tl.fromTo('.eyebrow-row',{x:-30,opacity:0},{x:0,opacity:1,duration:.35},.3)
-tl.fromTo('#e1',{scale:1.25,opacity:0},{scale:1,opacity:1,duration:.8},.65)
-tl.fromTo('#e2',{y:30,opacity:0},{y:0,opacity:1,duration:.6},.95)
-tl.fromTo('#e3',{y:20,opacity:0},{y:0,opacity:1,duration:.5},1.35)
+var n=document.querySelectorAll('.tip-item').length
+tl.fromTo('.eyebrow-row',{x:-30,opacity:0},{x:0,opacity:1,duration:.5},0)
+tl.fromTo('.title',{y:24,opacity:0},{y:0,opacity:1,duration:.6},.25)
+tl.fromTo('.tip-item',{y:25,opacity:0},{y:0,opacity:1,stagger:.1,duration:.55},.55)
+tl.fromTo('.tip-num',{scale:0},{scale:1,stagger:.1,duration:.4,ease:'back.out(1.4)'},.55)
+tl.fromTo('#sd',{y:15,opacity:0},{y:0,opacity:1,duration:.45},.55+n*.1+.05)
 tl.fromTo('#s2t',{y:30,opacity:0},{y:0,opacity:1,duration:.65},10.2)
 tl.fromTo('#s2s',{opacity:0},{opacity:1,duration:.5},10.65)
-window.__timelines['stat']=tl
+window.__timelines['tips']=tl
 </script>
 </body>
 </html>
