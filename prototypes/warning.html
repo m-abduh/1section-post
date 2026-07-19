@@ -6,45 +6,41 @@
 <title>Warning — Prototype</title>
 <link rel="stylesheet" href="doodle.css">
 <style>
-.container { --accent: #c4665d; }
+.container { --accent: #c49a6a; }
 .warn-card {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  max-width: 620px;
+  max-width: 640px;
   align-self: center;
   width: 100%;
-  padding: 36px 40px;
-  background: rgba(196,102,93,.06);
-  border-radius: 24px;
-  text-align: center;
+  padding: 28px 32px;
+  background: rgba(196,154,106,.07);
+  border-radius: 20px;
+}
+.warn-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 32px;
+  font-weight: 800;
+  color: var(--accent);
+  margin-bottom: 4px;
 }
 .warn-icon {
-  width: 56px;
-  height: 56px;
+  width: 28px;
+  height: 28px;
+  min-width: 28px;
   border-radius: 50%;
   background: var(--accent);
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 16px;
-}
-.warn-icon span {
-  font-size: 28px;
+  font-size: 16px;
   font-weight: 700;
   color: #fff;
-}
-.warn-title {
-  font-size: 36px;
-  font-weight: 800;
-  color: var(--accent);
-  margin-bottom: 8px;
 }
 .warn-text {
   font-size: 26px;
   line-height: 1.55;
   color: #555;
-  max-width: 500px;
 }
 </style>
 </head>
@@ -56,13 +52,13 @@
     <div class="eyebrow-line"></div>
   </div>
   <div class="visual-area" style="flex-direction:column">
-    <div class="warn-card">
-      <div class="warn-icon"><span>!</span></div>
-      <div>
-        <div class="warn-title">Burnout is coming</div>
+      <div class="warn-card">
+        <div class="warn-title">
+          <span class="warn-icon">!</span>
+          Burnout is coming
+        </div>
         <div class="warn-text">Working 10+ hours daily without breaks doesn&#8217;t make you productive. It makes you exhausted.</div>
-      </div>
-    </div>
+  </div>
   </div>
   <div class="content-area">
     <div class="desc">

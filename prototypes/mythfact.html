@@ -10,52 +10,58 @@
 .mf-wrap {
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  max-width: 680px;
+  gap: 0;
+  max-width: 640px;
   align-self: center;
   width: 100%;
 }
 .mf-card {
-  padding: 24px 28px;
+  padding: 28px 32px;
   border-radius: 20px;
 }
 .myth-card {
-  background: rgba(196,102,93,.06);
+  background: rgba(196,102,93,.05);
 }
 .fact-card {
-  background: rgba(93,158,122,.06);
+  background: rgba(93,158,122,.05);
 }
-.mf-label {
-  font-size: 22px;
-  font-weight: 700;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  margin-bottom: 6px;
+.mf-top {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
 }
-.mf-label.myth { color: var(--accent-myth); }
-.mf-label.fact { color: var(--accent-fact); }
+.mf-icon {
+  font-size: 36px;
+  line-height: 1;
+  margin-top: 2px;
+  min-width: 36px;
+}
+.myth-card .mf-icon { color: var(--accent-myth); }
+.fact-card .mf-icon { color: var(--accent-fact); }
 .mf-text {
-  font-size: 30px;
+  font-size: 28px;
   line-height: 1.5;
 }
-.mf-text.myth { color: #666; font-weight: 400; }
-.mf-text.fact { color: #1a1a1a; font-weight: 600; }
-.mf-vs {
+.myth-card .mf-text {
+  color: #777;
+  font-weight: 400;
+  text-decoration: line-through;
+}
+.fact-card .mf-text {
+  color: #1a1a1a;
+  font-weight: 600;
+}
+.mf-line {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 14px;
-  font-size: 14px;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  color: #ccc;
-  font-weight: 700;
+  height: 32px;
+  position: relative;
 }
-.mf-vs::before,
-.mf-vs::after {
+.mf-line::before {
   content: '';
-  width: 40px;
-  height: 1px;
+  width: 2px;
+  height: 100%;
   background: rgba(0,0,0,.06);
 }
 </style>
@@ -70,13 +76,17 @@
   <div class="visual-area" style="flex-direction:column">
     <div class="mf-wrap">
       <div class="mf-card myth-card">
-        <div class="mf-label myth">The Myth</div>
-        <div class="mf-text myth">You need to work 80 hours a week to be successful.</div>
+        <div class="mf-top">
+        <div class="mf-icon">&#10005;</div>
+        <div class="mf-text">You need to work 80 hours a week to be successful.</div>
+        </div>
       </div>
-      <div class="mf-vs">vs</div>
+      <div class="mf-line"></div>
       <div class="mf-card fact-card">
-        <div class="mf-label fact">The Truth</div>
-        <div class="mf-text fact">Working smarter, not harder, is what actually works.</div>
+        <div class="mf-top">
+          <div class="mf-icon">&#10003;</div>
+          <div class="mf-text">Working smarter, not harder, is what actually works.</div>
+        </div>
       </div>
     </div>
   </div>
