@@ -65,11 +65,15 @@ body{font-family:'Satoshi',system-ui,sans-serif;background:#faf8f5;color:#1a1a1a
 </div>
 <script>
 window.__timelines=window.__timelines||{}
-var tl=gsap.timeline({paused:true})
-tl.from('.tip-item',{y:20,opacity:0,stagger:.1,duration:.5,ease:'power2.out'},0)
-tl.from('#sd',{y:15,opacity:0,duration:.4,ease:'power2.out'},.3+.1*5+.05)
-tl.from('#s2t',{y:25,opacity:0,duration:.7,ease:'power2.out'},10.2)
-tl.from('#s2s',{opacity:0,duration:.5,ease:'power2.out'},10.7)
+var tl=gsap.timeline({paused:true,defaults:{ease:'power3.out'}})
+var n=document.querySelectorAll('.tip-item').length
+tl.fromTo('.eyebrow-row',{x:-30,opacity:0},{x:0,opacity:1,duration:.5},0)
+tl.fromTo('.title',{y:24,opacity:0},{y:0,opacity:1,duration:.6},.25)
+tl.fromTo('.tip-item',{y:25,opacity:0},{y:0,opacity:1,stagger:.1,duration:.55},.55)
+tl.fromTo('.tip-num',{scale:0},{scale:1,stagger:.1,duration:.4,ease:'back.out(1.4)'},.55)
+tl.fromTo('#sd',{y:15,opacity:0},{y:0,opacity:1,duration:.45},.55+n*.1+.05)
+tl.fromTo('#s2t',{y:30,opacity:0},{y:0,opacity:1,duration:.65},10.2)
+tl.fromTo('#s2s',{opacity:0},{opacity:1,duration:.5},10.65)
 window.__timelines['tips']=tl
 </script>
 </body>

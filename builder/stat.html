@@ -60,12 +60,14 @@ body{font-family:'Satoshi',system-ui,sans-serif;background:#faf8f5;color:#1a1a1a
 </div>
 <script>
 window.__timelines=window.__timelines||{}
-var tl=gsap.timeline({paused:true})
-tl.from('#e1',{scale:1.2,opacity:0,duration:.8,ease:'power3.out'},0)
-tl.from('#e2',{y:30,opacity:0,duration:.6,ease:'power2.out'},.5)
-tl.from('#e3',{y:20,opacity:0,duration:.5,ease:'power2.out'},1)
-tl.from('#s2t',{y:25,opacity:0,duration:.7,ease:'power2.out'},10.2)
-tl.from('#s2s',{opacity:0,duration:.5,ease:'power2.out'},10.7)
+var tl=gsap.timeline({paused:true,defaults:{ease:'power3.out'}})
+tl.fromTo('.eyebrow-row',{x:-30,opacity:0},{x:0,opacity:1,duration:.5},0)
+tl.fromTo('.title',{y:24,opacity:0},{y:0,opacity:1,duration:.6},.25)
+tl.fromTo('#e1',{scale:1.25,opacity:0},{scale:1,opacity:1,duration:.8},.55)
+tl.fromTo('#e2',{y:30,opacity:0},{y:0,opacity:1,duration:.6},.85)
+tl.fromTo('#e3',{y:20,opacity:0},{y:0,opacity:1,duration:.5},1.25)
+tl.fromTo('#s2t',{y:30,opacity:0},{y:0,opacity:1,duration:.65},10.2)
+tl.fromTo('#s2s',{opacity:0},{opacity:1,duration:.5},10.65)
 window.__timelines['stat']=tl
 </script>
 </body>

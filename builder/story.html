@@ -57,13 +57,14 @@ body{font-family:'Satoshi',system-ui,sans-serif;background:#faf8f5;color:#1a1a1a
 </div>
 <script>
 window.__timelines=window.__timelines||{}
-var tl=gsap.timeline({paused:true})
-tl.from('.title',{y:20,opacity:0,duration:.6,ease:'power2.out'},0)
+var tl=gsap.timeline({paused:true,defaults:{ease:'power3.out'}})
 var np=document.querySelectorAll('#st p').length
-tl.from('#st p',{y:15,opacity:0,stagger:.12,duration:.5,ease:'power2.out'},.5)
-tl.from('#sd',{y:15,opacity:0,duration:.4,ease:'power2.out'},.5+np*.12+.1)
-tl.from('#s2t',{y:25,opacity:0,duration:.7,ease:'power2.out'},10.2)
-tl.from('#s2s',{opacity:0,duration:.5,ease:'power2.out'},10.7)
+tl.fromTo('.eyebrow-row',{x:-30,opacity:0},{x:0,opacity:1,duration:.5},0)
+tl.fromTo('.title',{y:24,opacity:0},{y:0,opacity:1,duration:.6},.25)
+tl.fromTo('#st p',{y:20,opacity:0},{y:0,opacity:1,stagger:.15,duration:.55},.55)
+tl.fromTo('#sd',{y:15,opacity:0},{y:0,opacity:1,duration:.45},.55+np*.15+.05)
+tl.fromTo('#s2t',{y:30,opacity:0},{y:0,opacity:1,duration:.65},10.2)
+tl.fromTo('#s2s',{opacity:0},{opacity:1,duration:.5},10.65)
 window.__timelines['story']=tl
 </script>
 </body>
