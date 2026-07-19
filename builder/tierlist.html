@@ -32,6 +32,8 @@ body{font-family:'Satoshi',system-ui,sans-serif;background:#faf8f5;color:#1a1a1a
 .tier-row.c .tier-badge{background:#ccc}
 .tier-title{font-size:28px;font-weight:700;color:#1a1a1a}
 .tier-desc{font-size:20px;color:#bbb;margin-top:2px}
+.hook-sec{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:#faf8f5}
+.hook-title{font-size:64px;font-weight:800;color:var(--accent);text-align:center;line-height:1.2;max-width:800px;padding:40px}
 .s2{display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;height:100%;padding:0 60px;background:#fff}
 .s2t{font-size:44px;font-weight:800;color:#1a1a1a;text-align:center}
 .s2s{font-size:26px;color:#c0c0c0;margin-top:12px}
@@ -39,7 +41,12 @@ body{font-family:'Satoshi',system-ui,sans-serif;background:#faf8f5;color:#1a1a1a
 </head>
 <body>
 <div id="root" data-composition-id="tierlist" data-start="0" data-width="1080" data-height="1920" data-duration="15">
-<section class="clip" data-start="0" data-duration="10" data-track-index="1">
+<section class="clip" data-start="0" data-duration="4" data-track-index="1">
+  <div class="hook-sec">
+    <div class="hook-title" id="ht">{{title}}</div>
+  </div>
+</section>
+<section class="clip" data-start="4" data-duration="6" data-track-index="1">
   <div class="card">
     <div class="eyebrow-row">
       <span class="eyebrow-accent">The verdict</span>
@@ -75,11 +82,13 @@ body{font-family:'Satoshi',system-ui,sans-serif;background:#faf8f5;color:#1a1a1a
 window.__timelines=window.__timelines||{}
 var tl=gsap.timeline({paused:true,defaults:{ease:'power3.out'}})
 var n=document.querySelectorAll('.tier-row').length
-tl.fromTo('.eyebrow-row',{x:-30,opacity:0},{x:0,opacity:1,duration:.5},0)
-tl.fromTo('.title',{y:24,opacity:0},{y:0,opacity:1,duration:.6},.25)
-tl.fromTo('.tier-row',{x:-20,opacity:0},{x:0,opacity:1,stagger:.08,duration:.5},.55)
-tl.fromTo('.tier-badge',{scale:0},{scale:1,stagger:.08,duration:.35,ease:'back.out(1.4)'},.55)
-tl.fromTo('#sd',{y:15,opacity:0},{y:0,opacity:1,duration:.45},.55+n*.08+.05)
+tl.fromTo('#ht',{opacity:0,scale:1.3},{opacity:1,scale:1.3,duration:.5,ease:'power2.out'},0)
+tl.to('#ht',{opacity:0,scale:1,duration:.5},3.5)
+tl.fromTo('.eyebrow-row',{x:-30,opacity:0},{x:0,opacity:1,duration:.5},4)
+tl.fromTo('.title',{y:24,opacity:0},{y:0,opacity:1,duration:.6},4.25)
+tl.fromTo('.tier-row',{x:-20,opacity:0},{x:0,opacity:1,stagger:.08,duration:.5},4.55)
+tl.fromTo('.tier-badge',{scale:0},{scale:1,stagger:.08,duration:.35,ease:'back.out(1.4)'},4.55)
+tl.fromTo('#sd',{y:15,opacity:0},{y:0,opacity:1,duration:.45},4.55+n*.08+.05)
 tl.fromTo('#s2t',{y:30,opacity:0},{y:0,opacity:1,duration:.65},10.2)
 tl.fromTo('#s2s',{opacity:0},{opacity:1,duration:.5},10.65)
 window.__timelines['tierlist']=tl
