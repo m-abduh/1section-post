@@ -11,34 +11,29 @@
   max-width: 640px;
   align-self: center;
   width: 100%;
-  padding: 28px 32px;
+  padding: 32px 32px;
   background: rgba(196,154,106,.07);
   border-radius: 20px;
-}
-.warn-title {
   display: flex;
-  align-items: center;
-  gap: 10px;
-  font-size: 32px;
-  font-weight: 800;
-  color: var(--accent);
-  margin-bottom: 4px;
+  align-items: flex-start;
+  gap: 16px;
 }
 .warn-icon {
-  width: 28px;
-  height: 28px;
-  min-width: 28px;
+  width: 36px;
+  height: 36px;
+  min-width: 36px;
   border-radius: 50%;
   background: var(--accent);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 700;
   color: #fff;
+  margin-top: 2px;
 }
 .warn-text {
-  font-size: 26px;
+  font-size: 28px;
   line-height: 1.55;
   color: #555;
 }
@@ -52,11 +47,9 @@
     <div class="eyebrow-line"></div>
   </div>
   <div class="visual-area" style="flex-direction:column">
+    <div class="title" style="margin-bottom:36px">You're heading for burnout</div>
       <div class="warn-card">
-        <div class="warn-title">
-          <span class="warn-icon">!</span>
-          Burnout is coming
-        </div>
+        <span class="warn-icon">!</span>
         <div class="warn-text">Working 10+ hours daily without breaks doesn&#8217;t make you productive. It makes you exhausted.</div>
   </div>
   </div>

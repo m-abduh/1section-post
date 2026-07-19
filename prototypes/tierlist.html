@@ -10,45 +10,47 @@
 .tier-wrap {
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  max-width: 600px;
+  gap: 8px;
+  max-width: 620px;
   align-self: center;
   width: 100%;
 }
-.tier-card {
+.tier-row {
   display: flex;
   align-items: center;
-  gap: 24px;
-  padding: 20px 28px;
-  border-radius: 16px;
+  gap: 16px;
+  padding: 16px 24px;
+  border-radius: 14px;
 }
-.tier-card.s { background: rgba(176,136,74,.07); }
-.tier-card.a { background: rgba(122,158,140,.07); }
-.tier-card.b { background: rgba(122,142,158,.07); }
-.tier-card.c { background: rgba(176,176,176,.07); }
-.tier-label {
-  width: 48px;
-  height: 48px;
-  min-width: 48px;
-  border-radius: 12px;
+.tier-row.s { background: rgba(176,136,74,.06); }
+.tier-row.a { background: rgba(122,158,140,.06); }
+.tier-row.b { background: rgba(122,142,158,.06); }
+.tier-row.c { background: rgba(200,200,200,.06); }
+.tier-badge {
+  width: 32px;
+  height: 32px;
+  min-width: 32px;
+  border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 22px;
+  font-size: 16px;
   font-weight: 800;
+  color: #fff;
 }
-.tier-card.s .tier-label { background: rgba(176,136,74,.15); color: #b0884a; }
-.tier-card.a .tier-label { background: rgba(122,158,140,.15); color: #7a9e8c; }
-.tier-card.b .tier-label { background: rgba(122,142,158,.15); color: #7a8e9e; }
-.tier-card.c .tier-label { background: rgba(176,176,176,.15); color: #b0b0b0; }
+.tier-row.s .tier-badge { background: #b0884a; }
+.tier-row.a .tier-badge { background: #7a9e8c; }
+.tier-row.b .tier-badge { background: #7a8e9e; }
+.tier-row.c .tier-badge { background: #ccc; }
 .tier-title {
   font-size: 28px;
   font-weight: 700;
+  color: #1a1a1a;
 }
 .tier-desc {
-  font-size: 22px;
-  color: #999;
-  margin-top: 1px;
+  font-size: 20px;
+  color: #bbb;
+  margin-top: 2px;
 }
 </style>
 </head>
@@ -62,29 +64,29 @@
   <div class="visual-area" style="flex-direction:column">
     <div class="title" style="margin-bottom:36px">Not all methods are worth your time</div>
     <div class="tier-wrap">
-      <div class="tier-card s">
-        <div class="tier-label">S</div>
+      <div class="tier-row s">
+        <div class="tier-badge">S</div>
         <div>
           <div class="tier-title">80/20 Rule</div>
-          <div class="tier-desc">Highest leverage activity you can do</div>
+          <div class="tier-desc">Highest leverage — do this first</div>
         </div>
       </div>
-      <div class="tier-card a">
-        <div class="tier-label">A</div>
+      <div class="tier-row a">
+        <div class="tier-badge">A</div>
         <div>
           <div class="tier-title">Deep Work</div>
           <div class="tier-desc">Focused, uninterrupted sessions</div>
         </div>
       </div>
-      <div class="tier-card b">
-        <div class="tier-label">B</div>
+      <div class="tier-row b">
+        <div class="tier-badge">B</div>
         <div>
           <div class="tier-title">Task Batching</div>
           <div class="tier-desc">Group similar work together</div>
         </div>
       </div>
-      <div class="tier-card c">
-        <div class="tier-label">C</div>
+      <div class="tier-row c">
+        <div class="tier-badge">C</div>
         <div>
           <div class="tier-title">To-Do Lists</div>
           <div class="tier-desc">Better than nothing</div>
