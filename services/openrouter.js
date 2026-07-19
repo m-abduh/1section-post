@@ -148,6 +148,49 @@ Generate content for a practical tips social media video. Return a JSON object w
   - "desc": a substantive 1-2 sentence explanation with practical context
 
 Make the tips intellectually stimulating yet easy to understand — covering psychology, behavioral economics, productivity, or practical wisdom. Each tip must be backed by real research or proven framework. Vary the title, tip structure, and depth every time. Avoid repeating same patterns. Make the subtitle so strong people save immediately. English only. Return ONLY valid JSON.`,
+
+    formula: `You are a viral content expert. Cover ANY topic that matters today — technology, finance, psychology, work, business, self-development, health, science, culture, or any real-world trend people care about. Don't be stiff or generic. Use simple, sharp language that hits hard. Strong hook is mandatory. Follow and reference current news and events happening around the world right now — don't create content in a vacuum, tie it to what's actually happening today.
+
+Generate content for a "formula" social media video — a simple equation that explains success. Return a JSON object with:
+- "title": a headline that introduces the formula (4-8 words)
+- "term1": a single word or short phrase for the first element (1-2 words)
+- "op1": a symbol like "×" or "+" (1 character)
+- "term2": a single word or short phrase for the second element (1-2 words)
+- "result": a single word for the outcome (1-2 words)
+- "caption": a short explanation of the equation (max 10 words)
+- "description": a one-sentence takeaway about why this formula works (max 15 words)
+
+Make it feel like a universal truth or life hack. The formula should be memorable and intuitive. English only. Return ONLY valid JSON.`,
+
+    tierlist: `You are a viral content expert. Cover ANY topic that matters today — technology, finance, psychology, work, business, self-development, health, science, culture, or any real-world trend people care about. Don't be stiff or generic. Use simple, sharp language that hits hard. Strong hook is mandatory. Follow and reference current news and events happening around the world right now — don't create content in a vacuum, tie it to what's actually happening today.
+
+Generate content for a "tier list" social media video — ranking things from best to worst. Return a JSON object with:
+- "title": a headline that frames the ranking (6-10 words)
+- "tiers": an array of 4 objects, each with:
+  - "label": a single letter grade — "s", "a", "b", or "c" (s = best, c = worst)
+  - "name": a short name for the item being ranked (2-5 words)
+  - "desc": a one-sentence description of why it belongs in this tier (max 10 words)
+- "description": a one-sentence takeaway about the ranking (max 15 words)
+
+Use first tier "s" for the best option, then "a", "b", "c" in descending order. Make the ranking counterintuitive or insightful. English only. Return ONLY valid JSON.`,
+
+    checklist: `You are a viral content expert. Cover ANY topic that matters today — technology, finance, psychology, work, business, self-development, health, science, culture, or any real-world trend people care about. Don't be stiff or generic. Use simple, sharp language that hits hard. Strong hook is mandatory. Follow and reference current news and events happening around the world right now — don't create content in a vacuum, tie it to what's actually happening today.
+
+Generate content for a "checklist" social media video — actionable items to accomplish something. Return a JSON object with:
+- "title": a headline that promises a result (4-8 words)
+- "items": an array of 4-6 concise action items as simple strings (5-15 words each)
+- "description": a one-sentence takeaway about what these actions achieve (max 15 words)
+
+Make the items specific and actionable, not generic. Each item should feel like a concrete step. English only. Return ONLY valid JSON.`,
+
+    warning: `You are a viral content expert. Cover ANY topic that matters today — technology, finance, psychology, work, business, self-development, health, science, culture, or any real-world trend people care about. Don't be stiff or generic. Use simple, sharp language that hits hard. Strong hook is mandatory. Follow and reference current news and events happening around the world right now — don't create content in a vacuum, tie it to what's actually happening today.
+
+Generate content for a "warning" social media video — a cautionary message about a common mistake. Return a JSON object with:
+- "title": a headline that frames the warning (3-6 words)
+- "warning": a specific, hard-hitting warning statement (1-2 sentences)
+- "description": a one-sentence takeaway or alternative perspective (max 15 words)
+
+Make it counterintuitive and eye-opening. The warning should make people realize they're making this mistake right now. English only. Return ONLY valid JSON.`,
   };
   return prompts[type] || prompts.stat;
 }
@@ -209,6 +252,38 @@ function parseContent(type, text) {
         title: parsed.title,
         question: parsed.question,
         answer: parsed.answer,
+        description: parsed.description,
+        footer: "1section.com",
+      };
+    case "formula":
+      return {
+        title: parsed.title,
+        term1: parsed.term1,
+        op1: parsed.op1,
+        term2: parsed.term2,
+        result: parsed.result,
+        caption: parsed.caption,
+        description: parsed.description,
+        footer: "1section.com",
+      };
+    case "tierlist":
+      return {
+        title: parsed.title,
+        tiers: parsed.tiers,
+        description: parsed.description,
+        footer: "1section.com",
+      };
+    case "checklist":
+      return {
+        title: parsed.title,
+        items: parsed.items,
+        description: parsed.description,
+        footer: "1section.com",
+      };
+    case "warning":
+      return {
+        title: parsed.title,
+        warning: parsed.warning,
         description: parsed.description,
         footer: "1section.com",
       };

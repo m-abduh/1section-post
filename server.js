@@ -20,7 +20,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/videos", express.static(join(__dirname, "output")));
 app.use("/music", express.static(join(__dirname, "music")));
 
-const TYPES = ["stat", "steps", "compare", "mythfact", "quote", "QnA", "story", "tips"];
+const TYPES = ["stat", "steps", "compare", "mythfact", "quote", "QnA", "story", "tips", "formula", "tierlist", "checklist", "warning"];
 
 function getVideos() {
   const dir = join(__dirname, "output");
