@@ -81,6 +81,7 @@ Generate content for a "steps" social media video — a practical step-by-step f
 - "steps": an array of 3-7 objects, each with:
   - "title": short step name (2-5 words)
   - "desc": one-sentence explanation (max 12 words)
+- "description": a one-sentence takeaway or summary of why this framework matters (max 15 words)
 
 Make it a practical mental framework or sequential process for adults. The steps should feel like concrete, actionable stages. Use current trends and relatable challenges. Make the title so compelling people save this video. English only. Return ONLY valid JSON.`,
 
@@ -91,6 +92,7 @@ Generate content for a comparison-style social media video. Return a JSON object
 - "pairs": an array of 3-5 objects, each with:
   - "left": one side of the comparison in a clear, specific sentence (concise)
   - "right": the contrasting side in a clear, specific sentence (concise)
+- "description": a one-sentence takeaway that frames why this comparison matters (max 15 words)
 
 The comparison can be any interesting contrast — old vs new, cheap vs expensive, fast vs slow, short-term vs long-term, etc. Not just negative vs positive. Make it insightful for adults. Base the comparison on real psychological research or behavioral science. Make the title so provocative people have to watch. English only. Return ONLY valid JSON.`,
 
@@ -122,6 +124,7 @@ Generate content for a "question & answer" social media video. Return a JSON obj
 - "title": a short theme/topic label (3-5 words)
 - "question": a deep, thought-provoking question (1 sentence, max 15 words)
 - "answer": a insightful answer that provides perspective (2-3 sentences)
+- "description": a one-sentence takeaway about why this Q&A matters (max 15 words)
 
 The question should make people pause and think. The answer should offer real insight grounded in psychology, neuroscience, or proven frameworks — not just generic advice. Make the question hit a universal human struggle. English only. Return ONLY valid JSON.`,
 
@@ -145,18 +148,7 @@ Generate content for a practical tips social media video. Return a JSON object w
   - "desc": a substantive 1-2 sentence explanation with practical context
 
 Make the tips intellectually stimulating yet easy to understand — covering psychology, behavioral economics, productivity, or practical wisdom. Each tip must be backed by real research or proven framework. Vary the title, tip structure, and depth every time. Avoid repeating same patterns. Make the subtitle so strong people save immediately. English only. Return ONLY valid JSON.`,
-
-    question: `You are a viral content expert. Cover ANY topic that matters today — technology, finance, psychology, work, business, self-development, health, science, culture, or any real-world trend people care about. Don't be stiff or generic. Use simple, sharp language that hits hard. Strong hook is mandatory. Follow and reference current news and events happening around the world right now — don't create content in a vacuum, tie it to what's actually happening today. Use reality-based insights and accurate data from real research or proven facts.
-
-Generate content for a "question & multiple choice" social media video. Return a JSON object with these fields:
-- "label": a short theme label (1-2 words in English, e.g. "REFLECT" or "CONSIDER")
-- "title": a deep, thought-provoking question in English (1 sentence, 10-18 words)
-- "options": an array of 4 answer choices as simple strings. Each option is a statement-style answer (5-12 words in English). Make them specific and descriptive, not generic. Option 4 is a "answer yourself" variant that fits the question (e.g. "I might have a different answer, I'll share in the comments" or "My perspective is unique, I'll write it below").
-- "description": a 1-sentence insight about why this question matters (max 18 words, English)
-
-Make the question hit a universal psychological truth or modern struggle. The options should reflect real human behavior patterns backed by psychology. Make people want to answer in the comments. Use English for all fields. Return ONLY valid JSON.`,
   };
-
   return prompts[type] || prompts.stat;
 }
 
@@ -169,12 +161,14 @@ function parseContent(type, text) {
       return {
         title: parsed.title,
         steps: parsed.steps,
+        description: parsed.description,
         footer: "1section.com",
       };
     case "compare":
       return {
         title: parsed.title,
         pairs: parsed.pairs,
+        description: parsed.description,
         footer: "1section.com",
       };
     case "mythfact":
@@ -189,6 +183,7 @@ function parseContent(type, text) {
       };
     case "quote":
       return {
+        title: parsed.title,
         quote: parsed.quote,
         source: parsed.source,
         description: parsed.description,
@@ -214,13 +209,6 @@ function parseContent(type, text) {
         title: parsed.title,
         question: parsed.question,
         answer: parsed.answer,
-        footer: "1section.com",
-      };
-    case "question":
-      return {
-        label: parsed.label,
-        title: parsed.title,
-        options: parsed.options,
         description: parsed.description,
         footer: "1section.com",
       };

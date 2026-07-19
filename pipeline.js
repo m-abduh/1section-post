@@ -9,7 +9,7 @@ import { getChannels, createPost } from "./services/buffer.js";
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const STATE_PATH = join(__dirname, "rotation-state.json");
 
-const TYPES = ["stat", "steps", "compare", "mythfact", "quote", "QnA", "question", "story", "tips"];
+const TYPES = ["stat", "steps", "compare", "mythfact", "quote", "QnA", "story", "tips"];
 
 function getRotation() {
   if (!existsSync(STATE_PATH)) return 0;

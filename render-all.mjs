@@ -22,7 +22,6 @@ const dummies = {
   mythfact: { title: "Don't believe everything", myth: "You need to work 80 hours a week to be successful", fact: "Working smarter, not harder, is what actually works", description: "Productivity is about leverage, not hours", footer: "1section.com" },
   quote: { title: "Words that stick", quote: "The only way to do great work is to love what you do. If you haven't found it yet, keep looking. Don't settle.", source: "Steve Jobs", description: "Passion is the foundation of meaningful achievement", footer: "1section.com" },
   QnA: { title: "Real questions, real answers", question: "How do I stay consistent?", answer: "Start so small you can't say no — 2 minutes a day.", description: "Consistency beats intensity every single time", footer: "1section.com" },
-  question: { label: "REFLECT", title: "What matters most in your career right now?", options: ["Money & stability", "Growth & learning", "Impact & purpose", "Freedom & flexibility"], description: "Your answer reveals what you truly value", footer: "1section.com" },
   story: { title: "Real talk", hook: "She gave herself permission", opening: "She spent years asking others if she was good enough. Seeking approval from bosses, mentors, and even strangers on the internet.\n\nUntil one day she realized the only permission she ever needed was her own.", description: "Self-belief is the most powerful career move you can make", footer: "1section.com" },
   tips: { title: "FOCUS BETTER", subtitle: "Simple ways to focus better", tips: [
     { tip: "Single-task mode", desc: "One focus block at a time. No multitasking allowed." },
@@ -41,7 +40,7 @@ const dummies = {
 };
 
 async function main() {
-  const types = ["stat", "steps", "compare", "mythfact", "quote", "QnA", "question", "story", "tips", "formula", "tierlist", "checklist", "warning"];
+  const types = ["stat", "steps", "compare", "mythfact", "quote", "QnA", "story", "tips", "formula", "tierlist", "checklist", "warning"];
   for (const type of types) {
     console.log(`\n====== Rendering ${type} ======`);
     const ts = Date.now();

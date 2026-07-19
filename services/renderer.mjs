@@ -28,12 +28,12 @@ function renderTemplate(tpl, data) {
         return out.replace(/\{\{\.\}\}/g, String(item));
       }
       return out.replace(/\{\{(\w+)\}\}/g, (_, f) =>
-        item[f] != null ? String(item[f]) : `{{${f}}}`
+        item[f] != null ? String(item[f]) : ""
       );
     }).join("");
   });
   return tpl.replace(/\{\{(\w+)\}\}/g, (_, key) =>
-    data[key] != null ? String(data[key]) : `{{${key}}}`
+    data[key] != null ? String(data[key]) : ""
   );
 }
 
@@ -57,14 +57,6 @@ export function renderPost(type, content, outputPath) {
 
   if (type === "tips") {
     content.title_upper = (content.title || "").toUpperCase();
-  }
-
-  if (type === "question" && Array.isArray(content.options)) {
-    const letters = ["A", "B", "C", "D", "E", "F"];
-    content.options = content.options.map((o, i) => ({
-      label: letters[i] || String(i + 1),
-      text: o,
-    }));
   }
 
   if (type === "tierlist" && Array.isArray(content.tiers)) {
