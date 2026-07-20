@@ -41,7 +41,7 @@ export async function renderPost(type, content, outputPath) {
   const file = FILE_MAP[type] || type.toLowerCase();
   let html = readFileSync(join(BUILDER, `${file}.html`), "utf-8");
 
-  content = { ...content, follow: content.cta || "Follow @1section for more" };
+  content = { ...content, follow: content.cta || content.title, follow_call: content.follow_call || "Follow @1section for more" };
 
   if (type === "quote") {
     const q = content.quote || "";

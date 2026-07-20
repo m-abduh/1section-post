@@ -3,42 +3,29 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=1080,height=1920">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.45.0/dist/tabler-icons.min.css">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 @font-face{font-family:'Satoshi';src:url('../../fonts/Satoshi-Variable.ttf')format('truetype');font-weight:300 900}
 body{font-family:'Satoshi',system-ui,sans-serif;background:#faf8f5}
-#root{width:1080px;height:1920px;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#faf8f5;position:relative;overflow:hidden}
-.tag{position:absolute;top:60px;left:80px;font-size:11px;color:#d4745d;letter-spacing:6px;text-transform:uppercase;font-weight:600}
-.domain{position:absolute;bottom:60px;right:80px;font-size:11px;color:#ddd;letter-spacing:3px;text-transform:uppercase}
-.gauge-wrap{position:relative;width:400px;height:400px;margin-bottom:30px}
-.gauge-ring{width:400px;height:400px;border-radius:50%;border:18px solid #f0eeea;position:absolute}
-.gauge-fill{width:400px;height:400px;border-radius:50%;border:18px solid transparent;border-top-color:#d4745d;border-right-color:#d4745d;transform:rotate(45deg);position:absolute}
-.gauge-center{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center}
-.gauge-center .num{font-size:72px;font-weight:900;color:#d4745d;letter-spacing:-3px;line-height:1}
-.gauge-center .lbl{font-size:16px;color:#bbb;margin-top:2px}
-.gauge-dot{position:absolute;top:44px;left:50%;width:12px;height:12px;border-radius:50%;background:#d4745d;transform:translateX(-50%)}
-.content{text-align:center;max-width:580px}
-.content .intro-title{font-size:40px;font-weight:800;line-height:1.15;letter-spacing:-1.5px;color:#1a1a1a}
-.content .intro-desc{font-size:20px;color:#bbb;line-height:1.5;margin-top:6px}
+#root{width:1080px;height:1920px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;background:#faf8f5;padding:80px}
+.icon-wrap{width:80px;height:80px;display:flex;align-items:center;justify-content:center}
+.intro-hline{width:40px;height:2px;background:#d4745d;border-radius:2px;margin:8px auto 12px;opacity:.6}
+.icon-wrap .ti{font-size:72px;color:#d4745d}
+.intro-title{font-size:56px;font-weight:800;line-height:1.12;letter-spacing:-2.5px;color:#1a1a1a;max-width:680px}
+.intro-desc{font-size:24px;color:#bababa;line-height:1.45;max-width:540px;margin-top:12px;font-weight:400}
+.intro-divider{width:32px;height:2px;background:#e8e4de;border-radius:2px;margin:18px auto}
+.intro-domain{font-size:13px;color:#d0d0d0;letter-spacing:4px;text-transform:uppercase;font-weight:500}
 </style>
 </head>
 <body>
 <div id="root">
-  <div class="tag">Stat</div>
-  <div class="gauge-wrap">
-    <div class="gauge-ring"></div>
-    <div class="gauge-fill"></div>
-    <div class="gauge-dot"></div>
-    <div class="gauge-center">
-      <div class="num">87%</div>
-      <div class="lbl">of people fail</div>
-    </div>
-  </div>
-  <div class="content">
-    <div class="intro-title">Numbers don't lie</div>
-    <div class="intro-desc">One percent better every day changes everything.</div>
-  </div>
-  <div class="domain">1section.com</div>
+  <div class="icon-wrap"><i class="ti ti-chart-bar"></i></div>
+  <div class="intro-hline"></div>
+  <div class="intro-title">Numbers don't lie</div>
+  <div class="intro-desc">One percent better every day changes everything.</div>
+  <div class="intro-divider"></div>
+  <div class="intro-domain">1section.com</div>
 </div>
 </body>
 </html>
