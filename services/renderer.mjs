@@ -10,6 +10,8 @@ const MUSIC_DIR = join(__dirname, "..", "music");
 
 const FILE_MAP = { QnA: "qna" };
 
+const ICON_MAP = JSON.parse(readFileSync(join(BUILDER, "icon-map.json"), "utf-8"));
+
 function findMusic() {
   if (!existsSync(MUSIC_DIR)) return null;
   const files = readdirSync(MUSIC_DIR).filter(f => /\.(mp3|wav|m4a|aac|ogg|flac)$/i.test(f));
@@ -42,6 +44,13 @@ export async function renderPost(type, content, outputPath) {
   let html = readFileSync(join(BUILDER, `${file}.html`), "utf-8");
 
   content = { ...content, follow: content.cta || content.title, follow_call: content.follow_call || "Follow @1section for more" };
+
+  const icons = ICON_MAP[type];
+  if (icons && icons.length) {
+    content.icon = icons[Math.floor(Math.random() * icons.length)];
+  } else {
+    content.icon = "ti-icon";
+  }
 
   if (type === "quote") {
     const q = content.quote || "";
