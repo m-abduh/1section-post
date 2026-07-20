@@ -160,7 +160,7 @@ Make the tips intellectually stimulating yet easy to understand — covering psy
 
 Generate content for a "formula" social media video — a simple equation that explains success. Return a JSON object with:
 - "title": a headline that introduces the formula (4-8 words)
-- "terms": an array of 3-5 short phrases or single words (each 1-2 words) that combine to produce the result
+- "terms": an array of 5 short phrases or single words (each 1-2 words) that combine to produce the result
 - "result": a single word for the outcome (1-2 words)
 - "caption": a short explanation of the equation (max 10 words)
 - "description": a one-sentence takeaway about why this formula works (max 15 words)

@@ -32,7 +32,7 @@ const dummies = {
     { tip: "Time boxing", desc: "Set a timer. Work only until it rings. Then rest." },
     { tip: "Environment design", desc: "Remove distractions before they remove your focus." }
   ], description: "Your focus determines your reality", footer: "1section.com" },
-  formula: { title: "The Growth Formula", icon: "ti-math", follow_call: "Master the formula for personal growth. Follow for more insights that compound", terms: ["Focus", "Consistency", "Patience"], result: "Growth", caption: "The only equation that matters for self-improvement", description: "Get these right, and everything else follows", footer: "1section.com" },
+  formula: { title: "The Growth Formula", icon: "ti-math", follow_call: "Master the formula for personal growth. Follow for more insights that compound", terms: ["Focus", "Consistency", "Patience", "Rest", "Habits"], result: "Growth", caption: "The only equation that matters for self-improvement", description: "Get these right, and everything else follows", footer: "1section.com" },
   tierlist: { title: "Productivity methods ranked from best to worst", icon: "ti-layers-difference", follow_call: "Stop wasting time on low-impact habits. Follow for more evidence-based rankings", tiers: [
     { label: "s", name: "80/20 Rule", desc: "Highest leverage \u2014 do this first" },
     { label: "a", name: "Deep Work", desc: "Focused, uninterrupted sessions" },
