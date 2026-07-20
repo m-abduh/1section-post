@@ -41,7 +41,7 @@ export function renderPost(type, content, outputPath) {
   const file = FILE_MAP[type] || type.toLowerCase();
   let html = readFileSync(join(BUILDER, `${file}.html`), "utf-8");
 
-  content = { ...content, follow: "Follow @1section" };
+  content = { ...content, follow: content.cta || "Follow @1section for more" };
 
   if (type === "quote") {
     const q = content.quote || "";
@@ -74,7 +74,7 @@ export function renderPost(type, content, outputPath) {
 
   const musicFile = findMusic();
   if (musicFile) {
-    const audio = `<audio id="bgm" src="${musicFile}" data-start="0" data-duration="20" data-volume="0.3" data-has-audio="true"></audio>`;
+    const audio = `<audio id="bgm" src="${musicFile}" data-start="0" data-duration="12" data-volume="0.3" data-has-audio="true"></audio>`;
     html = html.replace("</div>", audio + "\n</div>");
   }
 

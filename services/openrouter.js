@@ -68,7 +68,7 @@ Generate content for a statistics social media video. Return a JSON object with 
 - "stat": a striking statistic. MUST be 6 characters or fewer (e.g. "73%", "42M", "$1.2B", "1/4", "12yr", "3:1", "99th", "200K"). NO spaces if possible.
 - "desc": a one-sentence description of what the stat means (max 12 words)
 - "sub": a 2-3 sentence explanation providing deeper context
-- "cta": a short call-to-action question (max 12 words)
+- "cta": a short follow invitation (4-7 words) that relates to the content. e.g. "Follow for more insights like this" or "Need more? Follow @1section"
 
 IMPORTANT: stat field is displayed at huge font size (260px). Anything longer than 6 characters will overflow the screen. Keep it short and punchy.
 
@@ -82,6 +82,7 @@ Generate content for a "steps" social media video — a practical step-by-step f
   - "title": short step name (2-5 words)
   - "desc": one-sentence explanation (max 12 words)
 - "description": a one-sentence takeaway or summary of why this framework matters (max 15 words)
+- "cta": a short follow invitation (4-7 words) that relates to the content. e.g. "Follow for more insights like this" or "Need more? Follow @1section"
 
 Make it a practical mental framework or sequential process for adults. The steps should feel like concrete, actionable stages. Use current trends and relatable challenges. Make the title so compelling people save this video. English only. Return ONLY valid JSON.`,
 
@@ -93,6 +94,7 @@ Generate content for a comparison-style social media video. Return a JSON object
   - "left": one side of the comparison in a clear, specific sentence (concise)
   - "right": the contrasting side in a clear, specific sentence (concise)
 - "description": a one-sentence takeaway that frames why this comparison matters (max 15 words)
+- "cta": a short follow invitation (4-7 words) that relates to the content. e.g. "Follow for more insights like this" or "Need more? Follow @1section"
 
 The comparison can be any interesting contrast — old vs new, cheap vs expensive, fast vs slow, short-term vs long-term, etc. Not just negative vs positive. Make it insightful for adults. Base the comparison on real psychological research or behavioral science. Make the title so provocative people have to watch. English only. Return ONLY valid JSON.`,
 
@@ -105,6 +107,7 @@ Generate content for a "myth vs fact" social media video. Return a JSON object w
 - "myth": a commonly believed but false statement (1-2 sentences)
 - "fact": the actual truth that corrects the myth (1-2 sentences)
 - "description": a one-sentence takeaway or insight about why this myth matters (max 18 words)
+- "cta": a short follow invitation (4-7 words) that relates to the content. e.g. "Follow for more insights like this" or "Need more? Follow @1section"
 
 Make it counterintuitive and intellectually engaging for adults. The fact MUST be backed by real research, studies, or proven data. Choose myths that are widely believed today and relevant to people's lives. Make people question what they know. English only. Return ONLY valid JSON.`,
 
@@ -115,6 +118,7 @@ Generate content for an inspirational quote social media video. Return a JSON ob
 - "quote": an insightful, thought-provoking quote (1-2 sentences)
 - "source": the person who said the quote (first and last name)
 - "description": a 1-2 sentence explanation of why this quote matters or how to apply it
+- "cta": a short follow invitation (4-7 words) that relates to the content. e.g. "Follow for more insights like this" or "Need more? Follow @1section"
 
 Make the quote original-sounding, not overly cliché. Use quotes from modern thinkers across any field — tech, finance, science, philosophy, business, psychology — relevant to today's challenges. The quote should feel like a cold hard truth, not generic inspiration. English only. Return ONLY valid JSON.`,
 
@@ -125,6 +129,7 @@ Generate content for a "question & answer" social media video. Return a JSON obj
 - "question": a deep, thought-provoking question (1 sentence, max 15 words)
 - "answer": a insightful answer that provides perspective (2-3 sentences)
 - "description": a one-sentence takeaway about why this Q&A matters (max 15 words)
+- "cta": a short follow invitation (4-7 words) that relates to the content. e.g. "Follow for more insights like this" or "Need more? Follow @1section"
 
 The question should make people pause and think. The answer should offer real insight grounded in psychology, neuroscience, or proven frameworks — not just generic advice. Make the question hit a universal human struggle. English only. Return ONLY valid JSON.`,
 
@@ -135,6 +140,7 @@ Generate content for a "micro story" social media video. Return a JSON object wi
 - "hook": a short teaser that sparks curiosity (2-5 words in English)
 - "opening": a short relatable story (3-4 short paragraphs, use \\n\\n between paragraphs, max 50 words total in English)
 - "description": a one-sentence takeaway that explains what this story teaches us — keep it simple and clear (8-15 words in English)
+- "cta": a short follow invitation (4-7 words) that relates to the content. e.g. "Follow for more insights like this" or "Need more? Follow @1section"
 
 Tell a short relatable story about real human struggles — loneliness, ambition, failure, success, identity, purpose. The hook should make people curious, not tell them what to do. The description should help viewers understand the lesson in plain, easy words. Vary the title theme every time. Make it emotionally gripping so people share it. English only. Return ONLY valid JSON.`,
 
@@ -146,6 +152,7 @@ Generate content for a practical tips social media video. Return a JSON object w
 - "tips": an array of 3-6 objects, each with:
   - "tip": a short actionable advice (3-6 words)
   - "desc": a substantive 1-2 sentence explanation with practical context
+- "cta": a short follow invitation (4-7 words) that relates to the content. e.g. "Follow for more insights like this" or "Need more? Follow @1section"
 
 Make the tips intellectually stimulating yet easy to understand — covering psychology, behavioral economics, productivity, or practical wisdom. Each tip must be backed by real research or proven framework. Vary the title, tip structure, and depth every time. Avoid repeating same patterns. Make the subtitle so strong people save immediately. English only. Return ONLY valid JSON.`,
 
@@ -159,6 +166,7 @@ Generate content for a "formula" social media video — a simple equation that e
 - "result": a single word for the outcome (1-2 words)
 - "caption": a short explanation of the equation (max 10 words)
 - "description": a one-sentence takeaway about why this formula works (max 15 words)
+- "cta": a short follow invitation (4-7 words) that relates to the content. e.g. "Follow for more insights like this" or "Need more? Follow @1section"
 
 Make it feel like a universal truth or life hack. The formula should be memorable and intuitive. English only. Return ONLY valid JSON.`,
 
@@ -171,6 +179,7 @@ Generate content for a "tier list" social media video — ranking things from be
   - "name": a short name for the item being ranked (2-5 words)
   - "desc": a one-sentence description of why it belongs in this tier (max 10 words)
 - "description": a one-sentence takeaway about the ranking (max 15 words)
+- "cta": a short follow invitation (4-7 words) that relates to the content. e.g. "Follow for more insights like this" or "Need more? Follow @1section"
 
 Use first tier "s" for the best option, then "a", "b", "c" in descending order. Make the ranking counterintuitive or insightful. English only. Return ONLY valid JSON.`,
 
@@ -180,6 +189,7 @@ Generate content for a "checklist" social media video — actionable items to ac
 - "title": a headline that promises a result (4-8 words)
 - "items": an array of 4-6 concise action items as simple strings (5-15 words each)
 - "description": a one-sentence takeaway about what these actions achieve (max 15 words)
+- "cta": a short follow invitation (4-7 words) that relates to the content. e.g. "Follow for more insights like this" or "Need more? Follow @1section"
 
 Make the items specific and actionable, not generic. Each item should feel like a concrete step. English only. Return ONLY valid JSON.`,
 
@@ -189,6 +199,7 @@ Generate content for a "warning" social media video — a cautionary message abo
 - "title": a headline that frames the warning (3-6 words)
 - "warning": a specific, hard-hitting warning statement (1-2 sentences)
 - "description": a one-sentence takeaway or alternative perspective (max 15 words)
+- "cta": a short follow invitation (4-7 words) that relates to the content. e.g. "Follow for more insights like this" or "Need more? Follow @1section"
 
 Make it counterintuitive and eye-opening. The warning should make people realize they're making this mistake right now. English only. Return ONLY valid JSON.`,
   };
@@ -205,6 +216,7 @@ function parseContent(type, text) {
         title: parsed.title,
         steps: parsed.steps,
         description: parsed.description,
+        cta: parsed.cta || "",
         footer: "1section.com",
       };
     case "compare":
@@ -212,6 +224,7 @@ function parseContent(type, text) {
         title: parsed.title,
         pairs: parsed.pairs,
         description: parsed.description,
+        cta: parsed.cta || "",
         footer: "1section.com",
       };
     case "mythfact":
@@ -222,6 +235,7 @@ function parseContent(type, text) {
         myth: parsed.myth,
         fact: parsed.fact,
         description: parsed.description,
+        cta: parsed.cta || "",
         footer: "1section.com",
       };
     case "quote":
@@ -230,6 +244,7 @@ function parseContent(type, text) {
         quote: parsed.quote,
         source: parsed.source,
         description: parsed.description,
+        cta: parsed.cta || "",
         footer: "1section.com",
       };
     case "story":
@@ -238,6 +253,7 @@ function parseContent(type, text) {
         hook: parsed.hook,
         opening: parsed.opening,
         description: parsed.description,
+        cta: parsed.cta || "",
         footer: "1section.com",
       };
     case "tips":
@@ -245,6 +261,7 @@ function parseContent(type, text) {
         title: parsed.title,
         subtitle: parsed.subtitle,
         tips: parsed.tips,
+        cta: parsed.cta || "",
         footer: "1section.com",
       };
     case "QnA":
@@ -253,6 +270,7 @@ function parseContent(type, text) {
         question: parsed.question,
         answer: parsed.answer,
         description: parsed.description,
+        cta: parsed.cta || "",
         footer: "1section.com",
       };
     case "formula":
@@ -264,6 +282,7 @@ function parseContent(type, text) {
         result: parsed.result,
         caption: parsed.caption,
         description: parsed.description,
+        cta: parsed.cta || "",
         footer: "1section.com",
       };
     case "tierlist":
@@ -271,6 +290,7 @@ function parseContent(type, text) {
         title: parsed.title,
         tiers: parsed.tiers,
         description: parsed.description,
+        cta: parsed.cta || "",
         footer: "1section.com",
       };
     case "checklist":
@@ -278,6 +298,7 @@ function parseContent(type, text) {
         title: parsed.title,
         items: parsed.items,
         description: parsed.description,
+        cta: parsed.cta || "",
         footer: "1section.com",
       };
     case "warning":
@@ -285,11 +306,13 @@ function parseContent(type, text) {
         title: parsed.title,
         warning: parsed.warning,
         description: parsed.description,
+        cta: parsed.cta || "",
         footer: "1section.com",
       };
     default:
       return {
         ...parsed,
+        cta: parsed.cta || "",
         footer: "1section.com",
       };
   }
