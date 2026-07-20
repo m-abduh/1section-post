@@ -1,8 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-REPO="https://github.com/m-a-b-d-u-h/marketing.git"
-APP_DIR="$HOME/marketing"
+APP_DIR="$(cd "$(dirname "$0")" && pwd)"
 ENV_FILE="$APP_DIR/.env"
 
 echo "[1/6] Checking prerequisites..."
@@ -11,16 +10,7 @@ command -v ffmpeg &>/dev/null || { echo "ffmpeg not found, installing..."; apt-g
 echo "   node $(node -v), ffmpeg $(ffmpeg -version | head -1 | awk '{print $3}')"
 npm install -g pm2
 
-echo "[2/6] Cloning repo..."
-if [ -d "$APP_DIR/.git" ]; then
-  git -C "$APP_DIR" pull
-elif [ -d "$APP_DIR" ]; then
-  echo ">>> $APP_DIR exists but not a git repo. Remove it and re-run."
-  exit 1
-else
-  git clone "$REPO" "$APP_DIR"
-fi
-
+echo "[2/6] Setting up project..."
 cd "$APP_DIR"
 
 echo "[3/6] Installing dependencies..."
