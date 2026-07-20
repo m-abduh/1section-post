@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1080,height=1920">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+@font-face{font-family:'Satoshi';src:url('../../fonts/Satoshi-Variable.ttf')format('truetype');font-weight:300 900}
+body{font-family:'Satoshi',system-ui,sans-serif;background:#faf8f5}
+#root{width:1080px;height:1920px;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#faf8f5;position:relative;overflow:hidden}
+.ring{position:absolute;width:720px;height:720px;border-radius:50%;border:2px solid #7a8a6a;opacity:.08}
+.ring:nth-child(1){width:900px;height:900px}
+.ring:nth-child(2){width:640px;height:640px;border-width:3px}
+.ring:nth-child(3){width:380px;height:380px;opacity:.15}
+.check-big{position:absolute;font-size:340px;color:#7a8a6a;opacity:.07;font-weight:100;line-height:1;top:50%;left:50%;transform:translate(-50%,-50%)}
+.tag-dom{position:absolute;top:60px;left:80px;right:80px;display:flex;justify-content:space-between;align-items:center}
+.tag-dom .tag{font-size:11px;color:#7a8a6a;letter-spacing:6px;text-transform:uppercase;font-weight:600}
+.tag-dom .domain{font-size:11px;color:#ddd;letter-spacing:3px;text-transform:uppercase}
+.content{z-index:2;text-align:center;max-width:680px;padding:0 80px}
+.content .brand-icon{font-size:48px;color:#7a8a6a;margin-bottom:12px;opacity:.8}
+.content .intro-title{font-size:52px;font-weight:800;line-height:1.15;letter-spacing:-2px;color:#1a1a1a}
+.content .intro-desc{font-size:22px;color:#bbb;line-height:1.45;margin-top:10px}
+</style>
+</head>
+<body>
+<div id="root">
+  <div class="ring"></div>
+  <div class="ring"></div>
+  <div class="ring"></div>
+  <div class="ring"></div>
+  <div class="check-big">&#10003;</div>
+  <div class="tag-dom">
+    <div class="tag">Checklist</div>
+    <div class="domain">1section.com</div>
+  </div>
+  <div class="content">
+    <div class="brand-icon">&#10003;</div>
+    <div class="intro-title">Tick the boxes that matter</div>
+    <div class="intro-desc">A simple list can change everything. Stop guessing. Start checking.</div>
+  </div>
+</div>
+</body>
+</html>

@@ -1,3 +1,5 @@
 node_modules/
 output/
 .env
+builder/_render.html
+builder/_bgm.mp3

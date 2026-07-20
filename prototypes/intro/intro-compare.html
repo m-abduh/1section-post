@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1080,height=1920">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+@font-face{font-family:'Satoshi';src:url('../../fonts/Satoshi-Variable.ttf')format('truetype');font-weight:300 900}
+body{font-family:'Satoshi',system-ui,sans-serif;background:#faf8f5}
+#root{width:1080px;height:1920px;display:flex;background:#faf8f5}
+.col{flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:40px 30px;position:relative}
+.col-a{background:#f8f6f3}
+.col-b{background:#f2efe9}
+.col-vs{width:80px;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#fff;position:relative}
+.col-vs .vs-text{font-size:16px;font-weight:800;color:#7a8b5d;letter-spacing:4px;text-transform:uppercase;transform:rotate(-90deg)}
+.col-vs::before,.col-vs::after{content:'';width:1px;flex:1;background:#eee}
+.tag{position:absolute;top:60px;left:80px;font-size:11px;color:#7a8b5d;letter-spacing:6px;text-transform:uppercase;font-weight:600}
+.domain{position:absolute;bottom:60px;right:80px;font-size:11px;color:#ddd;letter-spacing:3px;text-transform:uppercase}
+.col .icon{font-size:60px;color:rgba(122,139,93,.12);margin-bottom:16px}
+.col .label{font-size:14px;color:#bbb;letter-spacing:3px;text-transform:uppercase;font-weight:600;margin-bottom:6px}
+.col .hook{font-size:22px;font-weight:700;color:#1a1a1a;text-align:center;line-height:1.3;max-width:200px}
+.col-a .hook{color:#999}
+.col-b .hook{color:#1a1a1a}
+</style>
+</head>
+<body>
+<div id="root">
+  <div class="tag">Compare</div>
+  <div class="col col-a">
+    <div class="icon">&#9679;</div>
+    <div class="label">Before</div>
+    <div class="hook">The old way. It worked. Sort of.</div>
+  </div>
+  <div class="col-vs"><div class="vs-text">VS</div></div>
+  <div class="col col-b">
+    <div class="icon">&#9679;</div>
+    <div class="label">After</div>
+    <div class="hook">See the difference clearly</div>
+  </div>
+  <div class="domain">1section.com</div>
+</div>
+</body>
+</html>

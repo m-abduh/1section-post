@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1080,height=1920">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+@font-face{font-family:'Satoshi';src:url('../../fonts/Satoshi-Variable.ttf')format('truetype');font-weight:300 900}
+body{font-family:'Satoshi',system-ui,sans-serif;background:#1a1a1a}
+#root{width:1080px;height:1920px;display:flex;flex-direction:column;background:#1a1a1a;position:relative;overflow:hidden}
+.tag{position:absolute;top:60px;left:80px;font-size:11px;color:rgba(255,255,255,.35);letter-spacing:6px;text-transform:uppercase;font-weight:600;z-index:2}
+.domain{position:absolute;bottom:60px;right:80px;font-size:11px;color:rgba(255,255,255,.2);letter-spacing:3px;text-transform:uppercase;z-index:2}
+.letterbox-top{flex:1;background:#1a1a1a}
+.letterbox-bottom{flex:1;background:#1a1a1a}
+.panorama{height:420px;background:linear-gradient(135deg,#8a6a7a,#bfa5b5,#8a6a7a);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.panorama::before,.panorama::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,#1a1a1a 0%,transparent 15%,transparent 85%,#1a1a1a 100%)}
+.panorama-inner{z-index:1;text-align:center;padding:0 120px}
+.panorama-inner .icon{font-size:64px;color:rgba(255,255,255,.15);margin-bottom:8px}
+.panorama-inner .intro-title{font-size:46px;font-weight:800;line-height:1.15;letter-spacing:-1.5px;color:#fff}
+.panorama-inner .intro-desc{font-size:20px;color:rgba(255,255,255,.4);line-height:1.45;margin-top:8px;max-width:480px;margin-left:auto;margin-right:auto}
+</style>
+</head>
+<body>
+<div id="root">
+  <div class="tag">Story</div>
+  <div class="letterbox-top"></div>
+  <div class="panorama">
+    <div class="panorama-inner">
+      <div class="icon">&#9733;</div>
+      <div class="intro-title">Every story changes you</div>
+      <div class="intro-desc">The best lessons are hidden in the best stories.</div>
+    </div>
+  </div>
+  <div class="letterbox-bottom"></div>
+  <div class="domain">1section.com</div>
+</div>
+</body>
+</html>

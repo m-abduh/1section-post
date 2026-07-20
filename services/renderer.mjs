@@ -37,7 +37,7 @@ function renderTemplate(tpl, data) {
   );
 }
 
-export function renderPost(type, content, outputPath) {
+export async function renderPost(type, content, outputPath) {
   const file = FILE_MAP[type] || type.toLowerCase();
   let html = readFileSync(join(BUILDER, `${file}.html`), "utf-8");
 
@@ -74,7 +74,19 @@ export function renderPost(type, content, outputPath) {
 
   const musicFile = findMusic();
   if (musicFile) {
-    const audio = `<audio id="bgm" src="${musicFile}" data-start="0" data-duration="12" data-volume="0.3" data-has-audio="true"></audio>`;
+    const bgmPath = join(BUILDER, "_bgm.mp3");
+    await new Promise((resolve, reject) => {
+      const ff = spawn("ffmpeg", [
+        "-y", "-i", musicFile,
+        "-t", "12",
+        "-af", "afade=t=out:st=9:d=3",
+        "-c:a", "libmp3lame", "-q:a", "2",
+        bgmPath
+      ]);
+      ff.on("close", c => c === 0 ? resolve() : reject(new Error(`ffmpeg exited ${c}`)));
+      ff.on("error", reject);
+    });
+    const audio = `<audio id="bgm" src="./_bgm.mp3" data-start="0" data-duration="12" data-volume="0.3" data-has-audio="true"></audio>`;
     html = html.replace("</div>", audio + "\n</div>");
   }
 
