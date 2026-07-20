@@ -32,8 +32,8 @@ body{font-family:'Satoshi',system-ui,sans-serif;background:#faf8f5;color:#1a1a1a
 .mf-text{font-size:26px;line-height:1.45}
 .myth-card .mf-text{color:#777;font-weight:400;text-decoration:line-through}
 .fact-card .mf-text{color:#1a1a1a;font-weight:600}
-.mf-line{display:flex;align-items:center;justify-content:center;height:24px}
-.mf-line::before{content:'';width:2px;height:100%;background:rgba(0,0,0,.06)}
+.mf-pair{display:flex;flex-direction:column;gap:2px}
+.mf-pair+.mf-pair{margin-top:10px;padding-top:10px;border-top:1px solid rgba(0,0,0,.04)}
 .cta-card{align-items:center;justify-content:center}
 .intro-icon{width:72px;height:72px;display:flex;align-items:center;justify-content:center;margin-bottom:16px}
 .intro-icon .ti{font-size:72px;color:var(--accent)}
@@ -64,19 +64,22 @@ body{font-family:'Satoshi',system-ui,sans-serif;background:#faf8f5;color:#1a1a1a
     <div class="visual-area">
       <div class="title" id="ot">{{title}}</div>
       <div class="mf-wrap">
-        <div class="mf-card myth-card" id="o1">
-          <div class="mf-top">
-            <span class="mf-icon">&#10005;</span>
-            <div class="mf-text">{{myth}}</div>
+{{#each pairs}}
+        <div class="mf-pair" id="op-{{@index}}">
+          <div class="mf-card myth-card">
+            <div class="mf-top">
+              <span class="mf-icon">&#10005;</span>
+              <div class="mf-text">{{myth}}</div>
+            </div>
+          </div>
+          <div class="mf-card fact-card">
+            <div class="mf-top">
+              <span class="mf-icon">&#10003;</span>
+              <div class="mf-text">{{fact}}</div>
+            </div>
           </div>
         </div>
-        <div class="mf-line" id="o2"></div>
-        <div class="mf-card fact-card" id="o3">
-          <div class="mf-top">
-            <span class="mf-icon">&#10003;</span>
-            <div class="mf-text">{{fact}}</div>
-          </div>
-        </div>
+{{/each}}
       </div>
       <div class="desc" id="o4">{{description}}</div>
     </div>
@@ -102,11 +105,10 @@ tl.fromTo('#iv',{scaleX:0},{scaleX:1,transformOrigin:'50% 0%',duration:.35},.55)
 tl.fromTo('#id',{y:12,opacity:0},{y:0,opacity:1,duration:.3},.65)
 tl.to('#ii,#ih,#bt,#bd,#iv,#id',{opacity:0,y:-15,duration:.35,stagger:.03,ease:'power3.in'},2.3)
 tl.fromTo('#ot',{y:20,opacity:0},{y:0,opacity:1,duration:.45},3.45)
-tl.fromTo('#o1',{x:-30,opacity:0},{x:0,opacity:1,duration:.4},3.7)
-tl.fromTo('#o2',{scaleY:0},{scaleY:1,transformOrigin:'50% 0%',duration:.25},4.0)
-tl.fromTo('#o3',{x:30,opacity:0},{x:0,opacity:1,duration:.4},4.1)
-tl.fromTo('#o4',{y:15,opacity:0},{y:0,opacity:1,duration:.3},4.4)
-tl.to('#ot,#o1,#o2,#o3,#o4',{opacity:0,y:-15,duration:.3,stagger:.03,ease:'power3.in'},8.4)
+var np=document.querySelectorAll('.mf-pair').length
+tl.fromTo('.mf-pair',{x:-30,opacity:0},{x:0,opacity:1,stagger:.12,duration:.45},3.7)
+tl.fromTo('#o4',{y:15,opacity:0},{y:0,opacity:1,duration:.3},3.7+np*.12+.05)
+tl.to('#ot,.mf-pair,#o4',{opacity:0,y:-15,duration:.3,stagger:.03,ease:'power3.in'},8.4)
 tl.fromTo('#ct',{y:18,opacity:0},{y:0,opacity:1,duration:.35},9)
 tl.fromTo('#cg',{opacity:0,y:12},{opacity:1,y:0,duration:.3},9.3)
 tl.to('#ct,#cg',{opacity:0,y:-15,duration:.3,stagger:.05,ease:'power3.in'},11.4)

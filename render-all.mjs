@@ -19,7 +19,11 @@ const dummies = {
     { left: "Requires expensive tools", right: "Free or low-cost solutions" },
     { left: "Complex and confusing", right: "Simple and intuitive" }
   ], description: "The new approach is faster, cheaper, and easier than ever before", footer: "1section.com" },
-  mythfact: { title: "Don't believe everything", icon: "ti-alert-triangle", cta: "Separate fact from fiction.", follow_call: "Follow for more myth busters", myth: "You need to work 80 hours a week to be successful", fact: "Working smarter, not harder, is what actually works", description: "Productivity is about leverage, not hours", footer: "1section.com" },
+  mythfact: { title: "Don't believe everything", icon: "ti-alert-triangle", cta: "Separate fact from fiction.", follow_call: "Follow for more myth busters", pairs: [
+    { myth: "You need to work 80 hours a week to be successful", fact: "Working smarter, not harder, is what actually works" },
+    { myth: "Multitasking makes you more productive", fact: "Single-tasking produces higher quality results" },
+    { myth: "Success happens overnight", fact: "Consistent small wins compound over time" }
+  ], description: "Productivity is about leverage, not hours", footer: "1section.com" },
   quote: { title: "Words that stick", icon: "ti-quote", cta: "Words that change how you think.", follow_call: "Follow for more inspiring words", quote: "The only way to do great work is to love what you do. If you haven't found it yet, keep looking. Don't settle.", source: "Steve Jobs", description: "Passion is the foundation of meaningful achievement", footer: "1section.com" },
   QnA: { title: "Real questions, real answers", icon: "ti-help-circle", cta: "Got questions? We've got answers.", follow_call: "Follow for more real answers", question: "How do I stay consistent?", answer: "Start so small you can't say no — 2 minutes a day.", description: "Consistency beats intensity every single time", footer: "1section.com" },
   story: { title: "Real talk", icon: "ti-book-2", cta: "Your story matters. Start writing it.", follow_call: "Follow for more real stories", hook: "She gave herself permission", opening: "She spent years asking others if she was good enough. Seeking approval from bosses, mentors, and even strangers on the internet.\n\nUntil one day she realized the only permission she ever needed was her own.", description: "Self-belief is the most powerful career move you can make", footer: "1section.com" },
