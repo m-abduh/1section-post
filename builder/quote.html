@@ -51,7 +51,6 @@ body{font-family:'Satoshi',system-ui,sans-serif;background:#faf8f5;color:#1a1a1a
 <section class="clip" data-start="3" data-duration="6" data-track-index="1">
   <div class="card detail-card">
     <div class="visual-area">
-      <div class="title" id="ot">{{title}}</div>
       <div style="display:flex;flex-direction:column;align-items:center">
         <div class="quote-mark">&ldquo;</div>
         <div class="quote-text" id="o1">{{quote_short}}</div>
@@ -80,12 +79,11 @@ tl.fromTo('#bd',{y:18,opacity:0},{y:0,opacity:1,duration:.45},.38)
 tl.fromTo('#iv',{scaleX:0},{scaleX:1,transformOrigin:'50% 0%',duration:.35},.55)
 tl.fromTo('#id',{y:12,opacity:0},{y:0,opacity:1,duration:.3},.65)
 tl.to('#ii,#ih,#bt,#bd,#iv,#id',{opacity:0,y:-15,duration:.35,stagger:.03,ease:'power3.in'},2.3)
-tl.fromTo('#ot',{y:20,opacity:0},{y:0,opacity:1,duration:.45},3.45)
 tl.fromTo('.quote-mark',{scale:1.5,opacity:0},{scale:1,opacity:1,duration:.5},3.7)
 tl.fromTo('#o1',{y:25,opacity:0},{y:0,opacity:1,duration:.55},3.9)
 tl.fromTo('#o2',{y:15,opacity:0},{y:0,opacity:1,duration:.4},4.25)
 tl.fromTo('#o3',{y:15,opacity:0},{y:0,opacity:1,duration:.35},4.5)
-tl.to('#ot,.quote-mark,#o1,#o2,#o3',{opacity:0,y:-15,duration:.3,stagger:.03,ease:'power3.in'},8.4)
+tl.to('.quote-mark,#o1,#o2,#o3',{opacity:0,y:-15,duration:.3,stagger:.03,ease:'power3.in'},8.4)
 tl.fromTo('#ct',{y:18,opacity:0},{y:0,opacity:1,duration:.35},9)
 tl.fromTo('#cg',{opacity:0,y:12},{opacity:1,y:0,duration:.3},9.3)
 tl.to('#ct,#cg',{opacity:0,y:-15,duration:.3,stagger:.05,ease:'power3.in'},11.4)
