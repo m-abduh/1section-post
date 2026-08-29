@@ -161,7 +161,8 @@ export const store = {
 
   // Idempotent: insert seed categories by name. Falls back to a sensible
   // prompt if none was set, and replaces known placeholder prompts. It does
-  // NOT override a category that already has a real (user-written) prompt.
+  // Seed categories: seed.mjs is the canonical source. Ensures each seed
+  // category exists and keeps its default_prompt in sync with the seed file.
   seedCategories() {
     const upsertPrompt = db.prepare("UPDATE categories SET default_prompt=? WHERE id=?");
     for (const s of CATEGORY_SEEDS) {
@@ -170,10 +171,7 @@ export const store = {
         this.createCategory({ name: s.name, default_prompt: s.default_prompt });
         continue;
       }
-      const cur = (existing.default_prompt || "").trim();
-      if (!cur || cur.toLowerCase() === "story create") {
-        upsertPrompt.run(s.default_prompt, existing.id);
-      }
+      upsertPrompt.run(s.default_prompt, existing.id);
     }
     this.syncAllAccountCategories();
   },

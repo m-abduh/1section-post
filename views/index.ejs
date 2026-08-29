@@ -30,7 +30,10 @@ button:hover{background:#383842}
 .acc .name{font-weight:600;font-size:.88rem}
 .acc .del{color:#ef4444;background:none;border:none;cursor:pointer;font-size:.85rem}
 .muted{color:#9a9aa3;font-size:.8rem}
-.section-title{margin:1.2rem 0 .6rem;font-weight:600;font-size:.9rem;text-transform:uppercase;letter-spacing:.04em;color:#a9a9b2}
+    .section-title{margin:1.2rem 0 .6rem;font-weight:600;font-size:.9rem;text-transform:uppercase;letter-spacing:.04em;color:#a9a9b2}
+    .cat-toggle{cursor:pointer;display:flex;align-items:center;justify-content:space-between;user-select:none}
+    .chevron{display:inline-block;transition:transform .15s ease;color:#a9a9b2}
+    .chevron.open{transform:rotate(90deg)}
 .pill{background:#26262e;border-radius:999px;padding:.2rem .6rem;font-size:.72rem;color:#aaaab3;border:1px solid #383840}
 .pill.ok{color:#4ade80;border-color:#2f6b45}
 .pill.bad{color:#f87171;border-color:#7f1d1d}
@@ -99,8 +102,8 @@ button:hover{background:#383842}
     <p class="sub" id="panelSub">Choose a Buffer account to manage its categories, prompts &amp; videos.</p>
 
     <div id="accountPanel" style="display:none">
-      <div class="section-title">Categories & AI Prompts (for this account)</div>
-      <div id="accountCats"></div>
+      <div class="section-title cat-toggle" id="catToggle" onclick="toggleAccountCats()">Categories & AI Prompts (for this account) <span id="catChevron" class="chevron">▸</span></div>
+      <div id="accountCats" style="display:none"></div>
       <div class="section-title">Videos</div>
       <div id="videoList"></div>
     </div>
@@ -182,6 +185,14 @@ async function renderPanel() {
 }
 
 function availableCatIds() { return state.categories.map(c => c.id); }
+
+function toggleAccountCats() {
+  const box = document.getElementById('accountCats');
+  const chev = document.getElementById('catChevron');
+  const open = box.style.display !== 'none';
+  box.style.display = open ? 'none' : 'block';
+  chev.classList.toggle('open', !open);
+}
 
 function renderAccountCats() {
   const el = document.getElementById('accountCats');

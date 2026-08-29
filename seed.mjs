@@ -9,8 +9,9 @@ export const CATEGORY_SEEDS = [
     default_prompt: `Write ONE micro-fiction for this account. Provide a hook that pulls the reader in and a short 2-4 line story with a small twist or emotional payoff. Write in the same language as the rest of this account's content.
 
 Example:
-Hook: Aku berhenti mengejar uang setelah sadar satu hal.
-Content: Semakin aku mengejar uang, semakin aku fokus pada apa yang bisa aku dapat. Setelah fokusku berubah menjadi "masalah apa yang bisa aku selesaikan?", uang justru menjadi hasil dari proses itu.`,
+Hook: Aku berhenti setelah satu hal menyadarkanku.
+Content: Semakin aku mengejar uang, semakin aku fokus pada apa yang bisa aku dapat.
+Setelah fokusku berubah menjadi **"masalah apa yang bisa aku selesaikan?"**, uang justru menjadi hasil dari proses itu.`,
   },
   {
     name: "tips",
@@ -18,7 +19,12 @@ Content: Semakin aku mengejar uang, semakin aku fokus pada apa yang bisa aku dap
 
 Example:
 Hook: Kalau kamu susah konsisten, jangan mulai dari target besar.
-Content: Mulai dari sesuatu yang terlalu mudah untuk ditolak: baca 1 halaman, olahraga 5 menit, atau belajar 10 menit. Konsistensi lebih mudah dibangun dari kebiasaan kecil daripada motivasi besar.`,
+Content: Mulai dari yang terlalu mudah untuk ditolak:
+- Baca **1 halaman**
+- Olahraga **5 menit**
+- Belajar **10 menit**
+
+Konsistensi lebih mudah dibangun dari kebiasaan kecil daripada motivasi besar.`,
   },
   {
     name: "steps",
@@ -26,15 +32,19 @@ Content: Mulai dari sesuatu yang terlalu mudah untuk ditolak: baca 1 halaman, ol
 
 Example:
 Hook: Bingung mau mulai bisnis? Lakukan 3 hal ini.
-Content: 1. Cari masalah. 2. Tanyakan apakah orang mau membayar untuk menyelesaikannya. 3. Tawarkan solusi paling sederhana yang bisa kamu jual hari ini.`,
+Content: **3 langkah sederhana:**
+1. Cari masalah nyata.
+2. Pastikan orang mau membayar solusinya.
+3. Tawarkan solusi paling sederhana yang bisa kamu jual hari ini.`,
   },
   {
     name: "myth",
     default_prompt: `Write a myth-vs-fact piece for this account. Provide a hook, then content with one line labeled MYTH (a common misconception) and one line labeled FACT (the truth that busts it). Keep it factual.
 
 Example:
-Hook: "Kalau mau kaya, kamu harus bekerja lebih keras."
-Content: MYTH: Kerja keras selalu membuatmu kaya. FACT: Kerja keras hanya memperbesar hasil kalau yang kamu kerjakan memang bernilai.`,
+Hook: Mitologi sukses yang terlalu banyak dipercaya.
+Content: **MYTH:** Kerja keras selalu membuatmu kaya.
+**FACT:** Kerja keras hanya memperbesar hasil kalau yang kamu kerjakan memang bernilai.`,
   },
   {
     name: "compare",
@@ -42,31 +52,37 @@ Content: MYTH: Kerja keras selalu membuatmu kaya. FACT: Kerja keras hanya memper
 
 Example:
 Hook: Sibuk vs produktif: kelihatannya sama, hasilnya berbeda.
-Content: Sibuk = banyak hal dikerjakan. Produktif = hal yang penting diselesaikan. Jangan ukur harimu dari berapa banyak tugas yang kamu lakukan, tapi dari seberapa besar hasil yang kamu ciptakan.`,
+Content: **Sibuk** = banyak hal dikerjakan.
+**Produktif** = hal yang penting diselesaikan.
+
+Jangan ukur harimu dari banyaknya tugas, tapi dari besar hasil yang kamu ciptakan.`,
   },
   {
     name: "q&a",
     default_prompt: `Write a short Q&A / question-answer piece for this account. Provide a hook as a provocative question and content that answers it concisely.
 
 Example:
-Hook: "Kenapa orang pintar belum tentu sukses?"
-Content: Karena pintar memahami masalah tidak sama dengan berani bertindak. Pengetahuan memberi kemungkinan, tetapi eksekusi yang mengubahnya menjadi hasil.`,
+Hook: Mengapa tahu banyak tidak otomatis membawa hasil?
+Content: Karena pintar memahami masalah **≠** berani bertindak.
+Pengetahuan memberi kemungkinan, tetapi **eksekusi** yang mengubahnya menjadi hasil.`,
   },
   {
     name: "quote",
-    default_prompt: `Write a powerful, original quote-style line for this account. Provide a hook that is the quote itself and content that expands the idea in 2-3 short lines.
+    default_prompt: `Write a powerful quote-style piece for this account. The hook introduces the idea (not a question). The content is the quote itself written in quotation marks, followed on the next line by who said it (attribution).
 
 Example:
-Hook: "Jangan mengejar uang. Kejar nilai."
-Content: Uang adalah imbalan. Nilai adalah alasan seseorang bersedia membayarmu. Semakin besar masalah yang bisa kamu selesaikan, semakin besar nilai yang bisa kamu tawarkan.`,
+Hook: Pesan bijak yang sering luput.
+Content: "Jangan mengejar uang. Kejar nilai. Uang adalah imbalan, dan nilai adalah alasan orang bersedia membayarmu."
+*— Seneca*`,
   },
   {
     name: "stat",
     default_prompt: `Write a statistic-driven insight for this account. Provide a hook with a striking number or contrast and content that explains what the number really means in 2-3 short lines.
 
 Example:
-Hook: 1.000 followers tidak berarti 1.000 pembeli.
-Content: Jumlah followers mengukur ukuran audiens, bukan kualitas permintaan. 100 orang yang benar-benar membutuhkan produkmu bisa lebih berharga daripada 100.000 orang yang hanya melihat kontenmu.`,
+Hook: Besarnya audiens tidak menjamin penjualan.
+Content: Jumlah followers mengukur **ukuran audiens**, bukan **kualitas permintaan**.
+**100** orang yang benar-benar butuh produkmu bisa lebih berharga daripada **100.000** yang hanya melihat kontenmu.`,
   },
   {
     name: "tierlist",
@@ -74,15 +90,20 @@ Content: Jumlah followers mengukur ukuran audiens, bukan kualitas permintaan. 10
 
 Example:
 Hook: Kalau mau membangun bisnis, ini urutan yang harus kamu prioritaskan.
-Content: S: Masalah nyata. A: Orang yang mau membayar. B: Solusi. C: Branding. D: Logo.`,
+Content: **S:** Masalah nyata
+**A:** Orang yang mau membayar
+**B:** Solusi
+**C:** Branding
+**D:** Logo`,
   },
   {
     name: "warning",
     default_prompt: `Write a cautionary piece for this account. Provide a hook that warns and content describing red flags to watch for, in 2-3 short lines.
 
 Example:
-Hook: Hati-hati kalau bisnismu mulai terlihat seperti ini.
-Content: Kamu sibuk membuat fitur, memperbaiki logo, mengganti warna website, tetapi belum pernah benar-benar menawarkan produk ke calon pelanggan. Bisa jadi kamu sedang membangun bisnis tanpa memastikan ada yang mau membeli.`,
+Hook: Tanda kamu sedang sibuk, bukan sedang membangun.
+Content: Kamu sibuk membuat fitur, memperbaiki logo, mengganti warna website, tapi **belum pernah menawarkan produk ke calon pelanggan**.
+Bisa jadi kamu membangun bisnis tanpa memastikan ada yang mau membeli.`,
   },
   {
     name: "formula",
@@ -90,14 +111,18 @@ Content: Kamu sibuk membuat fitur, memperbaiki logo, mengganti warna website, te
 
 Example:
 Hook: Menjadi kaya itu mudah.
-Content: Masalah besar yang kamu selesaikan x jumlah orang yang kamu bantu x seberapa sulit kamu digantikan = nilai ekonomi.`,
+Content: **Masalah yang kamu selesaikan × jumlah orang yang kamu bantu × seberapa sulit kamu digantikan = nilai ekonomi**`,
   },
   {
     name: "checklist",
     default_prompt: `Write a short checklist for this account. Provide a hook and content as a short checklist of questions or items, each on its own line prefixed with a box mark.
 
 Example:
-Hook: Sebelum membuat produk, jawab 4 pertanyaan ini.
-Content: [ ] Masalahnya nyata? [ ] Siapa yang mengalaminya? [ ] Mereka mau membayar? [ ] Solusiku lebih baik dari alternatif yang ada?`,
+Hook: Jawab ini dulu sebelum kamu bangun apa pun.
+Content: Sebelum membuat produk:
+- [ ] Masalahnya nyata?
+- [ ] Siapa yang mengalaminya?
+- [ ] Mereka mau membayar?
+- [ ] Solusiku lebih baik dari alternatif yang ada?`,
   },
 ];
