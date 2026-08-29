@@ -3,3 +3,10 @@ output/
 .env
 builder/_render.html
 builder/_bgm.mp3
+db.sqlite
+db.sqlite-wal
+db.sqlite-shm
+*.db
+*.db-journal
+*.db-wal
+*.db-shm

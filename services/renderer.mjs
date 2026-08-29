@@ -2,15 +2,14 @@ import { readFileSync, writeFileSync, readdirSync, existsSync } from "fs";
 import { join, dirname } from "path";
 import { fileURLToPath } from "url";
 import { spawn } from "child_process";
+import { marked } from "marked";
+
+marked.setOptions({ breaks: true });
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const BUILDER = join(__dirname, "..", "builder");
 const COMP_PATH = join(BUILDER, "_render.html");
 const MUSIC_DIR = join(__dirname, "..", "music");
-
-const FILE_MAP = { QnA: "qna" };
-
-const ICON_MAP = JSON.parse(readFileSync(join(BUILDER, "icon-map.json"), "utf-8"));
 
 function findMusic() {
   if (!existsSync(MUSIC_DIR)) return null;
@@ -39,43 +38,37 @@ function renderTemplate(tpl, data) {
   );
 }
 
-export async function renderPost(type, content, outputPath) {
-  const file = FILE_MAP[type] || type.toLowerCase();
-  let html = readFileSync(join(BUILDER, `${file}.html`), "utf-8");
+const BOX_PALETTE = [
+  { fill: "#4f8cff", text: "#ffffff" },
+  { fill: "#ff7849", text: "#ffffff" },
+  { fill: "#3ecf8e", text: "#093b24" },
+  { fill: "#ffce3d", text: "#3a2b00" },
+  { fill: "#a66cff", text: "#ffffff" },
+  { fill: "#3ad6d6", text: "#062424" },
+  { fill: "#ff5d8f", text: "#ffffff" },
+  { fill: "#7de84f", text: "#17300a" },
+];
 
-  content = { ...content, follow: content.cta || content.title, follow_call: content.follow_call || "Follow @1section for more" };
+export async function renderPost({ hook, content, category, account, content_text }, outputPath) {
+  const htmlTpl = readFileSync(join(BUILDER, "unified.html"), "utf-8");
+  const palette = BOX_PALETTE[Math.floor(Math.random() * BOX_PALETTE.length)];
 
-  const icons = ICON_MAP[type];
-  if (icons && icons.length) {
-    content.icon = icons[Math.floor(Math.random() * icons.length)];
-  } else {
-    content.icon = "ti-icon";
-  }
+  const body = Array.isArray(content)
+    ? content.join("\n")
+    : (content_text || content || "");
+  const htmlContent = marked.parse(body);
+  const data = {
+    hook: hook || "",
+    content: htmlContent,
+    category: category || "",
+    account: account || "",
+    box_fill: palette.fill,
+    text_color: palette.text,
+  };
+  let html = renderTemplate(htmlTpl, data);
 
-  if (type === "quote") {
-    const q = content.quote || "";
-    content.quote_short = q.length > 80 ? q.slice(0, 77) + "..." : q;
-    content.source_display = "\u2014 " + (content.source || "");
-  }
-
-  if (type === "story") {
-    content.title_upper = (content.title || "").toUpperCase();
-    if (typeof content.opening === "string")
-      content.opening = content.opening.split("\n\n");
-  }
-
-  if (type === "tips") {
-    content.title_upper = (content.title || "").toUpperCase();
-  }
-
-  if (type === "tierlist" && Array.isArray(content.tiers)) {
-    content.tiers = content.tiers.map(t => ({
-      ...t,
-      labelUpper: (t.label || "").toUpperCase(),
-    }));
-  }
-
-  html = renderTemplate(html, content);
+  html = html.replace("--box-fill:#4f8cff", `--box-fill:${palette.fill}`);
+  html = html.replace("--text-color:#ffffff", `--text-color:${palette.text}`);
 
   if (html.includes('<script id="cd"')) {
     html = html.replace(/<script id="cd"[^>]*>[\s\S]*?<\/script>\s*/g, "");
@@ -87,15 +80,15 @@ export async function renderPost(type, content, outputPath) {
     await new Promise((resolve, reject) => {
       const ff = spawn("ffmpeg", [
         "-y", "-i", musicFile,
-        "-t", "12",
-        "-af", "afade=t=out:st=9:d=3",
+        "-t", "15",
+        "-af", "afade=t=out:st=11:d=4",
         "-c:a", "libmp3lame", "-q:a", "2",
         bgmPath
       ]);
       ff.on("close", c => c === 0 ? resolve() : reject(new Error(`ffmpeg exited ${c}`)));
       ff.on("error", reject);
     });
-    const audio = `<audio id="bgm" src="./_bgm.mp3" data-start="0" data-duration="12" data-volume="0.3" data-has-audio="true"></audio>`;
+    const audio = `<audio id="bgm" src="./_bgm.mp3" data-start="0" data-duration="15" data-volume="0.3" data-has-audio="true"></audio>`;
     html = html.replace("</div>", audio + "\n</div>");
   }
 

@@ -11,12 +11,8 @@ const OUT_DIR = join(__dirname, "..", "output");
 
 if (!existsSync(OUT_DIR)) mkdirSync(OUT_DIR, { recursive: true });
 
-export async function generateVideo(postType, content) {
-  const timestamp = Date.now();
-  const outFile = `${postType}-${timestamp}.mp4`;
-  const outPath = join(OUT_DIR, outFile);
-
-  await limit(() => renderPost(postType, content, outPath));
-
+export async function generateVideo(renderData, outputFileName) {
+  const outPath = join(OUT_DIR, outputFileName);
+  await limit(() => renderPost(renderData, outPath));
   return outPath;
 }

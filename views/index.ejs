@@ -1,162 +1,375 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Marketing Manager</title>
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      background: #0f0f11;
-      color: #e4e4e7;
-      min-height: 100vh;
-      padding: 2rem;
-    }
-    .container { max-width: 960px; margin: 0 auto; }
-    h1 { font-size: 1.5rem; font-weight: 600; margin-bottom: 0.25rem; }
-    .subtitle { color: #a1a1aa; font-size: 0.875rem; margin-bottom: 1.5rem; }
-    .stats {
-      display: flex; gap: 1rem; margin-bottom: 1.5rem;
-    }
-    .stat-card {
-      background: #1a1a1e; border: 1px solid #27272a; border-radius: 8px;
-      padding: 1rem 1.5rem; flex: 1;
-    }
-    .stat-card .label { font-size: 0.75rem; color: #a1a1aa; text-transform: uppercase; letter-spacing: 0.05em; }
-    .stat-card .value { font-size: 1.75rem; font-weight: 700; margin-top: 0.25rem; }
-    .generate-section {
-      background: #1a1a1e; border: 1px solid #27272a; border-radius: 8px;
-      padding: 1.25rem; margin-bottom: 1.5rem;
-      display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap;
-    }
-    .generate-section label { font-size: 0.875rem; color: #a1a1aa; }
-    select, button {
-      background: #27272a; border: 1px solid #3f3f46; border-radius: 6px;
-      color: #e4e4e7; padding: 0.5rem 1rem; font-size: 0.875rem;
-    }
-    select { min-width: 140px; }
-    button { cursor: pointer; font-weight: 500; transition: background 0.15s; }
-    button:hover { background: #3f3f46; }
-    .btn-primary { background: #3b82f6; border-color: #3b82f6; color: #fff; }
-    .btn-primary:hover { background: #2563eb; }
-    .btn-danger { background: #ef4444; border-color: #ef4444; color: #fff; }
-    .btn-danger:hover { background: #dc2626; }
-    .btn-danger:disabled { opacity: 0.5; cursor: not-allowed; }
-    .video-list { display: flex; flex-direction: column; gap: 0.5rem; }
-    .video-item {
-      background: #1a1a1e; border: 1px solid #27272a; border-radius: 8px;
-      padding: 0.75rem 1rem; display: flex; align-items: center; gap: 1rem;
-    }
-    .video-item .info { flex: 1; min-width: 0; }
-    .video-item .name { font-size: 0.875rem; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-    .video-item .meta { font-size: 0.75rem; color: #a1a1aa; margin-top: 0.125rem; }
-    .video-item .actions { display: flex; gap: 0.5rem; flex-shrink: 0; }
-    .btn-sm { padding: 0.375rem 0.75rem; font-size: 0.75rem; }
-    .empty { text-align: center; padding: 3rem 1rem; color: #a1a1aa; }
-    .empty p { margin-top: 0.5rem; }
-    .toast {
-      position: fixed; bottom: 1.5rem; right: 1.5rem;
-      background: #22c55e; color: #fff; padding: 0.75rem 1.25rem;
-      border-radius: 8px; font-size: 0.875rem; font-weight: 500;
-      opacity: 0; transition: opacity 0.3s; pointer-events: none;
-    }
-    .toast.error { background: #ef4444; }
-    .toast.show { opacity: 1; }
-    .spinner {
-      display: inline-block; width: 1rem; height: 1rem;
-      border: 2px solid rgba(255,255,255,0.3); border-top-color: #fff;
-      border-radius: 50%; animation: spin 0.6s linear infinite;
-      vertical-align: middle; margin-right: 0.375rem;
-    }
-    @keyframes spin { to { transform: rotate(360deg); } }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>1section Manager</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#0f0f11;color:#e4e4e7;min-height:100vh}
+.layout{display:flex;min-height:100vh}
+.sidebar{width:300px;background:#16161a;border-right:1px solid #26262b;padding:1.25rem;overflow-y:auto;flex-shrink:0}
+.main{flex:1;padding:1.5rem 2rem;overflow-y:auto}
+h1{font-size:1.25rem;font-weight:600}
+h2{font-size:1.05rem;font-weight:600;margin-bottom:.75rem}
+.sub{color:#82828b;font-size:.8rem;margin:.15rem 0 1rem}
+.card{background:#1a1a1e;border:1px solid #27272b;border-radius:10px;padding:1.1rem;margin-bottom:1.1rem}
+.row{display:flex;gap:.6rem;flex-wrap:wrap;align-items:center}
+label{font-size:.75rem;color:#9a9aa3;display:block;margin-bottom:.3rem}
+input,select,textarea{background:#212127;border:1px solid #3a3a42;color:#e4e4e7;border-radius:7px;padding:.5rem .6rem;font-size:.85rem;width:100%}
+textarea{resize:vertical;min-height:90px;font-family:monospace}
+button{background:#2b2b33;border:1px solid #3a3a42;color:#e4e4e7;padding:.5rem .9rem;border-radius:7px;cursor:pointer;font-size:.82rem}
+button:hover{background:#383842}
+.btn-primary{background:#3b82f6;border-color:#3b82f6;color:#fff}
+.btn-primary:hover{background:#2563eb}
+.btn-danger{background:#ef4444;border-color:#ef4444;color:#fff}
+.btn-danger:hover{background:#dc2626}
+.btn-sm{padding:.3rem .6rem;font-size:.75rem}
+.acc{display:flex;justify-content:space-between;align-items:center;background:#212127;border:1px solid #36363e;border-radius:8px;padding:.6rem .8rem;margin-bottom:.5rem;cursor:pointer}
+.acc.active{border-color:#3b82f6;background:#252b3a}
+.acc .name{font-weight:600;font-size:.88rem}
+.acc .del{color:#ef4444;background:none;border:none;cursor:pointer;font-size:.85rem}
+.muted{color:#9a9aa3;font-size:.8rem}
+.section-title{margin:1.2rem 0 .6rem;font-weight:600;font-size:.9rem;text-transform:uppercase;letter-spacing:.04em;color:#a9a9b2}
+.pill{background:#26262e;border-radius:999px;padding:.2rem .6rem;font-size:.72rem;color:#aaaab3;border:1px solid #383840}
+.pill.ok{color:#4ade80;border-color:#2f6b45}
+.pill.bad{color:#f87171;border-color:#7f1d1d}
+.vitem{display:flex;align-items:center;gap:1rem;background:#212127;border:1px solid #36363e;border-radius:8px;padding:.7rem .9rem;margin-bottom:.5rem}
+.vitem .meta{flex:1;min-width:0}
+.vitem .t{font-weight:600;font-size:.9rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.vitem .d{font-size:.75rem;color:#9a9aa3;margin-top:.15rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.vitem .acts{display:flex;gap:.4rem;flex-shrink:0}
+.cat-item{display:flex;align-items:flex-start;gap:.6rem;background:#212127;border:1px solid #36363e;border-radius:8px;padding:.7rem .9rem;margin-bottom:.5rem}
+.cat-item .info{flex:1}
+.cat-item .info .tl{display:flex;align-items:center;gap:.6rem}
+.cat-item textarea{margin-top:.5rem}
+.toast{position:fixed;bottom:1.5rem;right:1.5rem;background:#22c55e;color:#fff;padding:.8rem 1.1rem;border-radius:8px;font-size:.85rem;opacity:0;transition:.3s;pointer-events:none;z-index:50}
+.toast.err{background:#ef4444}
+.toast.show{opacity:1}
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);display:none;align-items:center;justify-content:center;z-index:40}
+.overlay.show{display:flex}
+.modal{background:#1d1d22;border:1px solid #36363e;border-radius:12px;width:420px;max-width:92vw;padding:1.4rem}
+.modal h3{font-size:1rem;margin-bottom:1rem}
+.empty{color:#7d7d86;font-size:.85rem;padding:1rem 0;text-align:center}
+.flex{display:flex;gap:.6rem}
+.grow{flex:1}
+.mt{margin-top:.6rem}
+</style>
 </head>
 <body>
-  <div class="container">
-    <h1>Marketing Manager</h1>
-    <p class="subtitle">Video generation &amp; publishing dashboard</p>
+<div class="layout">
+  <aside class="sidebar">
+    <h1>1section Manager</h1>
+    <p class="sub">Multi-account Buffer video generator</p>
 
-    <div class="stats">
-      <div class="stat-card">
-        <div class="label">Total Videos</div>
-        <div class="value"><%= videos.length %></div>
-      </div>
-      <div class="stat-card">
-        <div class="label">Types Published</div>
-        <div class="value"><%= typesPublished %></div>
-      </div>
-    </div>
+    <div class="section-title">Accounts</div>
+    <div id="accountList"></div>
+    <button class="btn-primary grow" onclick="openAddAccount()" style="width:100%">+ Add Buffer Account</button>
 
-    <div class="generate-section">
-      <label for="type">Generate new:</label>
-      <select id="type">
-        <% types.forEach(t => { %>
-          <option value="<%= t %>"><%= t %></option>
-        <% }) %>
-      </select>
-      <button class="btn-primary" onclick="generate()" id="genBtn">Generate & Publish</button>
-      <span id="genStatus" style="font-size:0.8rem;color:#a1a1aa"></span>
-    </div>
-
-    <div class="video-list">
-      <% if (videos.length === 0) { %>
-        <div class="empty">
-          <div style="font-size:2rem">📁</div>
-          <p>No videos yet. Click "Generate &amp; Publish" to create one.</p>
+    <div class="section-title">General Settings</div>
+    <div class="card">
+      <label>Videos per day</label>
+      <input type="number" id="set_vpd" min="0" max="24">
+      <div class="mt"><label>Scheduling window (24h)</label>
+        <div class="row">
+          <input type="time" id="set_ws">
+          <input type="time" id="set_we">
         </div>
-      <% } %>
-      <% videos.forEach(v => { %>
-        <div class="video-item" id="vid-<%= v.file %>">
-          <div class="info">
-            <div class="name"><%= v.type %> — <%= v.file %></div>
-            <div class="meta"><%= v.date %> &middot; <%= v.size %></div>
-          </div>
-          <div class="actions">
-            <button class="btn-sm" onclick="window.open('/videos/<%= v.file %>','_blank')">View</button>
-            <form method="POST" action="/delete" style="display:inline" onsubmit="return confirm('Delete <%= v.file %>?')">
-              <input type="hidden" name="file" value="<%= v.file %>">
-              <button class="btn-sm btn-danger" type="submit">Delete</button>
-            </form>
-          </div>
-        </div>
-      <% }) %>
+      </div>
+      <div class="mt"><label>Timezone</label><input type="text" id="set_tz"></div>
+      <div class="mt"><label>Generated run times (preview)</label><div id="set_sched" class="muted"></div></div>
+      <button class="btn-primary mt" onclick="saveSettings()" style="width:100%">Save Settings</button>
     </div>
+
+    <div class="section-title">Categories</div>
+    <div id="categoryList"></div>
+    <button class="grow" onclick="openAddCategory()" style="width:100%">+ Add Category</button>
+  </aside>
+
+  <main class="main">
+    <div class="card" style="display:flex;align-items:center;gap:1rem">
+      <div class="grow">
+        <div style="font-weight:600;font-size:.95rem">Generate a post now</div>
+        <div class="muted" id="genInfo">Runs the next account/category in rotation → AI copy → render → post to Buffer</div>
+      </div>
+      <button class="btn-primary" id="genNowBtn" onclick="generateNow()" style="padding:.7rem 1.4rem;font-size:.95rem;white-space:nowrap">▶ Generate Now</button>
+    </div>
+
+    <h2 id="panelTitle">Select an account</h2>
+    <p class="sub" id="panelSub">Choose a Buffer account to manage its categories, prompts &amp; videos.</p>
+
+    <div id="accountPanel" style="display:none">
+      <div class="section-title">Categories & AI Prompts (for this account)</div>
+      <div id="accountCats"></div>
+      <div class="section-title">Videos</div>
+      <div id="videoList"></div>
+    </div>
+  </main>
+</div>
+
+<!-- Add Account modal -->
+<div class="overlay" id="accModal">
+  <div class="modal">
+    <h3>Add Buffer Account</h3>
+    <label>Account name</label><input type="text" id="acc_name" placeholder="e.g. 1section.finance">
+    <div class="mt"><label>Buffer API token</label><input type="text" id="acc_token" placeholder="buffer access token"></div>
+    <div class="row mt"><button class="btn-primary grow" onclick="saveAccount()">Save</button><button onclick="closeAccModal()">Cancel</button></div>
   </div>
+</div>
 
-  <div id="toast" class="toast"></div>
+<!-- Add Category modal -->
+<div class="overlay" id="catModal">
+  <div class="modal">
+    <h3>Add Category</h3>
+    <label>Category name</label><input type="text" id="cat_name" placeholder="e.g. story, stat, tips">
+    <div class="mt"><label>Default AI prompt (optional)</label><textarea id="cat_prompt"></textarea></div>
+    <div class="row mt"><button class="btn-primary grow" onclick="saveCategory()">Save</button><button onclick="closeCatModal()">Cancel</button></div>
+  </div>
+</div>
 
-  <script>
-    async function generate() {
-      const type = document.getElementById('type').value;
-      const btn = document.getElementById('genBtn');
-      const status = document.getElementById('genStatus');
-      btn.disabled = true;
-      status.innerHTML = '<span class="spinner"></span>Generating ' + type + '...';
+<div class="toast" id="toast"></div>
 
-      try {
-        const res = await fetch('/generate', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ type })
-        });
-        const data = await res.json();
-        if (!data.success) throw new Error(data.error || 'Failed');
-        showToast(type + ' generated & published!');
-        setTimeout(() => location.reload(), 1500);
-      } catch (err) {
-        showToast(err.message, true);
-        btn.disabled = false;
-        status.innerHTML = '';
-      }
+<script>
+const state = { accounts: [], categories: [], selectedId: null };
+let accountCats = [];
+
+function toast(msg, err) { const t = document.getElementById('toast'); t.textContent = msg; t.className = 'toast' + (err ? ' err' : '') + ' show'; setTimeout(() => t.classList.remove('show'), 3200); }
+async function api(path, opts) { const r = await fetch(path, Object.assign({ headers: { 'Content-Type': 'application/json' } }, opts)); const j = await r.json().catch(() => ({})); if (!r.ok) throw new Error(j.error || r.statusText); return j; }
+
+async function refreshAll() {
+  state.accounts = await api('/api/accounts');
+  state.categories = await api('/api/categories');
+  renderAccounts(); renderCategories(); renderSettings(); renderPanel();
+}
+
+function renderAccounts() {
+  const el = document.getElementById('accountList');
+  el.innerHTML = state.accounts.length ? '' : '<div class="empty">No accounts yet</div>';
+  state.accounts.forEach(a => {
+    const d = document.createElement('div');
+    d.className = 'acc' + (a.id === state.selectedId ? ' active' : '');
+    d.innerHTML = `<div class="name">${escapeHtml(a.name)}</div><button class="del" title="Delete">✕</button>`;
+    d.onclick = (e) => { if (e.target.classList.contains('del')) return; state.selectedId = a.id; renderAccounts(); renderPanel(); };
+    d.querySelector('.del').onclick = async () => { if (!confirm('Delete account?')) return; await api('/api/accounts/' + a.id, { method: 'DELETE' }); state.selectedId = null; refreshAll(); };
+    el.appendChild(d);
+  });
+}
+
+function renderCategories() {
+  const el = document.getElementById('categoryList');
+  el.innerHTML = state.categories.length ? '' : '<div class="empty">No categories yet</div>';
+  state.categories.forEach(c => {
+    const d = document.createElement('div');
+    d.className = 'acc';
+    d.innerHTML = `<div class="name">${escapeHtml(c.name)}</div><button class="del" title="Delete">✕</button>`;
+    d.onclick = (e) => { if (e.target.classList.contains('del')) return; openEditCategory(c); };
+    d.querySelector('.del').onclick = async () => { if (!confirm('Delete category?')) return; await api('/api/categories/' + c.id, { method: 'DELETE' }); refreshAll(); };
+    el.appendChild(d);
+  });
+}
+
+async function renderPanel() {
+  const panel = document.getElementById('accountPanel');
+  if (!state.selectedId) { panel.style.display = 'none'; document.getElementById('panelTitle').textContent = 'Select an account'; document.getElementById('panelSub').textContent = 'Choose a Buffer account to manage its categories, prompts &amp; videos.'; return; }
+  const acc = state.accounts.find(a => a.id === state.selectedId);
+  panel.style.display = 'block';
+  document.getElementById('panelTitle').textContent = acc ? acc.name : '';
+  document.getElementById('panelSub').textContent = 'Manage categories, AI prompts and videos.';
+
+  accountCats = await api('/api/accounts/' + state.selectedId + '/categories');
+  renderAccountCats();
+  renderVideos();
+}
+
+function availableCatIds() { return state.categories.map(c => c.id); }
+
+function renderAccountCats() {
+  const el = document.getElementById('accountCats');
+  if (!state.categories.length) { el.innerHTML = '<div class="empty">Add categories first</div>'; return; }
+  el.innerHTML = '';
+  const defaultPromptFor = (categoryId) => {
+    const c = state.categories.find(x => x.id === categoryId);
+    return c ? (c.default_prompt || '') : '';
+  };
+  // Rows: existing mappings + any unmapped categories offered as "add"
+  const mapped = accountCats.map(ac => ac.category_id);
+  const rows = [];
+  accountCats.forEach(ac => rows.push({ id: ac.category_id, name: ac.category_name, prompt: ac.prompt != null ? ac.prompt : '', mapped: true }));
+  state.categories.filter(c => !mapped.includes(c.id)).forEach(c => rows.push({ id: c.id, name: c.name, prompt: defaultPromptFor(c.id), mapped: false }));
+
+  if (!rows.length) { el.innerHTML = '<div class="empty">No categories</div>'; return; }
+
+  rows.forEach(r => {
+    const d = document.createElement('div');
+    d.className = 'cat-item';
+    d.innerHTML = `
+      <div class="info">
+        <div class="tl"><strong>${escapeHtml(r.name)}</strong> ${r.mapped ? '' : '<span class="pill">not mapped</span>'}</div>
+        <textarea placeholder="Per-account AI prompt for ${escapeHtml(r.name)}">${escapeHtml(r.prompt || '')}</textarea>
+        <div class="row mt">
+          <button class="btn-sm" onclick="savePrompt(${r.id}, this)">Save prompt</button>
+          ${r.mapped ? `<button class="btn-sm btn-danger" onclick="removePrompt(${r.id})">Remove from account</button>` : ''}
+        </div>
+      </div>`;
+    el.appendChild(d);
+  });
+}
+
+async function savePrompt(categoryId, btn) {
+  const textarea = btn.closest('.cat-item').querySelector('textarea');
+  await api(`/api/accounts/${state.selectedId}/categories/${categoryId}/prompt`, { method: 'PUT', body: JSON.stringify({ prompt: textarea.value }) });
+  toast('Prompt saved');
+  accountCats = await api('/api/accounts/' + state.selectedId + '/categories');
+  renderAccountCats();
+}
+
+async function removePrompt(categoryId) {
+  accountCats = accountCats.filter(x => x.category_id !== categoryId);
+  await api('/api/accounts/' + state.selectedId + '/categories', { method: 'PUT', body: JSON.stringify({ pairs: accountCats.map((x, i) => ({ category_id: x.category_id, prompt: x.prompt, position: i })) }) });
+  renderPanel();
+}
+
+async function renderVideos() {
+  const el = document.getElementById('videoList');
+  const videos = await api('/api/videos?account_id=' + state.selectedId);
+  if (!videos.length) { el.innerHTML = '<div class="empty">No videos for this account</div>'; return; }
+  el.innerHTML = '';
+  videos.forEach(v => {
+    const d = document.createElement('div');
+    d.className = 'vitem';
+    d.dataset.id = v.id;
+    const st = v.status === 'success' ? 'pill ok' : v.status === 'failed' ? 'pill bad' : 'pill';
+    const viewHref = v.video_path ? '/videos/' + v.video_path.split('/').pop() : null;
+    d.innerHTML = `
+      <div class="meta">
+        <div class="t">#${v.id} — ${escapeHtml(v.category_name || '')} · <span class="${st}">${v.status}</span>${v.attempts > 1 ? ' (' + v.attempts + 'x)' : ''}</div>
+        <div class="d">${escapeHtml((v.caption || '').slice(0, 90)) || '—'}</div>
+        ${v.last_error ? `<div class="d" style="color:#f87171">${escapeHtml(v.last_error)}</div>` : ''}
+      </div>
+      <div class="acts">
+        ${viewHref ? `<a class="btn-sm" style="text-decoration:none;background:#2b2b33;border:1px solid #3a3a42;color:#e4e4e7;padding:.3rem .6rem;border-radius:7px" href="${viewHref}" target="_blank">View</a>` : ''}
+        ${v.status !== 'success' ? `<button class="btn-sm btn-primary" onclick="retry(${v.id})">Retry</button>` : ''}
+        <button class="btn-sm btn-danger" onclick="delVideo(${v.id})">Delete</button>
+      </div>`;
+    el.appendChild(d);
+  });
+}
+
+async function retry(id) { await api('/api/videos/' + id + '/retry', { method: 'POST' }); toast('Retry done'); renderVideos(); }
+async function delVideo(id) { if (!confirm('Delete video?')) return; await api('/api/videos/' + id, { method: 'DELETE' }); renderVideos(); }
+
+async function generateNow() {
+  const btn = document.getElementById('genNowBtn');
+  const info = document.getElementById('genInfo');
+  btn.disabled = true;
+  const original = btn.textContent;
+  btn.innerHTML = '<span class="spinner"></span>Generating… (can take ~1 min)';
+  info.textContent = 'AI copy → render video → post to Buffer. Working, please wait…';
+  try {
+    const r = await api('/api/generate', { method: 'POST' });
+    const v = r.video;
+    const status = v ? v.status : (r.result?.error ? 'failed' : 'done');
+
+    if (v && v.status === 'success') {
+      toast('Video generated & posted!');
+      info.textContent = 'Done → video #' + v.id + ' posted.';
+    } else if (v && v.status === 'failed') {
+      toast('Video generated but upload failed', true);
+      info.textContent = 'Video generated, upload failed: ' + (v.last_error || '').slice(0, 160);
+    } else if (v && v.status === 'pending') {
+      toast('Video generated', true);
+      info.textContent = 'Generated, but still pending: ' + (r.result?.error || '').slice(0, 160);
+    } else if (r.result?.error) {
+      toast(r.result.error, true);
+      info.textContent = 'Failed: ' + r.result.error;
+    } else {
+      toast('Done');
+      info.textContent = 'Done';
     }
 
-    function showToast(msg, isError) {
-      const t = document.getElementById('toast');
-      t.textContent = msg;
-      t.className = 'toast' + (isError ? ' error' : '') + ' show';
-      setTimeout(() => t.classList.remove('show'), 3000);
+    // If a video was created, switch to its account and highlight it
+    if (v && v.account_id) {
+      state.selectedId = v.account_id;
+      await refreshAll();
+      renderVideos();
+      scrollToVideo(v.id);
+    } else {
+      await refreshAll();
     }
-  </script>
+  } catch (e) {
+    toast(e.message, true);
+    info.textContent = 'Failed: ' + e.message;
+  } finally {
+    btn.disabled = false;
+    btn.textContent = original;
+  }
+}
+
+function scrollToVideo(id) {
+  // Ensure rendered before scroll
+  setTimeout(() => {
+    const item = document.querySelector('.vitem[data-id="' + id + '"]');
+    if (item) {
+      item.style.outline = '2px solid #3b82f6';
+      item.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      setTimeout(() => { item.style.outline = ''; }, 2500);
+    }
+  }, 200);
+}
+
+function renderSettings() {
+  api('/api/settings').then(s => {
+    document.getElementById('set_vpd').value = s.videos_per_day;
+    document.getElementById('set_ws').value = s.window_start;
+    document.getElementById('set_we').value = s.window_end;
+    document.getElementById('set_tz').value = s.tz;
+    document.getElementById('set_sched').textContent = s.schedules.join('  ') || '(disabled)';
+  });
+}
+
+async function saveSettings() {
+  await api('/api/settings', { method: 'PUT', body: JSON.stringify({
+    videos_per_day: document.getElementById('set_vpd').value,
+    window_start: document.getElementById('set_ws').value,
+    window_end: document.getElementById('set_we').value,
+    tz: document.getElementById('set_tz').value,
+  }) });
+  toast('Settings saved');
+  renderSettings();
+}
+
+function openAddAccount() { document.getElementById('acc_name').value = ''; document.getElementById('acc_token').value = ''; window.__editAcc = null; document.getElementById('accModal').classList.add('show'); }
+function closeAccModal() { document.getElementById('accModal').classList.remove('show'); }
+async function saveAccount() {
+  const name = document.getElementById('acc_name').value.trim();
+  const token = document.getElementById('acc_token').value.trim();
+  if (!name || !token) return toast('Fill all fields', true);
+  try { await api('/api/accounts', { method: 'POST', body: JSON.stringify({ name, buffer_token: token }) }); closeAccModal(); refreshAll(); }
+  catch (e) { toast(e.message, true); }
+}
+document.getElementById('accModal').onclick = (e) => { if (e.target.id === 'accModal') closeAccModal(); };
+
+function openAddCategory() { document.getElementById('cat_name').value = ''; document.getElementById('cat_prompt').value = ''; window.__editCat = null; document.getElementById('catModal').classList.add('show'); }
+function closeCatModal() { document.getElementById('catModal').classList.remove('show'); }
+async function saveCategory() {
+  const name = document.getElementById('cat_name').value.trim();
+  const prompt = document.getElementById('cat_prompt').value;
+  if (!name) return toast('Category name required', true);
+  const editId = window.__editCat;
+  if (editId != null) {
+    await api('/api/categories/' + editId, { method: 'PUT', body: JSON.stringify({ name, default_prompt: prompt }) });
+    delete window.__editCat;
+  } else {
+    await api('/api/categories', { method: 'POST', body: JSON.stringify({ name, default_prompt: prompt }) });
+  }
+  closeCatModal(); refreshAll();
+}
+function openEditCategory(c) { document.getElementById('cat_name').value = c.name; document.getElementById('cat_prompt').value = c.default_prompt || ''; document.getElementById('catModal').classList.add('show'); window.__editCat = c.id; }
+document.getElementById('catModal').onclick = (e) => { if (e.target.id === 'catModal') closeCatModal(); };
+
+function escapeHtml(s) { return String(s == null ? '' : s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+
+refreshAll();
+</script>
 </body>
 </html>
