@@ -1,6 +1,7 @@
 import Database from "better-sqlite3";
 import { join, dirname } from "path";
 import { fileURLToPath } from "url";
+import { CATEGORY_SEEDS } from "./seed.mjs";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const DB_PATH = process.env.DB_PATH || join(__dirname, "db.sqlite");
@@ -61,6 +62,25 @@ function getSetting(key, fallback = "") {
   const row = db.prepare("SELECT value FROM settings WHERE key = ?").get(key);
   return row ? row.value : fallback;
 }
+
+const DEFAULT_AI_BASE_PROMPT = `You write short, punchy, scroll-stopping social media content for a video channel.
+
+\`content\` MUST be pure Markdown written as a single string. This is stored and shown as-is, so the Markdown must be valid and correct:
+- Use Markdown syntax only (NO HTML): paragraphs, **bold**, *italic*, \`inline code\` if needed, and "- " unordered lists.
+- Separate every line or paragraph with a real newline (\\n). NEVER cram sentences onto one line.
+- Keep it 2 to 5 short lines, each short enough to fit a 1080x1350 video.
+- The source instructions below define the exact style and structure of \`content\` (story beats, myth/fact pairs, comparison, list, etc.) — follow them first.
+
+Return ONLY valid JSON matching EXACTLY this shape:
+{
+  "hook": "a 2-5 word strong hook line",
+  "content": "the Markdown content following the source instructions",
+  "caption": "one short paragraph for the social post caption (no hashtags, no @ mentions)"
+}`;
+
+db.prepare(
+  "INSERT INTO settings(key,value) VALUES('ai_base_prompt',?) ON CONFLICT(key) DO NOTHING"
+).run(DEFAULT_AI_BASE_PROMPT);
 function setSetting(key, value) {
   db.prepare(
     "INSERT INTO settings(key,value) VALUES(?,?) ON CONFLICT(key) DO UPDATE SET value=excluded.value"
@@ -92,6 +112,7 @@ export const store = {
     const info = db.prepare(
       "INSERT INTO accounts(name, buffer_token, position) VALUES(?,?,?)"
     ).run(name, buffer_token, max);
+    this.syncAllAccountCategories();
     return this.getAccount(info.lastInsertRowid);
   },
   updateAccount(id, { name, buffer_token }) {
@@ -119,19 +140,70 @@ export const store = {
     const info = db.prepare(
       "INSERT INTO categories(name, default_prompt, position) VALUES(?,?,?)"
     ).run(name, default_prompt || "", max);
+    this.syncAllAccountCategories();
     return this.getCategory(info.lastInsertRowid);
   },
   updateCategory(id, { name, default_prompt }) {
     db.prepare("UPDATE categories SET name=?, default_prompt=? WHERE id=?").run(name, default_prompt || "", id);
+    this.syncAllAccountCategories();
     return this.getCategory(id);
   },
   deleteCategory(id) {
     db.prepare("DELETE FROM categories WHERE id=?").run(id);
+    this.syncAllAccountCategories();
   },
   reorderCategories(ids) {
     const st = db.prepare("UPDATE categories SET position=? WHERE id=?");
     const tx = db.transaction((list) => list.forEach((id, i) => st.run(i, id)));
     tx(ids);
+    this.syncAllAccountCategories();
+  },
+
+  // Idempotent: insert seed categories by name. Falls back to a sensible
+  // prompt if none was set, and replaces known placeholder prompts. It does
+  // NOT override a category that already has a real (user-written) prompt.
+  seedCategories() {
+    const upsertPrompt = db.prepare("UPDATE categories SET default_prompt=? WHERE id=?");
+    for (const s of CATEGORY_SEEDS) {
+      const existing = db.prepare("SELECT * FROM categories WHERE name=?").get(s.name);
+      if (!existing) {
+        this.createCategory({ name: s.name, default_prompt: s.default_prompt });
+        continue;
+      }
+      const cur = (existing.default_prompt || "").trim();
+      if (!cur || cur.toLowerCase() === "story create") {
+        upsertPrompt.run(s.default_prompt, existing.id);
+      }
+    }
+    this.syncAllAccountCategories();
+  },
+
+  // Mirror the global category list onto every account so each account
+  // always has the same ordered set of categories. Per-account overrides
+  // (prompt) are preserved. Deleting a category is only done via the global
+  // category CRUD; FK cascade removes it from every account_categories row.
+  syncAllAccountCategories() {
+    const cats = this.listCategories();
+    const accounts = this.listAccounts();
+    const upsert = db.prepare(
+      "INSERT INTO account_categories(account_id, category_id, prompt, position) VALUES(?,?,?,?) " +
+      "ON CONFLICT(account_id, category_id) DO UPDATE SET position=excluded.position"
+    );
+    const remove = db.prepare(
+      "DELETE FROM account_categories WHERE account_id=? AND category_id NOT IN (SELECT id FROM categories)"
+    );
+    const tx = db.transaction(() => {
+      for (const account of accounts) {
+        const prompts = new Map(
+          this.listAccountCategories(account.id).map(r => [r.category_id, r.prompt])
+        );
+        remove.run(account.id);
+        cats.forEach((c, i) => {
+          upsert.run(account.id, c.id, prompts.get(c.id) ?? null, i);
+        });
+      }
+    });
+    tx();
   },
 
   // Account-category prompts
@@ -210,3 +282,6 @@ export const store = {
     return db.prepare("SELECT COUNT(*) AS c FROM videos WHERE status='failed'").get().c;
   },
 };
+
+store.seedCategories();
+store.syncAllAccountCategories();

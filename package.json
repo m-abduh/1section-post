@@ -5,7 +5,8 @@
   "private": true,
   "scripts": {
     "dev": "nodemon server.js",
-    "start": "NODE_ENV=production node server.js"
+    "start": "NODE_ENV=production node server.js",
+    "seed": "node -e \"import('./db.mjs').then(m=>{m.store.seedCategories();m.store.syncAllAccountCategories();console.log('Seed done ->', m.store.listCategories().map(c=>c.name).join(', '))})\""
   },
   "dependencies": {
     "better-sqlite3": "^11.10.0",

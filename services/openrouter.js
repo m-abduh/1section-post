@@ -1,4 +1,22 @@
+import { store } from "../db.mjs";
+
 const MODEL = process.env.OPENROUTER_MODEL || "nvidia/nemotron-3-super-120b-a12b:free";
+
+const DEFAULT_BASE_PROMPT = `You write short, punchy, scroll-stopping social media content for a video channel.
+
+"content" is a single Markdown string (2 to 5 short lines, separated by real line breaks). Keep every line short enough to fit a 1080x1350 video. Let the source instructions define the exact style and structure of "content" (story beats, myth/fact pairs, comparison, list, etc.).
+
+Return ONLY valid JSON matching EXACTLY this shape:
+{
+  "hook": "a 2-5 word strong hook line",
+  "content": "the content following the source instructions, as Markdown",
+  "caption": "one short paragraph for the social post caption (no hashtags, no @ mentions)"
+}`;
+
+function loadBasePrompt() {
+  const saved = store ? store.getSetting("ai_base_prompt", "") : "";
+  return saved && saved.trim() ? saved.trim() : DEFAULT_BASE_PROMPT;
+}
 
 async function askAI(prompt, retries = 3) {
   const key = process.env.OPENROUTER_KEY;
@@ -60,22 +78,19 @@ function extractJSON(text) {
  * @returns {{hook, content, caption, content_json}}
  */
 export async function generatePost({ accountName, categoryName, prompt }) {
-  const base = `You write short, punchy, scroll-stopping social media content for a video channel called "${accountName}", focused on the category "${categoryName}".
+  const base = loadBasePrompt();
 
-"content" is a single Markdown string (2 to 5 short lines). Use Markdown formatting: a bold headline, then bullet points ("- "), and short paragraphs. Separate lines/paragraphs with real line breaks. This is what the video shows, so keep every line short enough to fit a 1080x1350 video.
+  const src = (prompt && prompt.trim())
+    ? prompt.trim()
+    : `The topic is up to you — pick something timely and relevant to ${categoryName}.`;
 
-Return ONLY valid JSON matching EXACTLY this shape and format:
-{
-  "hook": "a 2-5 word strong hook line",
-  "content": "**Short bold headline**\\n\\n- point one\\n- point two\\n- point three",
-  "caption": "one short paragraph for the social post caption (no hashtags, no @ mentions)"
-}
+  const userPrompt = `Video channel name: ${accountName}
+Category: ${categoryName}
 
-Keep every line short enough to fit a 1080x1350 video. Make it factual, specific, and emotionally engaging.`;
+SOURCE INSTRUCTIONS (these define the content style, structure, and format — follow them first):
+${src}
 
-  const userPrompt = (prompt && prompt.trim())
-    ? `${prompt.trim()}\n\nOutput (ONLY valid JSON):\n${base}`
-    : `${base}\n\nThe topic is up to you — pick something timely and relevant to ${categoryName}.`;
+${base}`;
 
   const text = await askAI(userPrompt);
   const parsed = extractJSON(text);

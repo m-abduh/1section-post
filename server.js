@@ -173,6 +173,7 @@ app.get("/api/settings", (req, res) => {
     tz: store.getSetting("tz", process.env.TZ || "America/New_York"),
     window_start: store.getSetting("window_start", "06:00"),
     window_end: store.getSetting("window_end", "22:00"),
+    ai_base_prompt: store.getSetting("ai_base_prompt", ""),
     schedules: getSettings().schedules,
   });
 });
@@ -183,6 +184,7 @@ app.put("/api/settings", (req, res) => {
   if (body.tz !== undefined) store.setSetting("tz", body.tz);
   if (body.window_start !== undefined) store.setSetting("window_start", body.window_start);
   if (body.window_end !== undefined) store.setSetting("window_end", body.window_end);
+  if (body.ai_base_prompt !== undefined) store.setSetting("ai_base_prompt", body.ai_base_prompt);
   res.json(getSettings());
 });
 
