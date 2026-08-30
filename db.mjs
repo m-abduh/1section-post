@@ -1,7 +1,7 @@
 import Database from "better-sqlite3";
 import { join, dirname } from "path";
 import { fileURLToPath } from "url";
-import { CATEGORY_SEEDS } from "./seed.mjs";
+import { CATEGORY_SEEDS, LEGACY_SEED_NAMES } from "./seed.mjs";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const DB_PATH = process.env.DB_PATH || join(__dirname, "db.sqlite");
@@ -67,20 +67,27 @@ const DEFAULT_AI_BASE_PROMPT = `You are a senior copywriter writing short, punch
 
 Voice: SHORT, DENSE, EMOTIONAL, PERSONAL. Speak directly to the viewer as "you" — like a mentor who has been through the same money struggles. Every line must earn its place; never long-winded, never generic.
 
-"hook" MUST be 7 to 14 words: a strong, emotional, specific scroll-stopping statement or question.
+"hook" MUST be 7 to 14 words: a strong, emotional, specific scroll-stopping statement or question. It becomes the H2 title on the slide.
 "caption" MUST be one short personal paragraph (no hashtags, no @ mentions).
 
-"content" MUST be a single Markdown string of 2 to 5 SHORT lines (real newlines, \\n) that render beautifully on ONE static slide — it must never read like a plain paragraph. Leave a BLANK line between sections so they breathe. Use **bold** ONLY on the 1-2 words that carry the idea — never bold an entire line or sentence. Favour VISUAL Markdown: *italic* asides, blockquotes (>), "- " lists, small tables when the format asks, and symbols (↓ × = ≠) ONLY when they help the meaning. NEVER use emojis or emoticons — only text and numbers. Dense, emotional, personal — correct financial theory and accurate numbers, wrapped in a human voice. The source instructions below define the exact style and structure of "content" (story beats, myth/fact pairs, comparison, list, etc.) — follow them first.
+"content" is the Markdown BODY printed below the hook title — GitHub-README-style, rich and visual, rendered as ONE static slide. Use the full Markdown vocabulary where the source instructions ask for it: --thematic breaks, **bold** (1-2 key words max), *italic*, ~~strikethrough~~, blockquotes (>), "- " lists, \`\`\`text code fences, and | | tables. NEVER use emojis or emoticons — only text and numbers; symbols (× = ≠ ↓) only where meaningful. Leave a BLANK line between sections so they breathe. Keep every line short enough to fit on one screen. The source instructions define the exact structure of "content" — follow them first.
 
 Return ONLY valid JSON matching EXACTLY this shape:
 {
   "hook": "a 7-14 word strong hook line",
-  "content": "the Markdown content following the source instructions",
+  "content": "the Markdown body following the source instructions (no H1, no title)",
   "caption": "one short paragraph for the social post caption (no hashtags, no @ mentions)"
 }`;
 
 db.prepare(
   "INSERT INTO settings(key,value) VALUES('ai_base_prompt',?) ON CONFLICT(key) DO NOTHING"
+).run(DEFAULT_AI_BASE_PROMPT);
+
+// Migration: old saved base prompts (pre-README rewrite) must not silently
+// keep producing the old short-form content. Overwrite only if a legacy copy
+// is present, so a user's newer manual edits are never clobbered.
+db.prepare(
+  "UPDATE settings SET value=? WHERE key='ai_base_prompt' AND value LIKE '%2 to 5 SHORT lines%'"
 ).run(DEFAULT_AI_BASE_PROMPT);
 function setSetting(key, value) {
   db.prepare(
@@ -160,10 +167,10 @@ export const store = {
     this.syncAllAccountCategories();
   },
 
-  // Idempotent: insert seed categories by name. Falls back to a sensible
-  // prompt if none was set, and replaces known placeholder prompts. It does
   // Seed categories: seed.mjs is the canonical source. Ensures each seed
   // category exists and keeps its default_prompt in sync with the seed file.
+  // Pre-rework legacy seeds (that left the list) are removed so the rotation
+  // only ever contains the current set.
   seedCategories() {
     const upsertPrompt = db.prepare("UPDATE categories SET default_prompt=? WHERE id=?");
     for (const s of CATEGORY_SEEDS) {
@@ -174,6 +181,16 @@ export const store = {
       }
       upsertPrompt.run(s.default_prompt, existing.id);
     }
+    // Delete categories that used to be seeds but are gone from the new set.
+    // Only touches known legacy names, never user-created categories.
+    const removeLegacy = db.prepare("DELETE FROM categories WHERE name=?");
+    const tx = db.transaction(() => {
+      for (const name of LEGACY_SEED_NAMES) {
+        const row = db.prepare("SELECT id FROM categories WHERE name=?").get(name);
+        if (row) removeLegacy.run(name);
+      }
+    });
+    tx();
     this.syncAllAccountCategories();
   },
 

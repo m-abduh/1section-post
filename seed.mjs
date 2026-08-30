@@ -1,176 +1,223 @@
 // Seed categories: one entry = a financial content format + the prompt that
-// steers the AI to produce that format. Each prompt embeds stricter rules
-// (hook length, VISUAL markdown structure, correct financial theory) so the
-// generator stays consistent per category. Edit freely — it is applied on
-// boot (idempotent) and does overwrite default_prompt to keep it in sync.
+// steers the AI to produce that format as GitHub-README-style Markdown.
+//
+// The renderer composes the final one-screen slide as:
+//   # {nn} — {Category}
+//   ---
+//   ## {hook}      <- the headline/hook, written by the AI
+//   {body}         <- the rest, written by the AI (this is what the prompt steers)
+//
+// Body rules for EVERY category (baked into each prompt below):
+// - Rich README Markdown: --thematic break, **bold**, *italic*,
+//   ~~strikethrough~~, blockquotes (>), "- " lists, code fences (```text),
+//   and tables (| |) where the format calls for them.
+// - NEVER use emojis or emoticons — only text and numbers; use symbols
+//   (× = ≠ ↓) ONLY when they carry meaning.
+// - Keep lines short enough to fit on one 1080x1350 static frame.
+// - Every claim must be financially/factually correct — no hype.
 
-// Voice: senior copywriter. Short, dense, emotional, personal.
-// Formats use VISUAL Markdown so the slide never reads as plain paragraphs:
-// **bold**, *italic*, blockquotes (>), - lists, tables (| |),
-// arrows (↓), symbols (× = ≠), because the video is ONE static 1080x1350 slide.
-// Global rules baked into every prompt below:
-// - Hook: 7 to 14 words, punchy, emotional, specific. No clickbait lies.
-// - Content: SHORT (2-5 visual lines) but DENSE. Lines must be readable on one slide.
-// - Financial theory must be correct; numbers must be accurate. No hype.
-// - Caption: one short personal paragraph, no hashtags/@-mentions.
+function readmeBody({ structure, example }) {
+  return `Write the CONTENT BODY in GitHub-README-style Markdown. A headline (the "hook") already sits above as the H2 title; your body is everything after it — pure Markdown that renders beautifully on ONE static slide.
 
-const H = (p) => `HOOK: 7 to 14 words, punchy, emotional, specific. No clickbait lies.
-CONTENT: SHORT but DENSE — 2-5 VISUAL lines (bold, arrows ↓, a small table or a blockquote where the format asks for it) so the slide is never a plain paragraph. NEVER use emojis or emoticons — only text and numbers; use symbols (× = ≠ ↓) ONLY when they help the meaning. Leave a BLANK line between sections so they breathe instead of cramming. Use **bold** ONLY on the 1-2 words that carry the idea — never bold whole lines or sentences. Speak to the viewer as "you"; be personal, honest, never generic. Correct financial theory, accurate numbers.
-CAPTION: one short personal paragraph, no hashtags, no @ mentions.
+Structure to follow:
+${structure}
 
-${p.tag}`;
+Exact visual style to emulate (invent fresh content, never copy verbatim):
+${example}
 
+Rules: 100% Markdown, GitHub README look. Use only --thematic breaks, **bold** (max 1-2 key words per idea), *italic*, ~~strikethrough~~, blockquotes >, "- " lists, \`\`\`text code fences, and | tables when asked. No emojis, no emoticons, text + numbers only, symbols (× = ≠ ↓) only where meaningful. Every line short enough for one screen. Correct financial theory and accurate numbers.`;
+}
 export const CATEGORY_SEEDS = [
   {
-    name: "story",
-    default_prompt: H({
-      tag: `A 2-3 line micro-fiction about money with an emotional twist that lands a real financial lesson (compounding rewards time, lifestyle inflation eats raises, income is not wealth). Structure it like this — a normal line, then a flipped italic question inside a blockquote, then the payoff:
+    name: "Story",
+    default_prompt: readmeBody({
+      structure: `A 2–3 step symbolic money chain, a dramatic turn signposted by a blockquote, then the payoff line with the key word in **bold**.`,
+      example: `**Work harder → Earn more → Become rich**
 
-Example:
-"The harder I chased money, the more I focused on **what I could get**.
-Then I flipped the question:
-> *"What problem can I solve?"*
-Money became the result — not the goal."`,
+Until the question changes:
+
+> **"What problem can be solved?"**
+
+Money becomes the **result**, not the goal.`,
     }),
   },
   {
-    name: "tips",
-    default_prompt: H({
-      tag: `ONE practical money habit the viewer can do today, laid out VISUALLY: a one-line intro, then a bullet list of 2-3 micro-actions, then a bold closer. The habit must be economically sound (automation, paying yourself first, removing friction). Example:
+    name: "Myth",
+    default_prompt: readmeBody({
+      structure: `The myth as a ~~strikethrough~~ claim, the corrected truth in **bold**, then a blockquote whose last line is a **bold** punchline.`,
+      example: `~~More hours = More money~~
 
-"Start ridiculously small:
-* Read **1 page**
-* Move **5 minutes**
-* Learn **10 minutes**
+**Not necessarily.**
 
-**Consistency comes from repetition, not motivation.**"`,
+> Hard work matters. 
+> **Direction matters more.**`,
     }),
   },
   {
-    name: "steps",
-    default_prompt: H({
-      tag: `A short numbered process for one specific money goal, shown as stacked steps joined by ↓ arrows, then a bold two-word punchline. 3-4 steps max, correct order, most important first. Put a BLANK line between each step (step line, then ↓ on its own line, then a blank line) so every step renders as its own block — never squeeze the steps into one paragraph. Example:
+    name: "Contrarian",
+    default_prompt: readmeBody({
+      structure: `One contrarian one-liner, then a \`\`\`text code fence showing a 3-step chain joined by ↓, then a blockquote verdict.`,
+      example: `You need **less friction**.
 
-"**01** — Find a real problem
+\`\`\`text
+Smaller Task
 ↓
-
-**02** — Who is willing to pay
+Easier Start
 ↓
+More Repetition
+\`\`\`
 
-**03** — Ship the simplest fix
-
-**Sell first. Improve later.**"`,
+> **Design the behavior. Don't depend on motivation.**`,
     }),
   },
   {
-    name: "myth",
-    default_prompt: H({
-      tag: `A MYTH vs FACT piece that feels like a realisation. Line 1 states the myth. Line 2-3 give the correct math (opportunity cost, real vs nominal, time value of money) with a ≠ in bold. End with a bold blockquote that sums it up. Example:
+    name: "Unpopular Truth",
+    default_prompt: readmeBody({
+      structure: `A blunt unpopular truth in short bold-flagged lines, then a blockquote verdict, then a closer line with the key word in **bold**.`,
+      example: `The idea can be brilliant.
 
-"Hard work alone ≠ Wealth
-10 hours on something nobody needs
-is beaten by 2 hours on an important problem.
-> **Work hard — on work that is actually valuable.**"`,
+The design can be beautiful.
+
+But if nobody needs it:
+
+> **It doesn't matter.**
+
+Customers buy **solutions**, not ideas.`,
     }),
   },
   {
-    name: "compare",
-    default_prompt: H({
-      tag: `Compare two financial choices in a small MARKDOWN TABLE (2 columns + 2-3 data rows), then one bold closer. Keep cells very short (2-4 words). Right vs wrong, active vs passive, saving vs investing, avalanche vs snowball. Example:
+    name: "Reframe",
+    default_prompt: readmeBody({
+      structure: `A ~~strikethrough~~ of the wrong belief, the right frame in **bold**, a "- " bullet list of what it reveals, then a blockquote closer.`,
+      example: `~~Failure = Losing~~
 
-"| Passive | Active |
+**Failure = Information**
+
+It shows:
+
+- What failed
+- What was misunderstood
+- What needs to change
+
+> **Learn from it, then move.**`,
+    }),
+  },
+  {
+    name: "Q&A",
+    default_prompt: readmeBody({
+      structure: `A stinging question line, a **X ≠ Y** contrast, a short explanation, then a blockquote whose lines are the verdict.`,
+      example: `Because:
+
+**Knowing ≠ Doing**
+
+You can understand everything and still take **zero action**.
+
+> **Knowledge creates potential. 
+> Execution creates results.**`,
+    }),
+  },
+  {
+    name: "Compare",
+    default_prompt: readmeBody({
+      structure: `Compare two opposing sides in a small | table | (2 columns × 3 short data rows), then a blockquote verdict with a **bold** contrast.`,
+      example: `| Busy | Productive |
 |---|---|
-| Owns the market | Beats rarely |
-| Tiny fees | Higher fees |
-| Long-run ≈ 7% real | Most trail the index |
-Low cost wins over time. **Own the market.**"`,
+| Does more | Achieves more |
+| Chases activity | Chases outcomes |
+| Fills time | Creates value |
+
+> **Activity ≠ Progress**`,
     }),
   },
   {
-    name: "q&a",
-    default_prompt: H({
-      tag: `A question-and-answer piece. Hook is a personal money question that stings. Content: a bold term → *italic meaning* on 2 short lines, then a bold blockquote with the verdict. Real mechanism (time value of money, leverage, liquidity), not a slogan. Example:
+    name: "Problem → Solution",
+    default_prompt: readmeBody({
+      structure: `"The problem might not be X" + a **bold** alternative, then a 3-line "**X → Y**" chain, then a blockquote verdict.`,
+      example: `It might be the **system**.
 
-"**Knowledge** tells you *what could work*
-**Action** makes it *actually work*
-> **Knowledge creates potential. Execution creates results.**"`,
+**Distraction → Remove distraction**
+
+**Complexity → Simplify**
+
+**Friction → Reduce friction**
+
+> **Change the system, not just the willpower.**`,
     }),
   },
   {
-    name: "quote",
-    default_prompt: H({
-      tag: `A quote-style piece with a real, correctly attributed authority (Buffett, Graham, Malkiel, Keynes, Thaler — or a clearly-sound paraphrase, never fabricated). Content: 2-3 short lines where the final 1-2 lines are the quote, then the attribution. Hook sets the emotion. Example:
+    name: "Warning",
+    default_prompt: readmeBody({
+      structure: `A hard warning line, a short "- " list of red flags, "None of these prove **demand**", then a two-line blockquote.`,
+      example: `More features.
 
-"Money is the **reward**.
-Value is why people pay you.
-> "Someone's sitting in the shade today because someone planted a tree a long time ago."
-— Warren Buffett"`,
+Better UI.
+
+New logo.
+
+None of these prove **demand**.
+
+> **Building proves capability. 
+> Selling proves demand.**`,
     }),
   },
   {
-    name: "stat",
-    default_prompt: H({
-      tag: `A statistic-driven insight that turns a number into a personal realisation. Two label lines with a **bold keyword** each (X vs Y), then a contrast line with a big **number**, then a blockquote punchline. Real, dated data, correctly read. Example:
+    name: "Tips",
+    default_prompt: readmeBody({
+      structure: `A rhetorical question, a reframe ("make the action **smaller**"), three short bold numbered lines, then a blockquote punchline.`,
+      example: `Don't make the goal bigger.
 
-"Followers = **Audience size**
-Customers = **Demand**
-100 people who desperately need what you sell
-can be worth more than **100,000** who scroll past.
-> Reach gets attention. Relevance gets sales."`,
+Make the action **smaller**.
+
+**1 page. 
+5 minutes. 
+1 repetition.**
+
+> **Consistency starts when starting becomes easy.**`,
     }),
   },
   {
-    name: "tierlist",
-    default_prompt: H({
-      tag: `A priority tierlist (S/A/B/C/D) of where money should go, ONE line per tier with the tier letter **bold** and a short label. Right hierarchy: emergency fund and high-interest debt outrank speculation. End with a blockquote warning. Example:
+    name: "Formula",
+    default_prompt: readmeBody({
+      structure: `One correct money formula as a SINGLE HORIZONTAL line of terms joined by × and =, wrapped in a \`\`\`text code fence (terms on one line: A × B × C = Value — never stacked vertically), then a one-line reframe, then a blockquote verdict.`,
+      example: `\`\`\`text
+Problem × People × Leverage = Value
+\`\`\`
 
-"**S** — Emergency fund
-**A** — High-interest debt gone
-**B** — 5+ year index money
-**C** — Trend chasing
-**D** — "Guaranteed" returns
-> A solid base beats a pretty plan."`,
+Don't just work more.
+
+> **Create more value with the same effort.**`,
     }),
   },
   {
-    name: "warning",
-    default_prompt: H({
-      tag: `A cautionary piece: 2-3 named red flags as an emoji-free short list, then a "But..." twist line, then a bold blockquote. Genuinely dangerous money traps (guaranteed returns, urgency as pressure, products nobody wants). Example:
+    name: "Stat",
+    default_prompt: readmeBody({
+      structure: `A "**X = label**" contrast on two lines, a plain line, a blockquote with a bolded contrast, then a **bold** closer.`,
+      example: `**Followers = Attention**
 
-"You're:
-* Building more features
-* Redesigning the logo
-* Tweaking the colors
-But you **haven't tried selling it yet**.
-> **Don't spend months building what nobody has proven they want.**"`,
+**Customers = Demand**
+
+100 people who desperately need something can be worth more than:
+
+> **100,000 people who don't care.**
+
+**Relevance beats reach.**`,
     }),
   },
-  {
-    name: "formula",
-    default_prompt: H({
-      tag: `ONE correct money formula, laid out as stacked terms separated by × and = on their own lines, then a bold one-line honest explanation. Real math only (Net Worth = Assets − Liabilities; Real Return = Nominal − Inflation; Rule of 72 = 72 ÷ rate). Example:
+];
 
-"Big Problem
-×
-People Helped
-×
-Hard to Replace
-=
-Economic Value
-**Solve bigger problems. Help more people. Become harder to replace.**"`,
-    }),
-  },
-  {
-    name: "checklist",
-    default_prompt: H({
-      tag: `A short pre-decision checklist of 3-4 questions, each a single line prefixed with a plain "* " bullet (plain bullets only, never checkbox brackets) and one **bold** keyword, then a bold blockquote verdict. Right thresholds for money decisions (emergency fund before investing, debt before speculation). Example:
-
-"Before you invest:
-* Is the problem **real**?
-* Who actually **has it**?
-* Are they **willing to pay**?
-* Is your fix **better** than the alternatives?
-> **If you can't answer these, don't build yet.**"`,
-    }),
-  },
+// Pre-rework seed categories that no longer exist in the new 12-category set.
+// Removed on boot so the rotation only ever uses the new README-style formats.
+export const LEGACY_SEED_NAMES = [
+  "story",
+  "tips",
+  "steps",
+  "myth",
+  "compare",
+  "q&a",
+  "quote",
+  "stat",
+  "tierlist",
+  "warning",
+  "formula",
+  "checklist",
 ];

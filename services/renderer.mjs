@@ -38,37 +38,58 @@ function renderTemplate(tpl, data) {
   );
 }
 
-const BOX_PALETTE = [
-  { fill: "#4f8cff", text: "#ffffff" },
-  { fill: "#ff7849", text: "#ffffff" },
-  { fill: "#3ecf8e", text: "#093b24" },
-  { fill: "#ffce3d", text: "#3a2b00" },
-  { fill: "#a66cff", text: "#ffffff" },
-  { fill: "#3ad6d6", text: "#062424" },
-  { fill: "#ff5d8f", text: "#ffffff" },
-  { fill: "#7de84f", text: "#17300a" },
+// Light "paper" backgrounds — subtle tints that keep a clean, readable surface.
+// Only the background varies now (no colored content boxes).
+const PAPER_FILLS = [
+  "#f7f5f0",
+  "#f5f4f2",
+  "#f3f2ee",
+  "#f6f1ea",
+  "#efefec",
+  "#f2f0ec",
+  "#f4f2ef",
+  "#f1f0ee",
 ];
 
-export async function renderPost({ hook, content, category, account, content_text }, outputPath) {
-  const htmlTpl = readFileSync(join(BUILDER, "unified.html"), "utf-8");
-  const palette = BOX_PALETTE[Math.floor(Math.random() * BOX_PALETTE.length)];
+// Try to fit the rendered markdown into the 1350px slide by scaling the
+// markdown wrapper down when it would otherwise overflow. Keeps every item on one frame.
+const FIT_SCRIPT = `
+const __fit=()=>{const md=document.querySelector('.md');if(!md)return;const body=document.querySelector('.body');const avail=body.clientHeight;const h=md.offsetHeight;if(h>avail&&h>0){md.style.transform='scale('+(avail/h)+')';}};
+try{__fit();}catch(e){}
+`;
 
-  const body = Array.isArray(content)
+// Build the single full README-style markdown body for the slide:
+//   ## {hook}\n\n{content body}
+// No H1 banner or numeral is shown — the hook/headline and its discussion
+// render as one continuous, focus-on-content markdown document.
+export function buildMarkdown({ hook, body }) {
+  return `## ${(hook || "").trim()}\n\n` + (body || "").trim();
+}
+
+export async function renderPost({ hook, content, category, account, content_text, index }, outputPath) {
+  const htmlTpl = readFileSync(join(BUILDER, "unified.html"), "utf-8");
+  const bg = PAPER_FILLS[Math.floor(Math.random() * PAPER_FILLS.length)];
+
+  const bodyText = Array.isArray(content)
     ? content.join("\n")
     : (content_text || content || "");
-  const htmlContent = marked.parse(body).replace(/<input\b[^>]*>/gi, "");
+  const md = buildMarkdown({ hook, body: bodyText });
+  const htmlContent = marked.parse(md).replace(/<input\b[^>]*>/gi, "");
   const data = {
-    hook: hook || "",
     content: htmlContent,
     category: category || "",
     account: account || "",
-    box_fill: palette.fill,
-    text_color: palette.text,
+    bg_fill: bg,
   };
   let html = renderTemplate(htmlTpl, data);
 
-  html = html.replace("--box-fill:#4f8cff", `--box-fill:${palette.fill}`);
-  html = html.replace("--text-color:#ffffff", `--text-color:${palette.text}`);
+  html = html.replace("--paper:#f7f5f0", `--paper:${bg}`);
+
+  // Fit-to-frame: scale the markdown wrapper down only when it overflows.
+  html = html.replace(
+    "window.__timelines=window.__timelines||{}",
+    FIT_SCRIPT + "\nwindow.__timelines=window.__timelines||{}"
+  );
 
   if (html.includes('<script id="cd"')) {
     html = html.replace(/<script id="cd"[^>]*>[\s\S]*?<\/script>\s*/g, "");

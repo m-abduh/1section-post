@@ -7,40 +7,48 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 @font-face{font-family:'Satoshi';src:url('fonts/Satoshi-Variable.ttf')format('truetype');font-weight:300 900}
-:root{--box-fill:#4f8cff;--text-color:#ffffff;--badge:#1a1a1a}
-body{font-family:'Satoshi',system-ui,sans-serif;background:#f7f5f0;color:#1a1a1a}
-#root{position:relative;width:1080px;height:1350px;overflow:hidden;background:#f7f5f0}
-#paper{position:absolute;inset:0;opacity:.55;mix-blend-mode:multiply}
-.clip{position:absolute;inset:0;display:flex;flex-direction:column;padding:64px 56px}
-.topbar{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:36px}
+:root{--paper:#f7f5f0;--ink:#1a1a1a;--muted:#7a776e;--badge:#1a1a1a;--rule:#d8d4c9;--code-bg:#efede6}
+html,body{font-family:'Satoshi',system-ui,sans-serif;background:var(--paper);color:var(--ink)}
+#root{position:relative;width:1080px;height:1350px;overflow:hidden;background:var(--paper)}
+#paper{position:absolute;inset:0;opacity:.55;mix-blend-mode:multiply;z-index:0}
+#bg-tint{position:absolute;inset:0;z-index:0;pointer-events:none}
+.clip{position:absolute;inset:0;display:flex;flex-direction:column;padding:52px 60px 40px;z-index:1}
+.topbar{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:20px;flex-shrink:0}
 .category-badge{background:var(--badge);color:#fff;font-size:20px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:8px 18px;border-radius:999px}
-.account{display:flex;align-items:baseline;gap:4px;font-size:34px;color:#1a1a1a}
-.account .at{font-weight:500;color:#9a978e}
+.account{display:flex;align-items:baseline;gap:4px;font-size:32px;color:var(--ink)}
+.account .at{font-weight:500;color:var(--muted)}
 .account .handle{font-weight:800}
-.center{flex:1;display:flex;flex-direction:column;justify-content:center;gap:44px;min-height:0}
-.hook{font-size:54px;font-weight:800;line-height:1.2;letter-spacing:-1.5px;color:#1a1a1a;max-width:100%}
-.content-box{position:relative;display:flex;align-items:center;border-radius:28px;padding:64px 70px;background:var(--box-fill);overflow:hidden}
-.content-text{font-size:44px;font-weight:700;line-height:1.4;letter-spacing:-0.5px;color:var(--text-color);text-align:left;width:100%}
-.content-text p{margin:0 0 32px;font-weight:700}
-.content-text > *:last-child{margin-bottom:0}
-.content-text strong{font-weight:900}
-.content-text em{font-style:italic}
-.content-text ul,.content-text ol{margin:0 0 32px;padding-left:46px}
-.content-text li{margin-bottom:32px;line-height:1.38}
-.content-text li:last-child{margin-bottom:0}
-.content-text blockquote{margin:0 0 32px;padding:16px 30px;background:rgba(0,0,0,.18);border-radius:20px;font-weight:900;font-size:38px;line-height:1.3}
-.content-text blockquote p{margin:0}
-.content-text table{border-collapse:collapse;width:100%;margin:0 0 32px}
-.content-text th,.content-text td{border:2px solid rgba(0,0,0,.2);padding:10px 16px;font-size:32px}
-.content-text th{font-weight:900;text-align:left}
-.content-text td{font-weight:600}
-.content-text hr{border:none;border-top:3px solid rgba(0,0,0,.2);margin:0 0 32px}
-.footer{display:flex;align-items:center;justify-content:center;margin-top:36px;font-size:30px;font-weight:700;letter-spacing:1px}
-.footer .domain{color:#9a978e;font-weight:500}
+.body{flex:1;min-height:0;display:flex;flex-direction:column;justify-content:center;overflow:hidden}
+.mdwrap{width:100%;height:100%;min-height:0;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.md{width:100%;transform-origin:center center}
+.md h1{font-size:36px;font-weight:800;letter-spacing:-0.5px;margin:0 0 14px;line-height:1.1}
+.md h2{font-size:53px;font-weight:800;letter-spacing:-1px;line-height:1.15;margin:0 0 18px}
+.md hr{border:none;border-top:3px solid var(--rule);margin:16px 0 34px}
+.md p{margin:0 0 16px;font-size:40px;font-weight:600;line-height:1.32;letter-spacing:-0.3px}
+.md p:last-child{margin-bottom:0}
+.md strong{font-weight:900}
+.md del{color:var(--muted);text-decoration:line-through;text-decoration-thickness:3px;-webkit-text-decoration-color:var(--muted)}
+.md blockquote{margin:0 0 16px;padding:20px 26px;background:rgba(0,0,0,.055);border-radius:16px;font-size:37px;font-weight:800;line-height:1.32;letter-spacing:-0.3px}
+.md blockquote p{margin:0;font-size:37px}
+.md blockquote p:last-child{margin-bottom:0}
+.md ul,.md ol{margin:0 0 16px;padding-left:44px}
+.md li{margin:0 0 12px;font-size:37px;font-weight:600;line-height:1.3;letter-spacing:-0.3px}
+.md li:last-child{margin-bottom:0}
+.md li > ul,.md li > ol{margin:4px 0 0;padding-left:30px}
+.md table{border-collapse:collapse;width:100%;margin:0 0 16px}
+.md th,.md td{border:2px solid var(--rule);padding:14px 18px;font-size:34px;line-height:1.25;text-align:left}
+.md th{font-weight:900;background:rgba(0,0,0,.05)}
+.md td{font-weight:600}
+.md pre{--code-text:#f0efe9;background:#1b1b1f;color:var(--code-text);border:1px solid #2a2a30;border-radius:18px;padding:22px 26px;margin:0 0 16px;overflow:hidden;box-shadow:0 6px 18px rgba(0,0,0,.14);font-family:'ui-monospace','SFMono-Regular','Menlo','Consolas',monospace;font-size:36px;font-weight:700;line-height:1.5;white-space:pre;text-align:left}
+.md pre code{font-family:inherit;font-size:36px;font-weight:700;background:none;color:inherit;padding:0}
+.md code{font-family:'ui-monospace','SFMono-Regular','Menlo','Consolas',monospace;font-size:34px;background:var(--code-bg);padding:2px 8px;border-radius:6px}
+.footer{display:flex;align-items:center;justify-content:center;margin-top:auto;padding-top:16px;flex-shrink:0;font-size:28px;font-weight:700;letter-spacing:1px}
+.footer .domain{color:var(--muted);font-weight:500}
 </style>
 </head>
 <body>
 <div id="root" data-composition-id="unified" data-start="0" data-width="1080" data-height="1350" data-duration="15">
+<div id="bg-tint" style="background:{{bg_fill}}"></div>
 <svg id="paper" xmlns="http://www.w3.org/2000/svg" width="1080" height="1350">
   <defs>
     <filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter>
@@ -52,10 +60,9 @@ body{font-family:'Satoshi',system-ui,sans-serif;background:#f7f5f0;color:#1a1a1a
     <span class="category-badge">{{category}}</span>
     <div class="account"><span class="at">@</span><span class="handle">{{account}}</span></div>
   </div>
-  <div class="center">
-    <div class="hook">{{hook}}</div>
-    <div class="content-box">
-      <div class="content-text">{{content}}</div>
+  <div class="body">
+    <div class="mdwrap">
+      <div class="md">{{content}}</div>
     </div>
   </div>
   <div class="footer">1section<span class="domain">.com</span></div>

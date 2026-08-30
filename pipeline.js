@@ -110,6 +110,7 @@ async function generateAndPost(video, { account, categoryName, prompt }) {
       content: gen.content,
       category: categoryName,
       account: account.name,
+      index: categoryRow.position,
     },
     outFile
   );
