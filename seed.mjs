@@ -6,7 +6,7 @@
 
 // Voice: senior copywriter. Short, dense, emotional, personal.
 // Formats use VISUAL Markdown so the slide never reads as plain paragraphs:
-// **bold**, *italic*, blockquotes (>), - lists, tables (| |), emojis,
+// **bold**, *italic*, blockquotes (>), - lists, tables (| |),
 // arrows (↓), symbols (× = ≠), because the video is ONE static 1080x1350 slide.
 // Global rules baked into every prompt below:
 // - Hook: 7 to 14 words, punchy, emotional, specific. No clickbait lies.
@@ -15,7 +15,7 @@
 // - Caption: one short personal paragraph, no hashtags/@-mentions.
 
 const H = (p) => `HOOK: 7 to 14 words, punchy, emotional, specific. No clickbait lies.
-CONTENT: SHORT but DENSE — 2-5 VISUAL lines (bold, emoji, arrows, a small table or a blockquote where the format asks for it) so the slide is never a plain paragraph. Leave a BLANK line between sections so they breathe instead of cramming. Use **bold** ONLY on the 1-2 words that carry the idea — never bold whole lines or sentences. Speak to the viewer as "you"; be personal, honest, never generic. Correct financial theory, accurate numbers.
+CONTENT: SHORT but DENSE — 2-5 VISUAL lines (bold, arrows ↓, a small table or a blockquote where the format asks for it) so the slide is never a plain paragraph. NEVER use emojis or emoticons — only text and numbers; use symbols (× = ≠ ↓) ONLY when they help the meaning. Leave a BLANK line between sections so they breathe instead of cramming. Use **bold** ONLY on the 1-2 words that carry the idea — never bold whole lines or sentences. Speak to the viewer as "you"; be personal, honest, never generic. Correct financial theory, accurate numbers.
 CAPTION: one short personal paragraph, no hashtags, no @ mentions.
 
 ${p.tag}`;
@@ -36,12 +36,12 @@ Money became the result — not the goal."`,
   {
     name: "tips",
     default_prompt: H({
-      tag: `ONE practical money habit the viewer can do today, laid out VISUALLY: a one-line intro, then an emoji bullet list of 2-3 micro-actions, then a bold closer. The habit must be economically sound (automation, paying yourself first, removing friction). Example:
+      tag: `ONE practical money habit the viewer can do today, laid out VISUALLY: a one-line intro, then a bullet list of 2-3 micro-actions, then a bold closer. The habit must be economically sound (automation, paying yourself first, removing friction). Example:
 
 "Start ridiculously small:
-* 📖 Read **1 page**
-* 🏃 Move **5 minutes**
-* 🧠 Learn **10 minutes**
+* Read **1 page**
+* Move **5 minutes**
+* Learn **10 minutes**
 
 **Consistency comes from repetition, not motivation.**"`,
     }),
@@ -63,9 +63,9 @@ Money became the result — not the goal."`,
   {
     name: "myth",
     default_prompt: H({
-      tag: `A MYTH vs FACT piece that feels like a realisation. Line 1 states the myth with a ❌. Line 2-3 give the correct math (opportunity cost, real vs nominal, time value of money) with a ≠ in bold. End with a bold blockquote that sums it up. Example:
+      tag: `A MYTH vs FACT piece that feels like a realisation. Line 1 states the myth. Line 2-3 give the correct math (opportunity cost, real vs nominal, time value of money) with a ≠ in bold. End with a bold blockquote that sums it up. Example:
 
-"❌ Hard work alone ≠ Wealth
+"Hard work alone ≠ Wealth
 10 hours on something nobody needs
 is beaten by 2 hours on an important problem.
 > **Work hard — on work that is actually valuable.**"`,
@@ -120,9 +120,9 @@ can be worth more than **100,000** who scroll past.
   {
     name: "tierlist",
     default_prompt: H({
-      tag: `A priority tierlist (S/A/B/C/D) of where money should go, ONE line per tier with the tier letter **bold** and a short label (a 🔥 on S). Right hierarchy: emergency fund and high-interest debt outrank speculation. End with a blockquote warning. Example:
+      tag: `A priority tierlist (S/A/B/C/D) of where money should go, ONE line per tier with the tier letter **bold** and a short label. Right hierarchy: emergency fund and high-interest debt outrank speculation. End with a blockquote warning. Example:
 
-"**S** — Emergency fund 🔥
+"**S** — Emergency fund
 **A** — High-interest debt gone
 **B** — 5+ year index money
 **C** — Trend chasing
