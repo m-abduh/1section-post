@@ -15,7 +15,7 @@ const SAMPLES = [
 
 Until the question changes:
 
-> **"What problem can be solved?"**
+> "What problem can be solved?"
 
 Money becomes the **result**, not the goal.`,
   },
@@ -27,7 +27,7 @@ Money becomes the **result**, not the goal.`,
 **Not necessarily.**
 
 > Hard work matters. 
-> **Direction matters more.**`,
+> Direction matters more.`,
   },
   {
     name: "Contrarian",
@@ -42,7 +42,7 @@ Easier Start
 More Repetition
 \`\`\`
 
-> **Design the behavior. Don't depend on motivation.**`,
+> Design the behavior. Don't depend on motivation.`,
   },
   {
     name: "Unpopular Truth",
@@ -53,7 +53,7 @@ The design can be beautiful.
 
 But if nobody needs it:
 
-> **It doesn't matter.**
+> It doesn't matter.
 
 Customers buy **solutions**, not ideas.`,
   },
@@ -70,7 +70,7 @@ It shows:
 - What was misunderstood
 - What needs to change
 
-> **Learn from it, then move.**`,
+> Learn from it, then move.`,
   },
   {
     name: "Q&A",
@@ -81,8 +81,8 @@ It shows:
 
 You can understand everything and still take **zero action**.
 
-> **Knowledge creates potential. 
-> Execution creates results.**`,
+> Knowledge creates potential. 
+> Execution creates results.`,
   },
   {
     name: "Compare",
@@ -93,7 +93,7 @@ You can understand everything and still take **zero action**.
 | Chases activity | Chases outcomes |
 | Fills time | Creates value |
 
-> **Activity ≠ Progress**`,
+> Activity ≠ Progress`,
   },
   {
     name: "Problem → Solution",
@@ -106,7 +106,7 @@ You can understand everything and still take **zero action**.
 
 **Friction → Reduce friction**
 
-> **Change the system, not just the willpower.**`,
+> Change the system, not just the willpower.`,
   },
   {
     name: "Warning",
@@ -119,8 +119,8 @@ New logo.
 
 None of these prove **demand**.
 
-> **Building proves capability. 
-> Selling proves demand.**`,
+> Building proves capability. 
+> Selling proves demand.`,
   },
   {
     name: "Tips",
@@ -133,7 +133,7 @@ Make the action **smaller**.
 5 minutes. 
 1 repetition.**
 
-> **Consistency starts when starting becomes easy.**`,
+> Consistency starts when starting becomes easy.`,
   },
   {
     name: "Formula",
@@ -144,7 +144,7 @@ Problem × People × Leverage = Value
 
 Don't just work more.
 
-> **Create more value with the same effort.**`,
+> Create more value with the same effort.`,
   },
   {
     name: "Stat",
@@ -155,7 +155,7 @@ Don't just work more.
 
 100 people who desperately need something can be worth more than:
 
-> **100,000 people who don't care.**
+> 100,000 people who don't care.
 
 **Relevance beats reach.**`,
   },

@@ -25,7 +25,7 @@ ${structure}
 Exact visual style to emulate (invent fresh content, never copy verbatim):
 ${example}
 
-Rules: 100% Markdown, GitHub README look. Use only --thematic breaks, **bold** (max 1-2 key words per idea), *italic*, ~~strikethrough~~, blockquotes >, "- " lists, \`\`\`text code fences, and | tables when asked. No emojis, no emoticons, text + numbers only, symbols (× = ≠ ↓) only where meaningful. Every line short enough for one screen. Correct financial theory and accurate numbers.`;
+Rules: 100% Markdown, GitHub README look. Bold is used SPARINGLY — only on the 1-2 key words that carry an idea, and NEVER bold an entire line, blockquote, table cell, or whole code block. Inside blockquotes (>) and \`\`\`text code fences keep the text normal-weight by default; bold only a word or two when it truly matters. Use --thematic breaks, *italic*, ~~strikethrough~~, blockquotes >, "- " lists, \`\`\`text code fences, and | tables when asked. No emojis, no emoticons, text + numbers only, symbols (× = ≠ ↓) only where meaningful. Every line short enough for one screen. Correct financial theory and accurate numbers.`;
 }
 export const CATEGORY_SEEDS = [
   {
@@ -36,7 +36,7 @@ export const CATEGORY_SEEDS = [
 
 Until the question changes:
 
-> **"What problem can be solved?"**
+> "What problem can be solved?"
 
 Money becomes the **result**, not the goal.`,
     }),
@@ -44,13 +44,13 @@ Money becomes the **result**, not the goal.`,
   {
     name: "Myth",
     default_prompt: readmeBody({
-      structure: `The myth as a ~~strikethrough~~ claim, the corrected truth in **bold**, then a blockquote whose last line is a **bold** punchline.`,
+      structure: `The myth as a ~~strikethrough~~ claim, the corrected truth in **bold**, then a blockquote whose last line is the punchline.`,
       example: `~~More hours = More money~~
 
 **Not necessarily.**
 
 > Hard work matters. 
-> **Direction matters more.**`,
+> Direction matters more.`,
     }),
   },
   {
@@ -67,7 +67,7 @@ Easier Start
 More Repetition
 \`\`\`
 
-> **Design the behavior. Don't depend on motivation.**`,
+> Design the behavior. Don't depend on motivation.`,
     }),
   },
   {
@@ -80,7 +80,7 @@ The design can be beautiful.
 
 But if nobody needs it:
 
-> **It doesn't matter.**
+> It doesn't matter.
 
 Customers buy **solutions**, not ideas.`,
     }),
@@ -99,7 +99,7 @@ It shows:
 - What was misunderstood
 - What needs to change
 
-> **Learn from it, then move.**`,
+> Learn from it, then move.`,
     }),
   },
   {
@@ -112,21 +112,21 @@ It shows:
 
 You can understand everything and still take **zero action**.
 
-> **Knowledge creates potential. 
-> Execution creates results.**`,
+> Knowledge creates potential. 
+> Execution creates results.`,
     }),
   },
   {
     name: "Compare",
     default_prompt: readmeBody({
-      structure: `Compare two opposing sides in a small | table | (2 columns × 3 short data rows), then a blockquote verdict with a **bold** contrast.`,
+      structure: `Compare two opposing sides in a small | table | (2 columns × 3 short data rows), then a blockquote verdict.`,
       example: `| Busy | Productive |
 |---|---|
 | Does more | Achieves more |
 | Chases activity | Chases outcomes |
 | Fills time | Creates value |
 
-> **Activity ≠ Progress**`,
+> Activity ≠ Progress`,
     }),
   },
   {
@@ -141,7 +141,7 @@ You can understand everything and still take **zero action**.
 
 **Friction → Reduce friction**
 
-> **Change the system, not just the willpower.**`,
+> Change the system, not just the willpower.`,
     }),
   },
   {
@@ -156,8 +156,8 @@ New logo.
 
 None of these prove **demand**.
 
-> **Building proves capability. 
-> Selling proves demand.**`,
+> Building proves capability. 
+> Selling proves demand.`,
     }),
   },
   {
@@ -172,7 +172,7 @@ Make the action **smaller**.
 5 minutes. 
 1 repetition.**
 
-> **Consistency starts when starting becomes easy.**`,
+> Consistency starts when starting becomes easy.`,
     }),
   },
   {
@@ -185,20 +185,20 @@ Problem × People × Leverage = Value
 
 Don't just work more.
 
-> **Create more value with the same effort.**`,
+> Create more value with the same effort.`,
     }),
   },
   {
     name: "Stat",
     default_prompt: readmeBody({
-      structure: `A "**X = label**" contrast on two lines, a plain line, a blockquote with a bolded contrast, then a **bold** closer.`,
+      structure: `A "**X = label**" contrast on two lines, a plain line, a blockquote, then a **bold** closer.`,
       example: `**Followers = Attention**
 
 **Customers = Demand**
 
 100 people who desperately need something can be worth more than:
 
-> **100,000 people who don't care.**
+> 100,000 people who don't care.
 
 **Relevance beats reach.**`,
     }),
