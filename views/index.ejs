@@ -57,6 +57,23 @@ button:hover{background:#383842}
 .flex{display:flex;gap:.6rem}
 .grow{flex:1}
 .mt{margin-top:.6rem}
+@media (max-width:1024px){.main{padding:1.25rem}}
+@media (max-width:820px){
+  .layout{flex-direction:column}
+  .sidebar{width:100%;border-right:none;border-bottom:1px solid #26262b;max-height:45vh;overflow-y:auto}
+  .main{padding:1rem 1rem 2rem}
+  h1{font-size:1.15rem}
+  .card,.acc,.cat-item,.vitem{padding:.8rem}
+  .vitem{flex-wrap:wrap;gap:.6rem}
+  .vitem .acts{width:100%;justify-content:flex-end}
+  .content-box{padding:1.2rem}
+  .score,.row .pill{white-space:normal}
+}
+@media (max-width:480px){
+  .footer,.vitem .meta{align-items:flex-start}
+  .cat-item textarea{min-height:70px}
+  .modal{padding:1rem}
+}
 </style>
 </head>
 <body>
