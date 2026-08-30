@@ -56,7 +56,7 @@ export async function renderPost({ hook, content, category, account, content_tex
   const body = Array.isArray(content)
     ? content.join("\n")
     : (content_text || content || "");
-  const htmlContent = marked.parse(body);
+  const htmlContent = marked.parse(body).replace(/<input\b[^>]*>/gi, "");
   const data = {
     hook: hook || "",
     content: htmlContent,

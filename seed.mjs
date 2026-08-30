@@ -49,12 +49,14 @@ Money became the result — not the goal."`,
   {
     name: "steps",
     default_prompt: H({
-      tag: `A short numbered process for one specific money goal, shown as stacked steps joined by ↓ arrows, then a bold two-word punchline. 3-4 steps max, correct order, most important first. Example:
+      tag: `A short numbered process for one specific money goal, shown as stacked steps joined by ↓ arrows, then a bold two-word punchline. 3-4 steps max, correct order, most important first. Put a BLANK line between each step (step line, then ↓ on its own line, then a blank line) so every step renders as its own block — never squeeze the steps into one paragraph. Example:
 
 "**01** — Find a real problem
 ↓
+
 **02** — Who is willing to pay
 ↓
+
 **03** — Ship the simplest fix
 
 **Sell first. Improve later.**"`,
@@ -161,13 +163,13 @@ Economic Value
   {
     name: "checklist",
     default_prompt: H({
-      tag: `A short pre-decision checklist of 3-4 questions, each a single line prefixed with "* [ ]" and one **bold** keyword, then a bold blockquote verdict. Right thresholds for money decisions (emergency fund before investing, debt before speculation). Example:
+      tag: `A short pre-decision checklist of 3-4 questions, each a single line prefixed with a plain "* " bullet (plain bullets only, never checkbox brackets) and one **bold** keyword, then a bold blockquote verdict. Right thresholds for money decisions (emergency fund before investing, debt before speculation). Example:
 
 "Before you invest:
-* [ ] Is the problem **real**?
-* [ ] Who actually **has it**?
-* [ ] Are they **willing to pay**?
-* [ ] Is your fix **better** than the alternatives?
+* Is the problem **real**?
+* Who actually **has it**?
+* Are they **willing to pay**?
+* Is your fix **better** than the alternatives?
 > **If you can't answer these, don't build yet.**"`,
     }),
   },
