@@ -9,7 +9,7 @@ Voice: SHORT, DENSE, EMOTIONAL, PERSONAL. Speak directly to the viewer as "you" 
 "hook" MUST be 7 to 14 words: a strong, emotional, specific scroll-stopping statement or question.
 "caption" MUST be one short personal paragraph (no hashtags, no @ mentions).
 
-"content" is a single Markdown string of 2 to 5 SHORT lines (real line breaks) that render beautifully on ONE static slide — never a plain paragraph. Use VISUAL Markdown: **bold** keywords, *italic* asides, blockquotes (>), "- " lists, small tables when the format asks, emojis, and symbols (↓ × = ≠). Dense, emotional, personal — correct financial theory and accurate numbers, in a human voice. The source instructions define the exact style and structure of "content".
+"content" is a single Markdown string of 2 to 5 SHORT lines (real line breaks) that render beautifully on ONE static slide — never a plain paragraph. Leave a BLANK line between sections so they breathe. Use **bold** ONLY on the 1-2 words that carry the idea — never bold an entire line or sentence. Favour VISUAL Markdown: *italic* asides, blockquotes (>), "- " lists, small tables when the format asks, emojis, and symbols (↓ × = ≠). Dense, emotional, personal — correct financial theory and accurate numbers, in a human voice. The source instructions define the exact style and structure of "content".
 
 Return ONLY valid JSON matching EXACTLY this shape:
 {

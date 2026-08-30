@@ -15,7 +15,7 @@
 // - Caption: one short personal paragraph, no hashtags/@-mentions.
 
 const H = (p) => `HOOK: 7 to 14 words, punchy, emotional, specific. No clickbait lies.
-CONTENT: SHORT but DENSE — 2-5 VISUAL lines (bold, emoji, arrows, a small table or a blockquote where the format asks for it) so the slide is never a plain paragraph. Speak to the viewer as "you"; be personal, honest, never generic. Correct financial theory, accurate numbers.
+CONTENT: SHORT but DENSE — 2-5 VISUAL lines (bold, emoji, arrows, a small table or a blockquote where the format asks for it) so the slide is never a plain paragraph. Leave a BLANK line between sections so they breathe instead of cramming. Use **bold** ONLY on the 1-2 words that carry the idea — never bold whole lines or sentences. Speak to the viewer as "you"; be personal, honest, never generic. Correct financial theory, accurate numbers.
 CAPTION: one short personal paragraph, no hashtags, no @ mentions.
 
 ${p.tag}`;
@@ -51,11 +51,11 @@ Money became the result — not the goal."`,
     default_prompt: H({
       tag: `A short numbered process for one specific money goal, shown as stacked steps joined by ↓ arrows, then a bold two-word punchline. 3-4 steps max, correct order, most important first. Example:
 
-"**01 — Find a real problem**
+"**01** — Find a real problem
 ↓
-**02 — Who is willing to pay**
+**02** — Who is willing to pay
 ↓
-**03 — Ship the simplest fix**
+**03** — Ship the simplest fix
 
 **Sell first. Improve later.**"`,
     }),
@@ -65,7 +65,7 @@ Money became the result — not the goal."`,
     default_prompt: H({
       tag: `A MYTH vs FACT piece that feels like a realisation. Line 1 states the myth with a ❌. Line 2-3 give the correct math (opportunity cost, real vs nominal, time value of money) with a ≠ in bold. End with a bold blockquote that sums it up. Example:
 
-"**❌ Hard work alone ≠ Wealth**
+"❌ Hard work alone ≠ Wealth
 10 hours on something nobody needs
 is beaten by 2 hours on an important problem.
 > **Work hard — on work that is actually valuable.**"`,
@@ -81,7 +81,7 @@ is beaten by 2 hours on an important problem.
 | Owns the market | Beats rarely |
 | Tiny fees | Higher fees |
 | Long-run ≈ 7% real | Most trail the index |
-**Low cost wins over time. Own the market.**"`,
+Low cost wins over time. **Own the market.**"`,
     }),
   },
   {
@@ -100,7 +100,7 @@ is beaten by 2 hours on an important problem.
       tag: `A quote-style piece with a real, correctly attributed authority (Buffett, Graham, Malkiel, Keynes, Thaler — or a clearly-sound paraphrase, never fabricated). Content: 2-3 short lines where the final 1-2 lines are the quote, then the attribution. Hook sets the emotion. Example:
 
 "Money is the **reward**.
-Value is the **reason people pay you**.
+Value is why people pay you.
 > "Someone's sitting in the shade today because someone planted a tree a long time ago."
 — Warren Buffett"`,
     }),
@@ -108,26 +108,26 @@ Value is the **reason people pay you**.
   {
     name: "stat",
     default_prompt: H({
-      tag: `A statistic-driven insight that turns a number into a personal realisation. Two bold label lines (X vs Y), then a contrast line with a big **number**, then a bold blockquote punchline. Real, dated data, correctly read. Example:
+      tag: `A statistic-driven insight that turns a number into a personal realisation. Two label lines with a **bold keyword** each (X vs Y), then a contrast line with a big **number**, then a blockquote punchline. Real, dated data, correctly read. Example:
 
-"**Followers = Audience size**
-**Customers = Demand**
+"Followers = **Audience size**
+Customers = **Demand**
 100 people who desperately need what you sell
 can be worth more than **100,000** who scroll past.
-> **Reach gets attention. Relevance gets sales.**"`,
+> Reach gets attention. Relevance gets sales."`,
     }),
   },
   {
     name: "tierlist",
     default_prompt: H({
-      tag: `A priority tierlist (S/A/B/C/D) of where money should go, ONE bold line per tier with a short label and a 🔥 on S. Right hierarchy: emergency fund and high-interest debt outrank speculation. End with a bold blockquote warning. Example:
+      tag: `A priority tierlist (S/A/B/C/D) of where money should go, ONE line per tier with the tier letter **bold** and a short label (a 🔥 on S). Right hierarchy: emergency fund and high-interest debt outrank speculation. End with a blockquote warning. Example:
 
-"**S — Emergency fund** 🔥
-**A — High-interest debt gone**
-**B — 5+ year index money**
-**C — Trend chasing**
-**D — "Guaranteed" returns**
-> **A pretty plan on a weak base is still a bad plan.**"`,
+"**S** — Emergency fund 🔥
+**A** — High-interest debt gone
+**B** — 5+ year index money
+**C** — Trend chasing
+**D** — "Guaranteed" returns
+> A solid base beats a pretty plan."`,
     }),
   },
   {
@@ -146,16 +146,16 @@ But you **haven't tried selling it yet**.
   {
     name: "formula",
     default_prompt: H({
-      tag: `ONE correct money formula, laid out as stacked **bold terms** separated by × and = on their own lines, then a 1-line honest explanation. Real math only (Net Worth = Assets − Liabilities; Real Return = Nominal − Inflation; Rule of 72 = 72 ÷ rate). Example:
+      tag: `ONE correct money formula, laid out as stacked terms separated by × and = on their own lines, then a bold one-line honest explanation. Real math only (Net Worth = Assets − Liabilities; Real Return = Nominal − Inflation; Rule of 72 = 72 ÷ rate). Example:
 
-"**Big Problem**
+"Big Problem
 ×
-**People Helped**
+People Helped
 ×
-**Hard to Replace**
+Hard to Replace
 =
-**Economic Value**
-Solve bigger problems. Help more people. Become harder to replace."`,
+Economic Value
+**Solve bigger problems. Help more people. Become harder to replace.**"`,
     }),
   },
   {

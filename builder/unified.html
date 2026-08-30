@@ -12,6 +12,11 @@ body{font-family:'Satoshi',system-ui,sans-serif;background:#f7f5f0;color:#1a1a1a
 #root{position:relative;width:1080px;height:1350px;overflow:hidden;background:#f7f5f0}
 #paper{position:absolute;inset:0;opacity:.55;mix-blend-mode:multiply}
 .clip{position:absolute;inset:0;display:flex;flex-direction:column;padding:64px 56px}
+.topbar{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:36px}
+.category-badge{background:var(--badge);color:#fff;font-size:20px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:8px 18px;border-radius:999px}
+.account{display:flex;align-items:baseline;gap:4px;font-size:34px;color:#1a1a1a}
+.account .at{font-weight:500;color:#9a978e}
+.account .handle{font-weight:800}
 .center{flex:1;display:flex;flex-direction:column;justify-content:center;gap:44px;min-height:0}
 .hook{font-size:54px;font-weight:800;line-height:1.2;letter-spacing:-1.5px;color:#1a1a1a;max-width:100%}
 .content-box{position:relative;display:flex;align-items:center;border-radius:28px;padding:64px 70px;background:var(--box-fill);overflow:hidden}
@@ -23,20 +28,15 @@ body{font-family:'Satoshi',system-ui,sans-serif;background:#f7f5f0;color:#1a1a1a
 .content-text ul,.content-text ol{margin:4px 0;padding-left:46px}
 .content-text li{margin-bottom:18px;line-height:1.38}
 .content-text li:last-child{margin-bottom:0}
-.content-text blockquote{margin:22px 0 8px;padding:10px 26px;border-left:10px solid rgba(0,0,0,.22);font-weight:900;font-size:38px;line-height:1.3}
+.content-text blockquote{margin:22px 0 4px;padding:16px 30px;background:rgba(0,0,0,.18);border-radius:20px;font-weight:900;font-size:38px;line-height:1.3}
 .content-text blockquote p{margin:0}
 .content-text table{border-collapse:collapse;width:100%;margin:6px 0 18px}
 .content-text th,.content-text td{border:2px solid rgba(0,0,0,.2);padding:10px 16px;font-size:32px}
 .content-text th{font-weight:900;text-align:left}
 .content-text td{font-weight:600}
 .content-text hr{border:none;border-top:3px solid rgba(0,0,0,.2);margin:18px 0}
-.category-badge{align-self:flex-start;background:var(--badge);color:#fff;font-size:20px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:8px 18px;border-radius:999px;margin-bottom:14px}
-.footer{display:flex;align-items:center;justify-content:space-between;margin-top:36px}
-.footer-left{display:flex;align-items:baseline;gap:4px;font-size:30px;color:#1a1a1a}
-.footer-left .at{font-weight:500;color:#9a978e}
-.footer-left .handle{font-weight:800}
-.footer-right{font-size:30px;font-weight:700;letter-spacing:1px}
-.footer-right .domain{color:#9a978e;font-weight:500}
+.footer{display:flex;align-items:center;justify-content:center;margin-top:36px;font-size:30px;font-weight:700;letter-spacing:1px}
+.footer .domain{color:#9a978e;font-weight:500}
 </style>
 </head>
 <body>
@@ -48,17 +48,17 @@ body{font-family:'Satoshi',system-ui,sans-serif;background:#f7f5f0;color:#1a1a1a
   <rect width="1080" height="1350" filter="url(#n)" opacity="0.6"/>
 </svg>
 <section class="clip" id="unified-scene" data-start="0" data-duration="15" data-track-index="1">
-  <div class="center">
+  <div class="topbar">
     <span class="category-badge">{{category}}</span>
+    <div class="account"><span class="at">@</span><span class="handle">{{account}}</span></div>
+  </div>
+  <div class="center">
     <div class="hook">{{hook}}</div>
     <div class="content-box">
       <div class="content-text">{{content}}</div>
     </div>
   </div>
-  <div class="footer">
-    <div class="footer-left"><span class="at">@</span><span class="handle">{{account}}</span></div>
-    <div class="footer-right">1section<span class="domain">.com</span></div>
-  </div>
+  <div class="footer">1section<span class="domain">.com</span></div>
 </section>
 </div>
 <script>
