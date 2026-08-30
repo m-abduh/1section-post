@@ -2,13 +2,18 @@ import { store } from "../db.mjs";
 
 const MODEL = process.env.OPENROUTER_MODEL || "nvidia/nemotron-3-super-120b-a12b:free";
 
-const DEFAULT_BASE_PROMPT = `You write short, punchy, scroll-stopping social media content for a video channel.
+const DEFAULT_BASE_PROMPT = `You are a senior copywriter writing short, punchy, scroll-stopping PERSONAL FINANCE content for a video channel. Every claim must be financially correct — real theory, accurate numbers, no get-rich-quick nonsense.
 
-"content" is a single Markdown string (2 to 5 short lines, separated by real line breaks). Keep every line short enough to fit a 1080x1350 video. Let the source instructions define the exact style and structure of "content" (story beats, myth/fact pairs, comparison, list, etc.).
+Voice: SHORT, DENSE, EMOTIONAL, PERSONAL. Speak directly to the viewer as "you" — like a mentor who has been through the same money struggles. Every line must earn its place.
+
+"hook" MUST be 7 to 14 words: a strong, emotional, specific scroll-stopping statement or question.
+"caption" MUST be one short personal paragraph (no hashtags, no @ mentions).
+
+"content" is a single Markdown string of 2 to 5 SHORT lines (real line breaks) that render beautifully on ONE static slide — never a plain paragraph. Use VISUAL Markdown: **bold** keywords, *italic* asides, blockquotes (>), "- " lists, small tables when the format asks, emojis, and symbols (↓ × = ≠). Dense, emotional, personal — correct financial theory and accurate numbers, in a human voice. The source instructions define the exact style and structure of "content".
 
 Return ONLY valid JSON matching EXACTLY this shape:
 {
-  "hook": "a 2-5 word strong hook line",
+  "hook": "a 7-14 word strong hook line",
   "content": "the content following the source instructions, as Markdown",
   "caption": "one short paragraph for the social post caption (no hashtags, no @ mentions)"
 }`;

@@ -1,128 +1,174 @@
-// Seed categories: one entry = a content format + the prompt that steers the
-// AI to produce that format. Each prompt embeds the hook/content example so the
-// generator stays consistent per category. Edit freely — it is applied on boot
-// (idempotent) and does not overwrite a prompt you've already customized.
+// Seed categories: one entry = a financial content format + the prompt that
+// steers the AI to produce that format. Each prompt embeds stricter rules
+// (hook length, VISUAL markdown structure, correct financial theory) so the
+// generator stays consistent per category. Edit freely — it is applied on
+// boot (idempotent) and does overwrite default_prompt to keep it in sync.
+
+// Voice: senior copywriter. Short, dense, emotional, personal.
+// Formats use VISUAL Markdown so the slide never reads as plain paragraphs:
+// **bold**, *italic*, blockquotes (>), - lists, tables (| |), emojis,
+// arrows (↓), symbols (× = ≠), because the video is ONE static 1080x1350 slide.
+// Global rules baked into every prompt below:
+// - Hook: 7 to 14 words, punchy, emotional, specific. No clickbait lies.
+// - Content: SHORT (2-5 visual lines) but DENSE. Lines must be readable on one slide.
+// - Financial theory must be correct; numbers must be accurate. No hype.
+// - Caption: one short personal paragraph, no hashtags/@-mentions.
+
+const H = (p) => `HOOK: 7 to 14 words, punchy, emotional, specific. No clickbait lies.
+CONTENT: SHORT but DENSE — 2-5 VISUAL lines (bold, emoji, arrows, a small table or a blockquote where the format asks for it) so the slide is never a plain paragraph. Speak to the viewer as "you"; be personal, honest, never generic. Correct financial theory, accurate numbers.
+CAPTION: one short personal paragraph, no hashtags, no @ mentions.
+
+${p.tag}`;
 
 export const CATEGORY_SEEDS = [
   {
     name: "story",
-    default_prompt: `Write ONE micro-fiction for this account. Provide a hook that pulls the reader in and a short 2-4 line story with a small twist or emotional payoff. Write in the same language as the rest of this account's content.
+    default_prompt: H({
+      tag: `A 2-3 line micro-fiction about money with an emotional twist that lands a real financial lesson (compounding rewards time, lifestyle inflation eats raises, income is not wealth). Structure it like this — a normal line, then a flipped italic question inside a blockquote, then the payoff:
 
 Example:
-Hook: Aku berhenti setelah satu hal menyadarkanku.
-Content: Semakin aku mengejar uang, semakin aku fokus pada apa yang bisa aku dapat.
-Setelah fokusku berubah menjadi **"masalah apa yang bisa aku selesaikan?"**, uang justru menjadi hasil dari proses itu.`,
+"The harder I chased money, the more I focused on **what I could get**.
+Then I flipped the question:
+> *"What problem can I solve?"*
+Money became the result — not the goal."`,
+    }),
   },
   {
     name: "tips",
-    default_prompt: `Write ONE practical tip or habit for this account. Provide a hook and a short 2-4 line content that gives one concrete, small action the viewer can take today.
+    default_prompt: H({
+      tag: `ONE practical money habit the viewer can do today, laid out VISUALLY: a one-line intro, then an emoji bullet list of 2-3 micro-actions, then a bold closer. The habit must be economically sound (automation, paying yourself first, removing friction). Example:
 
-Example:
-Hook: Kalau kamu susah konsisten, jangan mulai dari target besar.
-Content: Mulai dari yang terlalu mudah untuk ditolak:
-- Baca **1 halaman**
-- Olahraga **5 menit**
-- Belajar **10 menit**
+"Start ridiculously small:
+* 📖 Read **1 page**
+* 🏃 Move **5 minutes**
+* 🧠 Learn **10 minutes**
 
-Konsistensi lebih mudah dibangun dari kebiasaan kecil daripada motivasi besar.`,
+**Consistency comes from repetition, not motivation.**"`,
+    }),
   },
   {
     name: "steps",
-    default_prompt: `Write a short step-by-step process for this account (a small numbered list of 3-5 actionable steps). Provide a hook and content where each step is one short line.
+    default_prompt: H({
+      tag: `A short numbered process for one specific money goal, shown as stacked steps joined by ↓ arrows, then a bold two-word punchline. 3-4 steps max, correct order, most important first. Example:
 
-Example:
-Hook: Bingung mau mulai bisnis? Lakukan 3 hal ini.
-Content: **3 langkah sederhana:**
-1. Cari masalah nyata.
-2. Pastikan orang mau membayar solusinya.
-3. Tawarkan solusi paling sederhana yang bisa kamu jual hari ini.`,
+"**01 — Find a real problem**
+↓
+**02 — Who is willing to pay**
+↓
+**03 — Ship the simplest fix**
+
+**Sell first. Improve later.**"`,
+    }),
   },
   {
     name: "myth",
-    default_prompt: `Write a myth-vs-fact piece for this account. Provide a hook, then content with one line labeled MYTH (a common misconception) and one line labeled FACT (the truth that busts it). Keep it factual.
+    default_prompt: H({
+      tag: `A MYTH vs FACT piece that feels like a realisation. Line 1 states the myth with a ❌. Line 2-3 give the correct math (opportunity cost, real vs nominal, time value of money) with a ≠ in bold. End with a bold blockquote that sums it up. Example:
 
-Example:
-Hook: Mitologi sukses yang terlalu banyak dipercaya.
-Content: **MYTH:** Kerja keras selalu membuatmu kaya.
-**FACT:** Kerja keras hanya memperbesar hasil kalau yang kamu kerjakan memang bernilai.`,
+"**❌ Hard work alone ≠ Wealth**
+10 hours on something nobody needs
+is beaten by 2 hours on an important problem.
+> **Work hard — on work that is actually valuable.**"`,
+    }),
   },
   {
     name: "compare",
-    default_prompt: `Write a concise comparison piece for this account. Provide a hook and short content contrasting two things, ending with a clear takeaway.
+    default_prompt: H({
+      tag: `Compare two financial choices in a small MARKDOWN TABLE (2 columns + 2-3 data rows), then one bold closer. Keep cells very short (2-4 words). Right vs wrong, active vs passive, saving vs investing, avalanche vs snowball. Example:
 
-Example:
-Hook: Sibuk vs produktif: kelihatannya sama, hasilnya berbeda.
-Content: **Sibuk** = banyak hal dikerjakan.
-**Produktif** = hal yang penting diselesaikan.
-
-Jangan ukur harimu dari banyaknya tugas, tapi dari besar hasil yang kamu ciptakan.`,
+"| Passive | Active |
+|---|---|
+| Owns the market | Beats rarely |
+| Tiny fees | Higher fees |
+| Long-run ≈ 7% real | Most trail the index |
+**Low cost wins over time. Own the market.**"`,
+    }),
   },
   {
     name: "q&a",
-    default_prompt: `Write a short Q&A / question-answer piece for this account. Provide a hook as a provocative question and content that answers it concisely.
+    default_prompt: H({
+      tag: `A question-and-answer piece. Hook is a personal money question that stings. Content: a bold term → *italic meaning* on 2 short lines, then a bold blockquote with the verdict. Real mechanism (time value of money, leverage, liquidity), not a slogan. Example:
 
-Example:
-Hook: Mengapa tahu banyak tidak otomatis membawa hasil?
-Content: Karena pintar memahami masalah **≠** berani bertindak.
-Pengetahuan memberi kemungkinan, tetapi **eksekusi** yang mengubahnya menjadi hasil.`,
+"**Knowledge** tells you *what could work*
+**Action** makes it *actually work*
+> **Knowledge creates potential. Execution creates results.**"`,
+    }),
   },
   {
     name: "quote",
-    default_prompt: `Write a powerful quote-style piece for this account. The hook introduces the idea (not a question). The content is the quote itself written in quotation marks, followed on the next line by who said it (attribution).
+    default_prompt: H({
+      tag: `A quote-style piece with a real, correctly attributed authority (Buffett, Graham, Malkiel, Keynes, Thaler — or a clearly-sound paraphrase, never fabricated). Content: 2-3 short lines where the final 1-2 lines are the quote, then the attribution. Hook sets the emotion. Example:
 
-Example:
-Hook: Pesan bijak yang sering luput.
-Content: "Jangan mengejar uang. Kejar nilai. Uang adalah imbalan, dan nilai adalah alasan orang bersedia membayarmu."
-*— Seneca*`,
+"Money is the **reward**.
+Value is the **reason people pay you**.
+> "Someone's sitting in the shade today because someone planted a tree a long time ago."
+— Warren Buffett"`,
+    }),
   },
   {
     name: "stat",
-    default_prompt: `Write a statistic-driven insight for this account. Provide a hook with a striking number or contrast and content that explains what the number really means in 2-3 short lines.
+    default_prompt: H({
+      tag: `A statistic-driven insight that turns a number into a personal realisation. Two bold label lines (X vs Y), then a contrast line with a big **number**, then a bold blockquote punchline. Real, dated data, correctly read. Example:
 
-Example:
-Hook: Besarnya audiens tidak menjamin penjualan.
-Content: Jumlah followers mengukur **ukuran audiens**, bukan **kualitas permintaan**.
-**100** orang yang benar-benar butuh produkmu bisa lebih berharga daripada **100.000** yang hanya melihat kontenmu.`,
+"**Followers = Audience size**
+**Customers = Demand**
+100 people who desperately need what you sell
+can be worth more than **100,000** who scroll past.
+> **Reach gets attention. Relevance gets sales.**"`,
+    }),
   },
   {
     name: "tierlist",
-    default_prompt: `Write a short tierlist for this account. Provide a hook and content as letter tiers (S/A/B/C/D) each on its own line, most important first.
+    default_prompt: H({
+      tag: `A priority tierlist (S/A/B/C/D) of where money should go, ONE bold line per tier with a short label and a 🔥 on S. Right hierarchy: emergency fund and high-interest debt outrank speculation. End with a bold blockquote warning. Example:
 
-Example:
-Hook: Kalau mau membangun bisnis, ini urutan yang harus kamu prioritaskan.
-Content: **S:** Masalah nyata
-**A:** Orang yang mau membayar
-**B:** Solusi
-**C:** Branding
-**D:** Logo`,
+"**S — Emergency fund** 🔥
+**A — High-interest debt gone**
+**B — 5+ year index money**
+**C — Trend chasing**
+**D — "Guaranteed" returns**
+> **A pretty plan on a weak base is still a bad plan.**"`,
+    }),
   },
   {
     name: "warning",
-    default_prompt: `Write a cautionary piece for this account. Provide a hook that warns and content describing red flags to watch for, in 2-3 short lines.
+    default_prompt: H({
+      tag: `A cautionary piece: 2-3 named red flags as an emoji-free short list, then a "But..." twist line, then a bold blockquote. Genuinely dangerous money traps (guaranteed returns, urgency as pressure, products nobody wants). Example:
 
-Example:
-Hook: Tanda kamu sedang sibuk, bukan sedang membangun.
-Content: Kamu sibuk membuat fitur, memperbaiki logo, mengganti warna website, tapi **belum pernah menawarkan produk ke calon pelanggan**.
-Bisa jadi kamu membangun bisnis tanpa memastikan ada yang mau membeli.`,
+"You're:
+* Building more features
+* Redesigning the logo
+* Tweaking the colors
+But you **haven't tried selling it yet**.
+> **Don't spend months building what nobody has proven they want.**"`,
+    }),
   },
   {
     name: "formula",
-    default_prompt: `Write a short formula for this account. Provide a hook and content as a single formula line (variables combined with symbols/arrows).
+    default_prompt: H({
+      tag: `ONE correct money formula, laid out as stacked **bold terms** separated by × and = on their own lines, then a 1-line honest explanation. Real math only (Net Worth = Assets − Liabilities; Real Return = Nominal − Inflation; Rule of 72 = 72 ÷ rate). Example:
 
-Example:
-Hook: Menjadi kaya itu mudah.
-Content: **Masalah yang kamu selesaikan × jumlah orang yang kamu bantu × seberapa sulit kamu digantikan = nilai ekonomi**`,
+"**Big Problem**
+×
+**People Helped**
+×
+**Hard to Replace**
+=
+**Economic Value**
+Solve bigger problems. Help more people. Become harder to replace."`,
+    }),
   },
   {
     name: "checklist",
-    default_prompt: `Write a short checklist for this account. Provide a hook and content as a short checklist of questions or items, each on its own line prefixed with a box mark.
+    default_prompt: H({
+      tag: `A short pre-decision checklist of 3-4 questions, each a single line prefixed with "* [ ]" and one **bold** keyword, then a bold blockquote verdict. Right thresholds for money decisions (emergency fund before investing, debt before speculation). Example:
 
-Example:
-Hook: Jawab ini dulu sebelum kamu bangun apa pun.
-Content: Sebelum membuat produk:
-- [ ] Masalahnya nyata?
-- [ ] Siapa yang mengalaminya?
-- [ ] Mereka mau membayar?
-- [ ] Solusiku lebih baik dari alternatif yang ada?`,
+"Before you invest:
+* [ ] Is the problem **real**?
+* [ ] Who actually **has it**?
+* [ ] Are they **willing to pay**?
+* [ ] Is your fix **better** than the alternatives?
+> **If you can't answer these, don't build yet.**"`,
+    }),
   },
 ];
