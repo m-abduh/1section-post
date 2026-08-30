@@ -104,6 +104,14 @@ button:hover{background:#383842}
     <div class="section-title">Categories</div>
     <div id="categoryList"></div>
     <button class="grow" onclick="openAddCategory()" style="width:100%">+ Add Category</button>
+
+    <div class="section-title">Music</div>
+    <div class="card">
+      <label>Upload tracks (BGM source)</label>
+      <input type="file" id="music_file" accept="audio/*" multiple>
+      <div class="mt"><button class="btn-primary grow" onclick="uploadMusic()" style="width:100%">Upload</button></div>
+      <div id="musicList" class="mt"></div>
+    </div>
   </aside>
 
   <main class="main">
@@ -152,6 +160,7 @@ button:hover{background:#383842}
 <script>
 const state = { accounts: [], categories: [], selectedId: null };
 let accountCats = [];
+let musicFiles = [];
 
 function toast(msg, err) { const t = document.getElementById('toast'); t.textContent = msg; t.className = 'toast' + (err ? ' err' : '') + ' show'; setTimeout(() => t.classList.remove('show'), 3200); }
 async function api(path, opts) { const r = await fetch(path, Object.assign({ headers: { 'Content-Type': 'application/json' } }, opts)); const j = await r.json().catch(() => ({})); if (!r.ok) throw new Error(j.error || r.statusText); return j; }
@@ -159,7 +168,7 @@ async function api(path, opts) { const r = await fetch(path, Object.assign({ hea
 async function refreshAll() {
   state.accounts = await api('/api/accounts');
   state.categories = await api('/api/categories');
-  renderAccounts(); renderCategories(); renderSettings(); renderPanel();
+  renderAccounts(); renderCategories(); renderSettings(); renderPanel(); renderMusic();
 }
 
 function renderAccounts() {
@@ -394,6 +403,61 @@ async function saveCategory() {
 }
 function openEditCategory(c) { document.getElementById('cat_name').value = c.name; document.getElementById('cat_prompt').value = c.default_prompt || ''; document.getElementById('catModal').classList.add('show'); window.__editCat = c.id; }
 document.getElementById('catModal').onclick = (e) => { if (e.target.id === 'catModal') closeCatModal(); };
+
+function fmtDur(s) { if (s == null) return '—'; const m = Math.floor(s / 60); const ss = Math.round(s % 60); return `${m}:${String(ss).padStart(2, '0')}`; }
+
+async function renderMusic() {
+  const el = document.getElementById('musicList');
+  try { musicFiles = await api('/api/music'); } catch (e) { el.innerHTML = '<div class="empty">Load failed</div>'; return; }
+  if (!musicFiles.length) { el.innerHTML = '<div class="empty">No music yet</div>'; return; }
+  el.innerHTML = '';
+  musicFiles.forEach((f, i) => {
+    const d = document.createElement('div');
+    d.className = 'vitem';
+    d.innerHTML = `
+      <audio controls preload="none" src="/music/${encodeURIComponent(f.name)}" style="width:230px;flex-shrink:0;height:34px"></audio>
+      <div class="meta">
+        <div class="t">${escapeHtml(f.name)}</div>
+        <div class="d">${fmtDur(f.duration)} · ${(f.size / 1048576).toFixed(1)} MB</div>
+      </div>
+      <div class="acts">
+        <button class="btn-sm" onclick="renameMusic(${i})">Rename</button>
+        <button class="btn-sm btn-danger" onclick="deleteMusic(${i})">Delete</button>
+      </div>`;
+    el.appendChild(d);
+  });
+}
+
+async function uploadMusic() {
+  const input = document.getElementById('music_file');
+  if (!input.files.length) return toast('Choose audio files first', true);
+  const fd = new FormData();
+  Array.from(input.files).forEach(f => fd.append('files', f));
+  try {
+    const r = await fetch('/api/music/upload', { method: 'POST', body: fd });
+    const j = await r.json().catch(() => ({}));
+    if (!r.ok) throw new Error(j.error || r.statusText);
+    input.value = '';
+    toast('Uploaded ' + j.files.length + (j.files.length > 1 ? ' tracks' : ' track'));
+    renderMusic();
+  } catch (e) { toast(e.message, true); }
+}
+
+async function deleteMusic(i) {
+  const f = musicFiles[i];
+  if (!f || !confirm('Delete "' + f.name + '"?')) return;
+  try { await api('/api/music/' + encodeURIComponent(f.name), { method: 'DELETE' }); renderMusic(); }
+  catch (e) { toast(e.message, true); }
+}
+
+async function renameMusic(i) {
+  const f = musicFiles[i];
+  if (!f) return;
+  const nn = prompt('New file name (keep the extension)', f.name);
+  if (!nn || nn === f.name) return;
+  try { await api('/api/music/' + encodeURIComponent(f.name), { method: 'PUT', body: JSON.stringify({ name: nn }) }); renderMusic(); }
+  catch (e) { toast(e.message, true); }
+}
 
 function escapeHtml(s) { return String(s == null ? '' : s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
 

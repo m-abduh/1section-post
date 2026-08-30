@@ -1,8 +1,10 @@
 import "dotenv/config";
 import express from "express";
+import multer from "multer";
 import { join, dirname } from "path";
 import { fileURLToPath } from "url";
-import { unlinkSync } from "fs";
+import { readdirSync, statSync, unlinkSync, renameSync, existsSync } from "fs";
+import { spawn } from "child_process";
 import { startScheduler } from "./scheduler.js";
 import { runPipeline } from "./pipeline.js";
 import { store } from "./db.mjs";
@@ -11,6 +13,46 @@ import { getSettings } from "./scheduler.js";
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const app = express();
 const PORT = process.env.PORT || 8000;
+const MUSIC_DIR = join(__dirname, "music");
+const AUDIO_RE = /\.(mp3|wav|m4a|aac|ogg|flac)$/i;
+
+function safeMusicName(name) {
+  return String(name || "").replace(/[\\/:*?"<>|]/g, "").trim();
+}
+
+function probeDuration(filePath) {
+  return new Promise((resolve) => {
+    const p = spawn("ffprobe", ["-v", "error", "-show_entries", "format=duration", "-of", "default=noprint_wrappers=1:nokey=1", filePath]);
+    let out = "";
+    p.stdout.on("data", (d) => (out += d));
+    p.on("close", () => {
+      const s = parseFloat(out.trim());
+      resolve(Number.isFinite(s) ? s : null);
+    });
+    p.on("error", () => resolve(null));
+  });
+}
+
+const musicUpload = multer({
+  storage: multer.diskStorage({
+    destination: MUSIC_DIR,
+    filename: (req, file, cb) => {
+      let name = safeMusicName(file.originalname);
+      if (!name || !AUDIO_RE.test(name)) return cb(new Error("Only audio files allowed (mp3, wav, m4a, aac, ogg, flac)"));
+      const ext = name.match(/\.[^.]+$/)[0];
+      const base = name.slice(0, -ext.length);
+      let cand = name;
+      let i = 1;
+      while (existsSync(join(MUSIC_DIR, cand))) cand = `${base} (${i++})${ext}`;
+      cb(null, cand);
+    },
+  }),
+  limits: { fileSize: 60 * 1024 * 1024 },
+  fileFilter: (req, file, cb) => {
+    if (!AUDIO_RE.test(file.originalname)) return cb(new Error("Only audio files allowed (mp3, wav, m4a, aac, ogg, flac)"));
+    cb(null, true);
+  },
+});
 
 app.set("view engine", "ejs");
 app.set("views", join(__dirname, "views"));
@@ -36,6 +78,51 @@ app.get("/", (req, res) => {
 
 app.get("/health", (req, res) => {
   res.json({ status: "ok", uptime: process.uptime() });
+});
+
+// ---------- Music ----------
+app.get("/api/music", async (req, res) => {
+  try {
+    const names = readdirSync(MUSIC_DIR).filter((f) => AUDIO_RE.test(f)).sort((a, b) => a.localeCompare(b));
+    const files = [];
+    for (const name of names) {
+      const st = statSync(join(MUSIC_DIR, name));
+      files.push({ name, size: st.size, mtime: st.mtimeMs, duration: await probeDuration(join(MUSIC_DIR, name)) });
+    }
+    res.json(files);
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
+app.post("/api/music/upload", (req, res) => {
+  musicUpload.array("files", 20)(req, res, (err) => {
+    if (err) return res.status(400).json({ error: err.message });
+    const uploaded = req.files || [];
+    res.json({ files: uploaded.map((f) => ({ name: f.filename, size: f.size })) });
+  });
+});
+
+app.put("/api/music/:file", (req, res) => {
+  const old = safeMusicName(req.params.file);
+  const name = safeMusicName(req.body?.name || "");
+  if (!old || !name || !AUDIO_RE.test(old) || !AUDIO_RE.test(name)) return res.status(400).json({ error: "invalid audio file name" });
+  if (old === name) return res.json({ ok: true, name });
+  const oldPath = join(MUSIC_DIR, old);
+  const newPath = join(MUSIC_DIR, name);
+  if (!existsSync(oldPath)) return res.status(404).json({ error: "not found" });
+  if (existsSync(newPath)) return res.status(400).json({ error: "name already exists" });
+  renameSync(oldPath, newPath);
+  res.json({ ok: true, name });
+});
+
+app.delete("/api/music/:file", (req, res) => {
+  const name = safeMusicName(req.params.file);
+  if (!name || !AUDIO_RE.test(name)) return res.status(400).json({ error: "invalid audio file name" });
+  const p = join(MUSIC_DIR, name);
+  if (!existsSync(p)) return res.status(404).json({ error: "not found" });
+  unlinkSync(p);
+  res.json({ ok: true });
 });
 
 // ---------- Accounts ----------
