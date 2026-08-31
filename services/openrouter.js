@@ -23,6 +23,19 @@ function loadBasePrompt() {
   return saved && saved.trim() ? saved.trim() : DEFAULT_BASE_PROMPT;
 }
 
+function isRetryable(e) {
+  const m = String((e && e.message) || "");
+  return (
+    e?.cause?.code === "EAI_AGAIN" ||
+    e?.code === "EAI_AGAIN" ||
+    e?.type === "system" ||
+    m.includes("fetch failed") ||
+    /^OpenRouter error 5\d\d/.test(m) ||
+    m.includes("temporarily overloaded") ||
+    m.startsWith("OpenRouter returned empty response")
+  );
+}
+
 async function askAI(prompt, retries = 3) {
   const key = process.env.OPENROUTER_KEY;
   if (!key) throw new Error("OPENROUTER_KEY not set");
@@ -52,12 +65,15 @@ async function askAI(prompt, retries = 3) {
 
     const data = await res.json();
     const content = data.choices?.[0]?.message?.content;
-    if (!content) throw new Error(`OpenRouter returned empty response: ${JSON.stringify(data)}`);
+    if (data.error || !content) {
+      throw new Error(`OpenRouter returned empty response: ${JSON.stringify(data)}`);
+    }
     return content;
   } catch (e) {
-    if (retries > 0 && (e.cause?.code === "EAI_AGAIN" || e.code === "EAI_AGAIN" || e.type === "system" || e.message?.includes("fetch failed"))) {
-      console.log(`OpenRouter DNS/network error, retrying... (${retries} left)`);
-      await new Promise(r => setTimeout(r, 2000));
+    if (retries > 0 && isRetryable(e)) {
+      const delay = Math.min(30000, 10000 + (3 - retries) * 10000);
+      console.log(`OpenRouter transient error, retrying in ${delay / 1000}s... (${retries} left)`);
+      await new Promise(r => setTimeout(r, delay));
       return askAI(prompt, retries - 1);
     }
     throw e;

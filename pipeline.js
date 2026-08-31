@@ -64,7 +64,7 @@ export async function runPipeline({ videoId } = {}) {
 
   let result;
   try {
-    result = await generateAndPost(video, { account, categoryName, prompt });
+    result = await generateAndPost(video, { account, categoryName, prompt, position: categoryRow.position });
 
     // Advance rotation only after a successful slot
     let nextIndex = accountIndex + 1;
@@ -76,13 +76,14 @@ export async function runPipeline({ videoId } = {}) {
     store.setSettingJSON("rotation", { contentIndex: nextContent, accountIndex: nextIndex });
   } catch (err) {
     console.error("[pipeline] slot failed:", err.message);
+    try { store.updateVideo(video.id, { status: "failed", last_error: err.message }); } catch {}
     result = { error: err.message };
   }
 
-  return { result, video };
+  return { result, video: store.getVideo(video.id) || video };
 }
 
-async function generateAndPost(video, { account, categoryName, prompt }) {
+async function generateAndPost(video, { account, categoryName, prompt, position }) {
   const outFile = `${account.name.replace(/[^a-zA-Z0-9-_]+/g, "-")}-${Date.now()}.mp4`;
 
   const gen = await generatePost({ accountName: account.name, categoryName, prompt });
@@ -110,7 +111,7 @@ async function generateAndPost(video, { account, categoryName, prompt }) {
       content: gen.content,
       category: categoryName,
       account: account.name,
-      index: categoryRow.position,
+      index: position,
     },
     outFile
   );
