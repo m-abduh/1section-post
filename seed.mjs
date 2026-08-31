@@ -8,16 +8,20 @@
 //   {body}         <- the rest, written by the AI (this is what the prompt steers)
 //
 // Body rules for EVERY category (baked into each prompt below):
-// - Rich README Markdown: --thematic break, **bold**, *italic*,
-//   ~~strikethrough~~, blockquotes (>), "- " lists, code fences (```text),
-//   and tables (| |) where the format calls for them.
+// - Plain flowing Markdown: **bold**, *italic*, ~~strikethrough~~, "- " lists,
+//   and | tables | where the format calls for them.
+// - NEVER use container blocks: no blockquotes (>) and no \`\`\`text code fences.
+// - NEVER repeat the hook text anywhere in the body — the body must stand on its
+//   own as a separate, non-redundant discussion (no wasted vertical space).
+// - The hook may use inline styling (like **bold**) SPARINGLY on a key phrase,
+//   but never bold the whole hook.
 // - NEVER use emojis or emoticons — only text and numbers; use symbols
 //   (× = ≠ ↓) ONLY when they carry meaning.
 // - Keep lines short enough to fit on one 1080x1350 static frame.
 // - Every claim must be financially/factually correct — no hype.
 
 function readmeBody({ structure, example }) {
-  return `Write the CONTENT BODY in GitHub-README-style Markdown. A headline (the "hook") already sits above as the H2 title; your body is everything after it — pure Markdown that renders beautifully on ONE static slide.
+  return `Write the CONTENT BODY in plain, flowing Markdown. A headline (the "hook") already sits above as the H2 title; your body is everything after it — pure Markdown that renders beautifully on ONE static slide.
 
 Structure to follow:
 ${structure}
@@ -25,62 +29,55 @@ ${structure}
 Exact visual style to emulate (invent fresh content, never copy verbatim):
 ${example}
 
-Rules: 100% Markdown, GitHub README look. Bold is used SPARINGLY — only on the 1-2 key words that carry an idea, and NEVER bold an entire line, blockquote, table cell, or whole code block. Inside blockquotes (>) and \`\`\`text code fences keep the text normal-weight by default; bold only a word or two when it truly matters. Use --thematic breaks, *italic*, ~~strikethrough~~, blockquotes >, "- " lists, \`\`\`text code fences, and | tables when asked. No emojis, no emoticons, text + numbers only, symbols (× = ≠ ↓) only where meaningful. Every line short enough for one screen. Correct financial theory and accurate numbers.`;
+Rules: 100% Markdown, plain flowing body. Use only safe inline styling — **bold** (1-2 key words max, never a whole line), *italic*, ~~strikethrough~~, "- " lists, and | tables | when asked. NEVER use container blocks: no blockquotes (>) and no \`\`\`text code fences — write everything as plain paragraphs and lists. NEVER repeat the hook text anywhere in the body; the body must add new information, not echo the title. No emojis, no emoticons, text + numbers only, symbols (× = ≠ ↓) only where meaningful. Every line short enough for one screen. Correct financial theory and accurate numbers.`;
 }
 export const CATEGORY_SEEDS = [
   {
     name: "Story",
     default_prompt: readmeBody({
-      structure: `A 2–3 step symbolic money chain, a dramatic turn signposted by a blockquote, then the payoff line with the key word in **bold**.`,
+      structure: `A 2–3 step symbolic money chain, a dramatic turn, then the payoff line with the key word in **bold**.`,
       example: `**Work harder → Earn more → Become rich**
 
 Until the question changes:
 
-> "What problem can be solved?"
-
-Money becomes the **result**, not the goal.`,
+"Money becomes the **result**, not the goal."`,
     }),
   },
   {
     name: "Myth",
     default_prompt: readmeBody({
-      structure: `The myth as a ~~strikethrough~~ claim, the corrected truth in **bold**, then a blockquote whose last line is the punchline.`,
-      example: `~~More hours = More money~~
+      structure: `Open with a ~~strikethrough~~ of the myth (paraphrased, never a repeat of the hook line), then the corrected truth with the key word in **bold**, then one final punchline line. No blockquote.`,
+      example: `~~Earning more is the whole game.~~
 
-**Not necessarily.**
+Earning more helps, but **keeping** it is what builds wealth.
 
-> Hard work matters. 
-> Direction matters more.`,
+Most people earn more and lose more.`,
     }),
   },
   {
     name: "Contrarian",
     default_prompt: readmeBody({
-      structure: `One contrarian one-liner, then a \`\`\`text code fence showing a 3-step chain joined by ↓, then a blockquote verdict.`,
+      structure: `One contrarian one-liner, then a 3-step chain joined by ↓, then a verdict line with the key word in **bold**. No code fence, no blockquote.`,
       example: `You need **less friction**.
 
-\`\`\`text
 Smaller Task
 ↓
 Easier Start
 ↓
 More Repetition
-\`\`\`
 
-> Design the behavior. Don't depend on motivation.`,
+Design the behavior. Don't depend on **motivation**.`,
     }),
   },
   {
     name: "Unpopular Truth",
     default_prompt: readmeBody({
-      structure: `A blunt unpopular truth in short bold-flagged lines, then a blockquote verdict, then a closer line with the key word in **bold**.`,
+      structure: `A blunt unpopular truth in short bold-flagged lines, then a blunt verdict line with the key word in **bold**. No blockquote.`,
       example: `The idea can be brilliant.
 
 The design can be beautiful.
 
-But if nobody needs it:
-
-> It doesn't matter.
+But if nobody needs it, **it doesn't matter**.
 
 Customers buy **solutions**, not ideas.`,
     }),
@@ -88,7 +85,7 @@ Customers buy **solutions**, not ideas.`,
   {
     name: "Reframe",
     default_prompt: readmeBody({
-      structure: `A ~~strikethrough~~ of the wrong belief, the right frame in **bold**, a "- " bullet list of what it reveals, then a blockquote closer.`,
+      structure: `A ~~strikethrough~~ of the wrong belief, the right frame in **bold**, a "- " bullet list of what it reveals, then a plain closer line. No blockquote.`,
       example: `~~Failure = Losing~~
 
 **Failure = Information**
@@ -99,40 +96,39 @@ It shows:
 - What was misunderstood
 - What needs to change
 
-> Learn from it, then move.`,
+Learn from it, then **move**.`,
     }),
   },
   {
     name: "Q&A",
     default_prompt: readmeBody({
-      structure: `A stinging question line, a **X ≠ Y** contrast, a short explanation, then a blockquote whose lines are the verdict.`,
+      structure: `A stinging question line, a **X ≠ Y** contrast, a short explanation, then a plain two-line verdict. No blockquote.`,
       example: `Because:
 
 **Knowing ≠ Doing**
 
 You can understand everything and still take **zero action**.
 
-> Knowledge creates potential. 
-> Execution creates results.`,
+Knowledge creates potential. Execution creates **results**.`,
     }),
   },
   {
     name: "Compare",
     default_prompt: readmeBody({
-      structure: `Compare two opposing sides in a small | table | (2 columns × 3 short data rows), then a blockquote verdict.`,
+      structure: `Compare two opposing sides in a small | table | (2 columns × 3 short data rows), then a plain one-line verdict. No blockquote.`,
       example: `| Busy | Productive |
 |---|---|
 | Does more | Achieves more |
 | Chases activity | Chases outcomes |
 | Fills time | Creates value |
 
-> Activity ≠ Progress`,
+**Activity ≠ Progress**`,
     }),
   },
   {
     name: "Problem → Solution",
     default_prompt: readmeBody({
-      structure: `"The problem might not be X" + a **bold** alternative, then a 3-line "**X → Y**" chain, then a blockquote verdict.`,
+      structure: `"The problem might not be X" + a **bold** alternative, then a 3-line "**X → Y**" chain, then a plain verdict line. No blockquote.`,
       example: `It might be the **system**.
 
 **Distraction → Remove distraction**
@@ -141,13 +137,13 @@ You can understand everything and still take **zero action**.
 
 **Friction → Reduce friction**
 
-> Change the system, not just the willpower.`,
+Change the **system**, not just the willpower.`,
     }),
   },
   {
     name: "Warning",
     default_prompt: readmeBody({
-      structure: `A hard warning line, a short "- " list of red flags, "None of these prove **demand**", then a two-line blockquote.`,
+      structure: `A hard warning line, a short "- " list of red flags, "None of these prove **demand**", then a plain two-line verdict. No blockquote.`,
       example: `More features.
 
 Better UI.
@@ -156,14 +152,13 @@ New logo.
 
 None of these prove **demand**.
 
-> Building proves capability. 
-> Selling proves demand.`,
+Building proves capability. **Selling** proves demand.`,
     }),
   },
   {
     name: "Tips",
     default_prompt: readmeBody({
-      structure: `A rhetorical question, a reframe ("make the action **smaller**"), three short bold numbered lines, then a blockquote punchline.`,
+      structure: `A rhetorical question, a reframe ("make the action **smaller**"), three short bold numbered lines, then a plain punchline. No blockquote.`,
       example: `Don't make the goal bigger.
 
 Make the action **smaller**.
@@ -172,33 +167,29 @@ Make the action **smaller**.
 5 minutes. 
 1 repetition.**
 
-> Consistency starts when starting becomes easy.`,
+Consistency starts when **starting** becomes easy.`,
     }),
   },
   {
     name: "Formula",
     default_prompt: readmeBody({
-      structure: `One correct money formula as a SINGLE HORIZONTAL line of terms joined by × and =, wrapped in a \`\`\`text code fence (terms on one line: A × B × C = Value — never stacked vertically), then a one-line reframe, then a blockquote verdict.`,
-      example: `\`\`\`text
-Problem × People × Leverage = Value
-\`\`\`
+      structure: `One correct money formula as a SINGLE HORIZONTAL line of terms joined by × and = (terms on one line: A × B × C = Value — never stacked vertically), then a one-line reframe, then a plain verdict line. No code fence, no blockquote.`,
+      example: `**Problem × People × Leverage = Value**
 
 Don't just work more.
 
-> Create more value with the same effort.`,
+Create more value with the **same effort**.`,
     }),
   },
   {
     name: "Stat",
     default_prompt: readmeBody({
-      structure: `A "**X = label**" contrast on two lines, a plain line, a blockquote, then a **bold** closer.`,
+      structure: `A "**X = label**" contrast on two lines, a plain line, then a **bold** closer. No blockquote.`,
       example: `**Followers = Attention**
 
 **Customers = Demand**
 
-100 people who desperately need something can be worth more than:
-
-> 100,000 people who don't care.
+100 people who desperately need something can be worth more than **100,000 who don't care**.
 
 **Relevance beats reach.**`,
     }),

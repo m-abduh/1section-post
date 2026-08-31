@@ -142,7 +142,7 @@ async function uploadWithRetry(video) {
         const results = [];
         for (const ch of channels) {
           const thumbnailOffset = (ch.service === "youtube" || ch.service === "tiktok") ? 0 : undefined;
-          await createPost(token, ch.id, video.caption, videoUrl, ch.service, video.account_name || "1section", thumbnailOffset);
+          await createPost(token, ch.id, video.caption, videoUrl, ch.service, video.hook || video.account_name || "1section", thumbnailOffset);
           results.push({ channel: ch.name, ok: true });
           console.log(`[pipeline] Posted to ${ch.name} (${ch.service})`);
         }
