@@ -73,7 +73,8 @@ export async function renderPost({ hook, content, category, account, content_tex
   const bodyText = Array.isArray(content)
     ? content.join("\n")
     : (content_text || content || "");
-  const md = buildMarkdown({ hook, body: bodyText });
+  let md = buildMarkdown({ hook, body: bodyText });
+  md = md.replace(/^(\*\*[^*\n]+)$/gm, (line) => (line.endsWith("**") ? line : line + "**"));
   const htmlContent = marked.parse(md).replace(/<input\b[^>]*>/gi, "");
   const data = {
     content: htmlContent,

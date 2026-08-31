@@ -83,7 +83,8 @@ async function askAI(prompt, retries = 3) {
 }
 
 function extractJSON(text) {
-  const cleaned = text.replace(/```json\s*|\s*```/g, "").trim();
+  let cleaned = text.trim();
+  cleaned = cleaned.replace(/^```json\s*/, "").replace(/\s*```$/, "");
   const start = cleaned.indexOf("{");
   const end = cleaned.lastIndexOf("}");
   if (start === -1 || end === -1) throw new Error("No JSON found in AI response");
