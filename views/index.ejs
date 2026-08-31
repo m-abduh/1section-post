@@ -379,7 +379,7 @@ async function saveSettings() {
 }
 
 function openAddAccount() { document.getElementById('acc_name').value = ''; document.getElementById('acc_token').value = ''; window.__editAcc = null; document.getElementById('accModalTitle').textContent = 'Add Buffer Account'; document.getElementById('accModal').classList.add('show'); }
-function openEditAccount(a) { document.getElementById('acc_name').value = a.name; document.getElementById('acc_token').value = a.buffer_token || ''; window.__editAcc = a.id; document.getElementById('accModalTitle').textContent = 'Edit Buffer Account'; document.getElementById('accModal').classList.add('show'); }
+async function openEditAccount(a) { const acc = await api('/api/accounts/' + a.id); document.getElementById('acc_name').value = acc.name; document.getElementById('acc_token').value = acc.buffer_token || ''; window.__editAcc = a.id; document.getElementById('accModalTitle').textContent = 'Edit Buffer Account'; document.getElementById('accModal').classList.add('show'); }
 function closeAccModal() { document.getElementById('accModal').classList.remove('show'); }
 async function saveAccount() {
   const name = document.getElementById('acc_name').value.trim();

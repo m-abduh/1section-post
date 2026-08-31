@@ -130,6 +130,12 @@ app.get("/api/accounts", (req, res) => {
   res.json(store.listAccounts());
 });
 
+app.get("/api/accounts/:id", (req, res) => {
+  const acc = store.getAccount(Number(req.params.id));
+  if (!acc) return res.status(404).json({ error: "not found" });
+  res.json(acc);
+});
+
 app.post("/api/accounts", (req, res) => {
   const { name, buffer_token } = req.body || {};
   if (!name || !buffer_token) return res.status(400).json({ error: "name and buffer_token required" });
