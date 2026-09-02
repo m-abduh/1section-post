@@ -11,18 +11,22 @@ import "dotenv/config";
 import { store } from "./db.mjs";
 
 // ---------------------------------------------------------------------------
-// Prompt builder shared by every niche. `label` says who is speaking; the
-// per-account category rows carry structure + example tailored to the niche.
+// Prompt builder shared by every niche. `niche` describes WHO and WHAT this
+// account covers; the per-account category rows carry structure + example
+// tailored to the niche. `niche` is injected verbatim so the AI always knows
+// its lane and stays on-topic with concrete, current insight.
 // ---------------------------------------------------------------------------
 function nichePrompt(niche, category, structure, example) {
-  return `You write ${niche} content for a short-form video channel. A headline (the "hook") already sits above as the H2 title; your body is everything after it — plain, flowing Markdown that renders on ONE static slide.
+  return `You write ${niche.description} for a short-form video channel named ${niche.name}. Stay strictly inside this niche — every line must be about ${niche.name} topics, never generic or finance-flavored unless that IS the niche. Give a real, non-obvious insight the viewer can act on, and keep references CURRENT (real trends, tools, shifts, or patterns in this field today).
+
+A headline (the "hook") already sits above as the H2 title; your body is everything after it — plain, flowing Markdown that renders on ONE static slide.
 
 Category: ${category}
 
 Structure to follow:
 ${structure}
 
-Exact visual style to emulate (invent fresh ${niche} facts, never copy verbatim):
+Exact visual style to emulate (invent fresh ${niche.name} facts, never copy verbatim):
 ${example}
 
 Rules: 100% Markdown, plain flowing body. Use only safe inline styling — **bold** (1-2 key words max, never a whole line), *italic*, ~~strikethrough~~, "- " lists, and | tables | when asked. NEVER use container blocks: no blockquotes (>) and no \`\`\`text code fences — write everything as plain paragraphs and lists. NEVER repeat the hook text anywhere in the body; the body must add new information, not echo the title. No emojis, no emoticons, text + numbers only, symbols (× = ≠ ↓) only where meaningful. Every line short enough for one screen. Claims must be factually correct for the niche — no hype, no misleading numbers.`;
@@ -34,18 +38,19 @@ Rules: 100% Markdown, plain flowing body. Use only safe inline styling — **bol
 // ---------------------------------------------------------------------------
 const CATEGORIES = ["Story", "Myth", "Contrarian", "Unpopular Truth", "Reframe", "Q&A", "Compare", "Problem → Solution", "Warning", "Tips", "Formula", "Stat"];
 
-function makeNiche(name, promptFor) {
+function makeNiche(name, description, promptFor) {
+  const niche = { name, description };
   return {
     name,
     prompts: CATEGORIES.map((category) => ({
       category,
-      prompt: promptFor(category, name),
+      prompt: promptFor(category, niche),
     })),
   };
 }
 
 const NICHES = [
-  makeNiche("1section.finance", (c, name) => {
+  makeNiche("1section.finance", "personal finance — saving, investing, budgeting, retirement, debt, taxes, and building wealth with correct money theory", (c, niche) => {
     const spec = {
       "Story": {
         structure: `A short personal money story arc (a 2–3 step symbol chain, a turning point, a payoff), ending with the key word in **bold**.`,
@@ -171,10 +176,10 @@ Cash loses value every year you leave it idle.
 **Own assets that outrun inflation.**`,
       },
     }[c];
-    return nichePrompt(name, c, spec.structure, spec.example);
+    return nichePrompt(niche, c, spec.structure, spec.example);
   }),
 
-  makeNiche("1section.business", (c, name) => {
+  makeNiche("1section.business", "business and entrepreneurship — starting and growing a company, offers, pricing, revenue, marketing, products, and scaling", (c, niche) => {
     const spec = {
       "Story": {
         structure: `A short business-founder story arc (a 2–3 step chain, a turning point, a payoff), ending with the key word in **bold**.`,
@@ -301,10 +306,10 @@ A million in sales can still mean losing money.
 **Profit is what actually pays you.**`,
       },
     }[c];
-    return nichePrompt(name, c, spec.structure, spec.example);
+    return nichePrompt(niche, c, spec.structure, spec.example);
   }),
 
-  makeNiche("1section.career", (c, name) => {
+  makeNiche("1section.career", "careers and professional growth — skills, jobs, promotions, negotiating salary, networking, interviews, and building a career", (c, niche) => {
     const spec = {
       "Story": {
         structure: `A short career-growth story arc (a 2–3 step chain, a turning point, a payoff), ending with the key word in **bold**.`,
@@ -433,136 +438,137 @@ Loyalty alone won't raise your worth.
 **Become the rare skill** people pay for.`,
       },
     }[c];
-    return nichePrompt(name, c, spec.structure, spec.example);
+    return nichePrompt(niche, c, spec.structure, spec.example);
   }),
 
-  makeNiche("1section.technology", (c, name) => {
+  makeNiche("1section.technology", "technology — current and emerging tech, AI, software, gadgets, apps, cybersecurity, tooling, and how tech shapes the world today", (c, niche) => {
     const spec = {
       "Story": {
-        structure: `A short tech-story arc (a 2–3 step chain, a turning point, a payoff), ending with the key word in **bold**.`,
-        example: `**A small tool → People use it → It compounds**
+        structure: `A short, true-to-life tech story arc about a real product, update, bug, or shift (a 2–3 step chain, a turning point, a payoff), ending with the key word in **bold**. Keep it about an actual, current technology or trend.`,
+        example: `**One scraping script → A dead site → Public backlash**
 
-Until one shift:
+Then the lesson lands:
 
-"Leverage becomes the **difference**, not the gadget."`,
+"AI can build anything, but it can't rebuild **trust**."`,
       },
       "Myth": {
-        structure: `Open with a ~~strikethrough~~ tech myth (paraphrased, never a repeat of the hook), the corrected truth in **bold**, then one punchline.`,
-        example: `~~Newer tech is always better.~~
+        structure: `Open with a ~~strikethrough~~ tech myth people actually believe (paraphrased, never a repeat of the hook), the corrected truth in **bold**, then one punchline rooted in how the tech really works.`,
+        example: `~~AI will soon replace every developer.~~
 
-The best tool is the one you already use.
+Models write code, but **humans** decide what to build and why.
 
-Shiny upgrades can be **distractions**, not progress.`,
+The work is shifting from writing code to **judging** it.`,
       },
       "Contrarian": {
-        structure: `One contrarian tech one-liner, a 3-step chain joined by ↓, then a bold verdict.`,
-        example: `Automation is not **magic**.
+        structure: `One contrarian tech take that goes against the hype, a 3-step chain joined by ↓, then a bold verdict. Must reference current tech reality.`,
+        example: `Hitting every AI feature is **not** a moat.
 
-Map the task
+Ship one tool
 ↓
-Find the repeatable part
+Let people rely on it
 ↓
-Automate that
+Improve the daily habit
 
-Automate the boring **90%**.`,
+A habit beats a **feature list**.`,
       },
       "Unpopular Truth": {
-        structure: `A blunt unpopular tech truth, then a blunt verdict with the key word in **bold**.`,
-        example: `The tool matters less than the **problem**.
+        structure: `A blunt, unpopular truth about modern technology, then a blunt verdict with the key word in **bold**. Stay tech-specific.`,
+        example: `Your LLM output is only as good as the **context** you give it.
 
-A great hammer won't help a nonexistent nail.
+Average prompts give average answers.
 
-Solve a real problem; tech is just the **means**.`,
+Garbage in, **garbage out** still holds in the AI age.`,
       },
       "Reframe": {
-        structure: `A ~~strikethrough~~ of a wrong tech belief, the right frame in **bold**, a short "- " list, then a plain closer.`,
-        example: `~~More tools = More productive.~~
+        structure: `A ~~strikethrough~~ of a wrong tech belief, the right frame in **bold**, a short "- " list of what it reveals, then a plain closer. Must be about real tech.`,
+        example: `~~Shiny new device = Smarter you.~~
 
-**Fewer tools = More focus.**
+**The tool you master shapes your output.**
 
-It cuts:
-- Setup time
-- Context switching
-- Decision fatigue
+It decides:
+- How fast you ship
+- How much you automate
+- How well you focus
 
-Choose **one** tool and master it.`,
+Depth beats **device count**.`,
       },
       "Q&A": {
-        structure: `A stinging tech question, a **X ≠ Y** contrast, a short explanation, then a plain two-line verdict.`,
+        structure: `A stinging tech question, a **X ≠ Y** contrast drawn from how systems really behave, a short explanation, then a plain two-line verdict.`,
         example: `Because:
 
-**Features ≠ Value**
+**More data ≠ Better output**
 
-A feature nobody uses is just complexity.
+Unclean, biased data makes models **lie confidently**.
 
-Value is when someone **relies on it daily**.`,
+Garbage training data means **garbage predictions**, at scale.`,
       },
       "Compare": {
-        structure: `Compare two tech choices in a small | table | (2 cols × 3 rows), then a plain one-line verdict.`,
-        example: `| Build | Buy |
+        structure: `Compare two real tech approaches or products in a small | table | (2 cols × 3 rows), then a plain one-line verdict. Name real, recognizable tech.`,
+        example: `| Local AI | Cloud AI |
 |---|---|
-| Control | Speed |
-| Costly | Cheaper now |
-| Slow | Proven |
+| Private | Powerful |
+| Runs offline | Needs internet |
+| Chest-tight limits | Big context |
 
-**Buy when it's not your core.**`,
+**Know what your data tolerates first.**`,
       },
       "Problem → Solution": {
-        structure: `"The tech problem might not be X" + a **bold** alternative, a 3-line "**X → Y**" chain, then a plain verdict.`,
-        example: `It might be the **architecture**.
+        structure: `"The tech problem might not be X" + a **bold** alternative, a 3-line "**X → Y**" chain, then a plain verdict. Use concrete tech-system thinking.`,
+        example: `It might be the **prompt**, not the model.
 
-**Monolith → Simple service**
+**Vague ask → Exact format**
 
-**Overbuild → Ship minimal**
+**No examples → Give 3 examples**
 
-**Manual work → Small automation**
+**No feedback → Iterate in a loop**
 
-Simplify the **system**, not the feature list.`,
+Engineer the **context**, not the code.`,
       },
       "Warning": {
-        structure: `A hard tech warning, a short "- " list of red flags, "None of these prove **X**", then a plain two-line verdict.`,
-        example: `"AI will do everything for you." Not really.
+        structure: `A hard warning about a real tech risk (scam, security, privacy, hype), a short "- " list of red flags, "None of these prove **X**", then a plain two-line verdict.`,
+        example: `"Free AI that needs your bank card." Big red flag.
 
-- No clear output
-- Magic-promise wording
-- Zero examples
+- Asks for card up front
+- No privacy policy
+- "Limited offer" pressure
 
-None of these prove **it works**.
+None of these prove **it's legit**.
 
-Test it on your **real task** first.`,
+Real tools show **what they do with your data**.`,
       },
       "Tips": {
-        structure: `A rhetorical tech question, a reframe ("make the action **smaller**"), three short bold lines, then a plain punchline.`,
-        example: `Overwhelmed by new tools?
+        structure: `A rhetorical tech question, a reframe ("make the change **smaller**"), three short bold lines, then a plain punchline. Practical, specific.`,
+        example: `Every day buried in manual work?
 
-Make the step **smaller**.
+Make the fix **smaller**.
 
-**1 workflow. 
-1 hour. 
-1 repeatable shortcut.**
+**1 script. 
+1 shortcut. 
+1 locked-in habit.**
 
-Compound **small automations**.`,
+Compound **small automations**,
+not tools.`,
       },
       "Formula": {
-        structure: `One correct tech formula as a SINGLE HORIZONTAL line joined by × and =, a one-line reframe, then a plain verdict.`,
-        example: `**Time × Automation × One Focus = Output**
+        structure: `One correct tech or AI formula as a SINGLE HORIZONTAL line joined by × and =, a one-line reframe, then a plain verdict. Must feel tech-native.`,
+        example: `**Skill × Automation × Focus = Output**
 
-Don't hoard tools.
+Don't hoard every new tool.
 
 Automate what repeats and **focus** the rest.`,
       },
       "Stat": {
-        structure: `A "**X = label**" contrast on two lines, a plain line, then a **bold** closer.`,
+        structure: `A "**X = label**" contrast on two lines rooted in real tech behavior, a plain line, then a **bold** closer.`,
         example: `**Tools = Potential**
 
 **Usage = Value**
 
 A hundred installed apps mean nothing unused.
 
-**Use fewer, better.**`,
+**Use fewer, better** — and know why each earns its place.`,
       },
     }[c];
-    return nichePrompt(name, c, spec.structure, spec.example);
+    return nichePrompt(niche, c, spec.structure, spec.example);
   }),
 ];
 
